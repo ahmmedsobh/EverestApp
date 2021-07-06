@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EverestApp.Views.MainPage"
+             xmlns:viewModel="clr-namespace:EverestApp.ViewModels"
+             Shell.PresentationMode="Animated">
+    <ContentPage.Content>
+        <StackLayout x:DataType="viewModel:MainPageViewModel">
+            <Label Text="{Binding Customer.Name,StringFormat='Welcome back {0}'}" />
+            <Label Text="{Binding Customer.Info}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
