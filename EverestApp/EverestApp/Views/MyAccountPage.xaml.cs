@@ -11,21 +11,12 @@ using Xamarin.Forms.Xaml;
 namespace EverestApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MainPage : ContentPage
+    public partial class MyAccountPage : ContentPage
     {
-        MainPageViewModel ViewModel = new MainPageViewModel();
-        public MainPage()
+        public MyAccountPage()
         {
             InitializeComponent();
-            BindingContext = ViewModel;
+            BindingContext = new MyAccountViewModel();
         }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            ViewModel.OnAppearing();
-        }
-
-
     }
 }

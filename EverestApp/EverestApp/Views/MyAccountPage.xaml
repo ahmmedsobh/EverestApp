@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EverestApp.Views.MyAccountPage"
+             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers"
+             Title="حسابى"
+             xmlns:viewModel="clr-namespace:EverestApp.ViewModels"
+             xmlns:converters="clr-namespace:EverestApp.Converters">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:StringToImageSourceConverter x:Key="StringToImageSourceConverter"></converters:StringToImageSourceConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout x:DataType="viewModel:MyAccountViewModel">
+                <StackLayout Padding="20">
+                    <Frame HorizontalOptions="CenterAndExpand" WidthRequest="100" CornerRadius="100">
+                        <Image  HorizontalOptions="CenterAndExpand"  
+                                                VerticalOptions="CenterAndExpand"
+                                                Aspect="AspectFit"
+                                                Margin="0,0,0,0">
+                            <Image.Source>
+                                <FontImageSource    FontFamily="FAS"
+                                                Color="#056839"
+                                                Glyph="{x:Static fontAwesome:FontAwesomeIcons.User}"
+                                                Size="100"/>
+                            </Image.Source>
+                        </Image>
+                    </Frame>
+                    <Label HorizontalTextAlignment="Center"  FontFamily="Cairo" Text="{Binding Info}" FontSize="30"/>
+                    <Label HorizontalTextAlignment="Center" Text="{Binding Code}" FontSize="20"/>
+                </StackLayout>
+                <StackLayout  Margin="20" HeightRequest="500">
+                    <Button FontFamily="Cairo" BackgroundColor="#056839" Text="مشاركة" Command="{Binding ShareImageCommand}"/>
+                    <Image Source="{Binding AccountImage,Converter={StaticResource StringToImageSourceConverter}}" />
+
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

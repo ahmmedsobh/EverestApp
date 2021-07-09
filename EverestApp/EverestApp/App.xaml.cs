@@ -16,6 +16,7 @@ namespace EverestApp
             DependencyService.Register<MockDataStore>();
             DependencyService.Register<CustomerService>();
             DependencyService.Register<AccountService>();
+            DependencyService.Register<MainService>();
             MainPage = new AppShell();
         }
 

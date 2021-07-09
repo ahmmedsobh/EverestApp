@@ -3,7 +3,8 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:EverestApp.Views"
        Title="EverestApp"
-       x:Class="EverestApp.AppShell">
+       x:Class="EverestApp.AppShell"
+       FlowDirection="RightToLeft" FlyoutBehavior="Flyout">
 
     <!--
         The overall app visual hierarchy is defined here, along with navigation.
@@ -14,12 +15,12 @@
     <Shell.Resources>
         <ResourceDictionary>
             <Style x:Key="BaseStyle" TargetType="Element">
-                <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.BackgroundColor" Value="#056839" />
                 <Setter Property="Shell.ForegroundColor" Value="White" />
                 <Setter Property="Shell.TitleColor" Value="White" />
                 <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
                 <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
-                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="#056839" />
                 <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
                 <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
                 <Setter Property="Shell.TabBarTitleColor" Value="White"/>
@@ -84,8 +85,11 @@
     <FlyoutItem Title="Login" Icon="icon_about.png" Shell.FlyoutItemIsVisible="False">
         <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Main" Icon="icon_about.png" Shell.FlyoutItemIsVisible="False">
+    <FlyoutItem Title="الرئيسية" Icon="icon_about.png" Shell.FlyoutItemIsVisible="False">
         <ShellContent Route="MainPage" ContentTemplate="{DataTemplate local:MainPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="حسابى" Icon="icon_about.png" Shell.FlyoutItemIsVisible="False">
+        <ShellContent Route="MyAccountPage" ContentTemplate="{DataTemplate local:MyAccountPage}" />
     </FlyoutItem>
     <!--<FlyoutItem Title="Browse" Icon="icon_feed.png">
         <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate local:ItemsPage}" />

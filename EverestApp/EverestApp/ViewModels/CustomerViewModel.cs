@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Essentials;
 using EverestApp.Views;
+using System.IO;
 
 namespace EverestApp.ViewModels
 {
@@ -65,14 +66,14 @@ namespace EverestApp.ViewModels
         {
             if(Code == null || Code == "")
             {
-                Message = "Enter Your Code";
+                Message = "ادخل الكود الخاص بك";
                 messageColor = "Red";
                 return;
             }
 
             if (Password == null || Password == "")
             {
-                Message = "Enter Your Password";
+                Message = "ادخل كلمة المرور";
                 messageColor = "Red";
                 return;
             }
@@ -80,29 +81,47 @@ namespace EverestApp.ViewModels
             var CustomerDate = await CustomerService.GetCustomerAsync(Code,Password);
             if(CustomerDate == null)
             {
-                Message = "Wrong code or password";
+                Message = "خطأ فى الكود او كلمة المرور";
                 MessageColor = "Red";
             }
             else
             {
-                Message = "Login successfully";
-                MessageColor = "Green";
+                //Message = "Login successfully";
+                //MessageColor = "Green";
+                Message = "";
                 SaveCustomerData(CustomerDate);
-                await Shell.Current.GoToAsync(nameof(MainPage));
+                await Shell.Current.GoToAsync($"///{nameof(MainPage)}");
             }
             IsBusy = false;
 
         }
 
-        void SaveCustomerData(Customer customer)
+        async void SaveCustomerData(Customer customer)
         {
             if(customer != null)
             {
-                Preferences.Set("ID", customer.ID);
-                Preferences.Set("Code", customer.Code);
-                Preferences.Set("Name", customer.Name);
-                Preferences.Set("Password", customer.Password);
-                Preferences.Set("Info", customer.Info);
+                try
+                {
+                    Preferences.Set("ID", customer.ID);
+                    Preferences.Set("Code", customer.Code);
+                    Preferences.Set("Name", customer.Name);
+                    Preferences.Set("Password", customer.Password);
+                    Preferences.Set("Info", customer.Info);
+
+                    var bytes = await ImageService.DownloadImage($"https://www.everestexport.net/ems/{customer.Code}.jpg");
+                    string fileName = Path.Combine(FileSystem.AppDataDirectory, $"AccountImg.jpg");
+                    if (File.Exists(fileName))
+                    {
+                        File.Delete(fileName);
+                    }
+
+                    File.WriteAllBytes(fileName, bytes);
+                }
+                catch(Exception ex)
+                {
+                    
+                }
+                
             }
         }
 

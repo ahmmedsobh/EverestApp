@@ -12,19 +12,19 @@
              Shell.FlyoutBehavior="Disabled">
     <ContentPage.Content>
         <StackLayout Padding="20" VerticalOptions="Center" x:DataType="viewModel:CustomerViewModel">
-            <Label Text="Welcome back" FontSize="40"   HorizontalTextAlignment="Center"/>
-            <Label Text="Login to your account" FontSize="20" HorizontalTextAlignment="Center"/>
+            <Label FontFamily="Cairo" Text="مرحبا بعودتك" TextColor="#056839" FontSize="40"   HorizontalTextAlignment="Center"/>
+            <Label FontFamily="Cairo"  Text="قم بالدخول الى حسابك" FontSize="20" HorizontalTextAlignment="Center"/>
             <Frame CornerRadius="20" Margin="0,20,0,0" Padding="0" HasShadow="False">
-                <controls:CustomEntry Placeholder="Enter UserName" BorderColor="Transparent" BackgroundColor="#eceef2" Text="{Binding Code,Mode=OneWayToSource}"/>
+                <controls:CustomEntry TextColor="#056839" PlaceholderColor="#056839" FontFamily="Cairo" Placeholder="ادخل الكود" BorderColor="Transparent" BackgroundColor="#eceef2" Text="{Binding Code,Mode=OneWayToSource}"/>
             </Frame>
             <Frame CornerRadius="20" Padding="0" HasShadow="False">
-                <controls:CustomEntry Placeholder="Enter Password" CornerRadius="20" BorderColor="White" BackgroundColor="#eceef2" Text="{Binding Password,Mode=OneWayToSource}"/>
+                <controls:CustomEntry TextColor="#056839" PlaceholderColor="#056839" FontFamily="Cairo" Placeholder="ادخل كلمة المرور" CornerRadius="20" BorderColor="White" BackgroundColor="#eceef2" Text="{Binding Password,Mode=OneWayToSource}"/>
             </Frame>
             <Frame CornerRadius="20" Padding="0" Margin="0,15,0,0">
-                <Button VerticalOptions="Center" Text="Login" Command="{Binding LoginCommand}"/>
+                <Button FontFamily="Cairo" VerticalOptions="Center" BackgroundColor="#056839" Text="دخول" Command="{Binding LoginCommand}"/>
             </Frame>
-            <Label Text="{Binding Message}" HorizontalTextAlignment="Center" FontSize="16" TextColor="{Binding MessageColor}"/>
-            <ActivityIndicator IsRunning="{Binding IsBusy}"/>
+            <Label Text="{Binding Message}" FontFamily="Cairo" HorizontalTextAlignment="Center" FontSize="16" TextColor="{Binding MessageColor}"/>
+            <ActivityIndicator Color="#056839" IsRunning="{Binding IsBusy}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
