@@ -91,6 +91,9 @@
     <FlyoutItem Title="حسابى" Icon="icon_about.png" Shell.FlyoutItemIsVisible="False">
         <ShellContent Route="MyAccountPage" ContentTemplate="{DataTemplate local:MyAccountPage}" />
     </FlyoutItem>
+    <FlyoutItem Title="الطلبيات" Icon="icon_about.png" Shell.FlyoutItemIsVisible="False">
+        <ShellContent Route="OrdersPage" ContentTemplate="{DataTemplate local:OrdersPage}" />
+    </FlyoutItem>
     <!--<FlyoutItem Title="Browse" Icon="icon_feed.png">
         <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate local:ItemsPage}" />
     </FlyoutItem>-->

@@ -68,7 +68,7 @@ namespace EverestApp.ViewModels
         {
             var items = new List<Item>()
             {
-                new Item(){Id="1",Text="الطلبيات",Icon=FontAwesomeIcons.ListAlt,IconColor="#056839",Url="MyAccountPage"},
+                new Item(){Id="1",Text="الطلبيات",Icon=FontAwesomeIcons.ListAlt,IconColor="#056839",Url="OrdersPage"},
                 new Item(){Id="2",Text="الشحنات",Icon=FontAwesomeIcons.BoxOpen,IconColor="#056839",Url="MyAccountPage"},
                 new Item(){Id="3",Text="الحسابات",Icon=FontAwesomeIcons.User,IconColor="#056839",Url="MyAccountPage"},
                 new Item(){Id="4",Text="معلومات العميل",Icon=FontAwesomeIcons.InfoCircle,IconColor="#056839",Url="MyAccountPage"},

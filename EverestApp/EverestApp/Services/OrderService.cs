@@ -2,7 +2,9 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -18,34 +20,98 @@ namespace EverestApp.Services
 
         public async Task<bool> AddOrderAsync()
         {
-
             if(CustomerId == "")
                 return await Task.FromResult(false);
 
-
-            BaseApiAddress = $"https://www.everestexport.net/ems_neworder.php?id={CustomerId}";
+            BaseApiAddress = $"https://www.everestexport.net/ems_neworder.php?id=" + CustomerId;
             var file = await MediaPicker.PickPhotoAsync();
 
             if (file == null)
                 return await Task.FromResult(false);
 
             var ImageExtnsion = file.FileName.Split('.')[1];
-            if(ImageExtnsion != "jpg")
+            if (ImageExtnsion != "jpg")
                 return await Task.FromResult(false);
-
 
             var image = File.ReadAllBytes(file.FullPath);
 
-            var content = new MultipartFormDataContent();
-            content.Add(new StreamContent(new MemoryStream(image)), "file", "upload.jpg");
+            NameValueCollection nvc = new NameValueCollection();
+            nvc.Add("submit", "Upload Image");
+            HttpUploadFile(BaseApiAddress, image, nvc);
 
-            var httpClient = new HttpClient();
-            var response = await httpClient.PostAsync(BaseApiAddress, content);
+            //var content = new MultipartFormDataContent();
+            //content.Add(new ByteArrayContent(image, 0, image.Length), "fileToUpload", "upload.jpg");
 
-            if(response.IsSuccessStatusCode)
-                return await Task.FromResult(true);
+            //var httpClient = new HttpClient();
+            //httpClient.DefaultRequestHeaders.Accept.Clear();
+            //httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/html"));
+            //httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xhtml+xml"));
+            //httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
+            //httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("image/webp"));
+            //httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
 
-            return await Task.FromResult(false);
+            //var response = await httpClient.PostAsync(BaseApiAddress, content);
+
+            //if (response.IsSuccessStatusCode)
+            //    return await Task.FromResult(true);
+
+            return await Task.FromResult(true);
+        }
+
+        public static void HttpUploadFile(string url,byte[] filebytes, NameValueCollection nvc)
+        {
+            string boundary = "---------------------------" + DateTime.Now.Ticks.ToString("x");
+            byte[] boundarybytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
+
+            HttpWebRequest wr = (HttpWebRequest)WebRequest.Create(url);
+            wr.ContentType = "multipart/form-data; boundary=" + boundary;
+            wr.Method = "POST";
+            wr.KeepAlive = true;
+            wr.Credentials = System.Net.CredentialCache.DefaultCredentials;
+
+            Stream rs = wr.GetRequestStream();
+
+            string formdataTemplate = "Content-Disposition: form-data; name=\"{0}\"\r\n\r\n{1}";
+            foreach (string key in nvc.Keys)
+            {
+                rs.Write(boundarybytes, 0, boundarybytes.Length);
+                string formitem = string.Format(formdataTemplate, key, nvc[key]);
+                byte[] formitembytes = System.Text.Encoding.UTF8.GetBytes(formitem);
+                rs.Write(formitembytes, 0, formitembytes.Length);
+            }
+            rs.Write(boundarybytes, 0, boundarybytes.Length);
+
+            string header = "Content-Disposition: form-data; name=\"fileToUpload\"; filename=\"upload.jpg\"\r\nContent-Type: image/jpeg\r\n\r\n";
+            byte[] headerbytes = Encoding.UTF8.GetBytes(header);
+            rs.Write(headerbytes, 0, headerbytes.Length);
+
+            rs.Write(filebytes, 0, filebytes.Length);
+
+            byte[] trailer = Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
+            rs.Write(trailer, 0, trailer.Length);
+            rs.Close();
+
+            WebResponse wresp = null;
+            try
+            {
+                wresp = wr.GetResponse();
+                Stream stream2 = wresp.GetResponseStream();
+                StreamReader reader2 = new StreamReader(stream2);
+
+            }
+            catch (Exception ex)
+            {
+
+                if (wresp != null)
+                {
+                    wresp.Close();
+                    wresp = null;
+                }
+            }
+            finally
+            {
+                wr = null;
+            }
         }
 
         public async Task<IEnumerable<Order>> GetOrdersAsync(bool forceRefresh = false)
