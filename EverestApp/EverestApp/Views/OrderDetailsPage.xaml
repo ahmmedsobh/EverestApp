@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EverestApp.Views.OrderDetailsPage"
+             xmlns:viewModel="clr-namespace:EverestApp.ViewModels"
+             Title="تفاصيل الطلبية"
+             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers">
+
+    <Shell.TitleView>
+        <StackLayout  Orientation="Horizontal">
+            <Image>
+                <Image.Source>
+                    <FontImageSource FontFamily="FAS"
+                                     Color="White"
+                                     Glyph="{x:Static fontAwesome:FontAwesomeIcons.InfoCircle}"
+                                     Size="20"/>
+                </Image.Source>
+            </Image>
+            <Label FontSize="20" FontFamily="Cairo" VerticalTextAlignment="Center" Text="تفاصيل الطلب" TextColor="White"/>
+        </StackLayout>
+    </Shell.TitleView>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout x:DataType="viewModel:OrderDetailsViewModel" Padding="20">
+                <Image Aspect="AspectFill" Source="{Binding Order.ID,StringFormat='https://www.everestexport.net/ems/orders/{0}.jpg'}"/>
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label FontFamily="Cairo" Text="طلبية رقم :" FontSize="20"/>
+                        <Label Text="{Binding Order.ID}" FontSize="20"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label FontFamily="Cairo" Text="تاريخ الارسال :" FontSize="20"/>
+                        <Label Text="{Binding Order.UploadedDate}" FontSize="20"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label FontFamily="Cairo" Text="تاريخ التحديث :" FontSize="20"/>
+                        <Label Text="{Binding Order.UpdatedDate}" FontSize="20"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label FontFamily="Cairo" Text="الحالة :" FontSize="20"/>
+                        <Label FontFamily="Cairo" Text="{Binding Order.StatusTitle}" FontSize="20"/>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

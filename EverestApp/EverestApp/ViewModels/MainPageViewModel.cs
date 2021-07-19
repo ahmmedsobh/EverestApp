@@ -1,6 +1,7 @@
 ﻿using EverestApp.Helpers;
 using EverestApp.Models;
 using EverestApp.Services;
+using EverestApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,6 +19,7 @@ namespace EverestApp.ViewModels
         public Customer Customer { get; set; }
         private Article _selectedArticle;
         private Item _selectedItem;
+        private Item _selectedMedia;
         IMainService MainService => DependencyService.Get<IMainService>();
 
         public ObservableCollection<Article> Articles { get; }
@@ -69,9 +71,9 @@ namespace EverestApp.ViewModels
             var items = new List<Item>()
             {
                 new Item(){Id="1",Text="الطلبيات",Icon=FontAwesomeIcons.ListAlt,IconColor="#056839",Url="OrdersPage"},
-                new Item(){Id="2",Text="الشحنات",Icon=FontAwesomeIcons.BoxOpen,IconColor="#056839",Url="MyAccountPage"},
+                new Item(){Id="2",Text="الشحنات",Icon=FontAwesomeIcons.BoxOpen,IconColor="#056839",Url=""},
                 new Item(){Id="3",Text="الحسابات",Icon=FontAwesomeIcons.User,IconColor="#056839",Url="MyAccountPage"},
-                new Item(){Id="4",Text="معلومات العميل",Icon=FontAwesomeIcons.InfoCircle,IconColor="#056839",Url="MyAccountPage"},
+                new Item(){Id="4",Text="معلومات العميل",Icon=FontAwesomeIcons.InfoCircle,IconColor="#056839",Url=""},
             };
 
             foreach(var item in items)
@@ -85,10 +87,10 @@ namespace EverestApp.ViewModels
         {
             var media = new List<Item>()
             {
-                new Item(){Id="1",Icon=FontAwesomeIcons.FacebookF,IconColor="#3b5998"},
-                new Item(){Id="2",Icon=FontAwesomeIcons.TwitterSquare,IconColor="#1da1f2"},
-                new Item(){Id="3",Icon=FontAwesomeIcons.InstagramSquare,IconColor="#c32aa3"},
-                new Item(){Id="4",Icon=FontAwesomeIcons.Telegram,IconColor="#0088cc"},
+                new Item(){Id="1",Icon="EverestApp.Resources.Images.facebook.png",IconColor="#3b5998",Url="https://www.facebook.com/EverestExport"},
+                new Item(){Id="2",Icon="EverestApp.Resources.Images.twitter.png",IconColor="#1da1f2",Url="https://twitter.com/ExportEverest"},
+                new Item(){Id="3",Icon="EverestApp.Resources.Images.instagram.png",IconColor="#c32aa3",Url="https://www.instagram.com/everest_export/"},
+                new Item(){Id="4",Icon="EverestApp.Resources.Images.telegram.png",IconColor="#0088cc",Url="https://telegram.me/everstexport"},
             };
 
             foreach (var item in media)
@@ -124,6 +126,16 @@ namespace EverestApp.ViewModels
             }
         }
 
+        public Item SelectedMedia
+        {
+            get => _selectedMedia;
+            set
+            {
+                SetProperty(ref _selectedMedia, value);
+                OnMediaSelected(value);
+            }
+        }
+
 
 
         async void OnArticleSelected(Article article)
@@ -132,6 +144,7 @@ namespace EverestApp.ViewModels
             {
                 if (article != null)
                 {
+                    _selectedArticle = null;
                     var FullLink = $"https://www.everestexport.net{article.link}";
                     await Browser.OpenAsync(FullLink, BrowserLaunchMode.SystemPreferred);
                 }
@@ -148,7 +161,24 @@ namespace EverestApp.ViewModels
             {
                 if (item != null)
                 {
-                    await Shell.Current.GoToAsync($"///{item.Url}");
+                    SelectedItem = null;
+                    await Shell.Current.GoToAsync($"{item.Url}");
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        async void OnMediaSelected(Item item)
+        {
+            try
+            {
+                if (item != null)
+                {
+                    SelectedMedia = null;
+                    await Browser.OpenAsync(item.Url);
                 }
             }
             catch (Exception ex)

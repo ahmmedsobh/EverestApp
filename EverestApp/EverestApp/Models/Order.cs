@@ -10,6 +10,9 @@ namespace EverestApp.Models
         public string CustomerID { get; set; }
         public string UploadedDate { get; set; }
         public string UpdatedDate { get; set; }
-        public string Status { get; set; }
+        public string Satus { get; set; }
+        public string StatusTitle { get; set; }
+        public string StatusColor { get; set; }
+        public string StatusIcon { get; set; }
     }
 }

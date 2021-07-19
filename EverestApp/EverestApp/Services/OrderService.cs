@@ -18,26 +18,23 @@ namespace EverestApp.Services
         string BaseApiAddress = "";
         string CustomerId = Preferences.Get("ID", "");
 
-        public async Task<bool> AddOrderAsync()
+        public async Task<bool> AddOrderAsync(byte[] file)
         {
             if(CustomerId == "")
                 return await Task.FromResult(false);
 
             BaseApiAddress = $"https://www.everestexport.net/ems_neworder.php?id=" + CustomerId;
-            var file = await MediaPicker.PickPhotoAsync();
 
-            if (file == null)
+            if (file.Length == 0)
                 return await Task.FromResult(false);
 
-            var ImageExtnsion = file.FileName.Split('.')[1];
-            if (ImageExtnsion != "jpg")
-                return await Task.FromResult(false);
+            
 
-            var image = File.ReadAllBytes(file.FullPath);
+            
 
             NameValueCollection nvc = new NameValueCollection();
             nvc.Add("submit", "Upload Image");
-            HttpUploadFile(BaseApiAddress, image, nvc);
+            HttpUploadFile(BaseApiAddress, file, nvc);
 
             //var content = new MultipartFormDataContent();
             //content.Add(new ByteArrayContent(image, 0, image.Length), "fileToUpload", "upload.jpg");

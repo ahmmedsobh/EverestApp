@@ -10,6 +10,11 @@
     <None Remove="Resources\Fonts\Cairo-Regular.ttf" />
     <None Remove="Resources\Fonts\Free-Regular-400.otf" />
     <None Remove="Resources\Fonts\Free-Solid-900.otf" />
+    <None Remove="Resources\Images\EverestLogo.png" />
+    <None Remove="Resources\Images\facebook.png" />
+    <None Remove="Resources\Images\instagram.png" />
+    <None Remove="Resources\Images\telegram.png" />
+    <None Remove="Resources\Images\twitter.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +22,11 @@
     <EmbeddedResource Include="Resources\Fonts\Cairo-Regular.ttf" />
     <EmbeddedResource Include="Resources\Fonts\Free-Regular-400.otf" />
     <EmbeddedResource Include="Resources\Fonts\Free-Solid-900.otf" />
+    <EmbeddedResource Include="Resources\Images\EverestLogo.png" />
+    <EmbeddedResource Include="Resources\Images\facebook.png" />
+    <EmbeddedResource Include="Resources\Images\instagram.png" />
+    <EmbeddedResource Include="Resources\Images\telegram.png" />
+    <EmbeddedResource Include="Resources\Images\twitter.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +40,9 @@
     <EmbeddedResource Update="CustomControls\CardView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\AddOrderPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\LoadingPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -37,6 +50,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\MyAccountPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\OrderDetailsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\OrdersPage.xaml">

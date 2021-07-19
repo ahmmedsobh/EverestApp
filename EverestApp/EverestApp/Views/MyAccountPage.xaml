@@ -7,6 +7,20 @@
              xmlns:viewModel="clr-namespace:EverestApp.ViewModels"
              xmlns:converters="clr-namespace:EverestApp.Converters">
 
+    <Shell.TitleView>
+        <StackLayout  Orientation="Horizontal">
+            <Image>
+                <Image.Source>
+                    <FontImageSource FontFamily="FAS"
+                                     Color="White"
+                                     Glyph="{x:Static fontAwesome:FontAwesomeIcons.User}"
+                                     Size="20"/>
+                </Image.Source>
+            </Image>
+            <Label FontSize="20" FontFamily="Cairo" VerticalTextAlignment="Center" Text="حسابى" TextColor="White"/>
+        </StackLayout>
+    </Shell.TitleView>
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:StringToImageSourceConverter x:Key="StringToImageSourceConverter"></converters:StringToImageSourceConverter>
@@ -34,7 +48,14 @@
                     <Label HorizontalTextAlignment="Center" Text="{Binding Code}" FontSize="20"/>
                 </StackLayout>
                 <StackLayout  Margin="20" HeightRequest="500">
-                    <Button FontFamily="Cairo" BackgroundColor="#056839" Text="مشاركة" Command="{Binding ShareImageCommand}"/>
+                    <Button FontFamily="Cairo" Padding="15,0,15,0" ContentLayout="left,0" BackgroundColor="#056839" Text="مشاركة" Command="{Binding ShareImageCommand}">
+                        <Button.ImageSource>
+                            <FontImageSource FontFamily="FAS" 
+                                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.ShareAlt}"
+                                             Size="20"
+                                             Color="White"/>
+                        </Button.ImageSource>
+                    </Button>
                     <Image Source="{Binding AccountImage,Converter={StaticResource StringToImageSourceConverter}}" />
 
                 </StackLayout>

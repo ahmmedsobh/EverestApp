@@ -2,10 +2,128 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EverestApp.Views.OrdersPage" 
-             xmlns:viewModels="clr-namespace:EverestApp.ViewModels">
+             xmlns:viewModels="clr-namespace:EverestApp.ViewModels"
+             Title="قائمة الطلبيات"
+             xmlns:model="clr-namespace:EverestApp.Models"
+             BackgroundColor="LightGray"
+             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers">
+
+    <Shell.TitleView>
+        <StackLayout  Orientation="Horizontal">
+            <Image>
+                <Image.Source>
+                    <FontImageSource FontFamily="FAS"
+                                     Color="White"
+                                     Glyph="{x:Static fontAwesome:FontAwesomeIcons.List}"
+                                     Size="20"/>
+                </Image.Source>
+            </Image>
+            <Label FontSize="20" FontFamily="Cairo" VerticalTextAlignment="Center" Text="اضافة طلب" TextColor="White"/>
+        </StackLayout>
+    </Shell.TitleView>
+
+    <ContentPage.Resources>
+        <Style TargetType="StackLayout">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="Transparent" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <StackLayout x:DataType="viewModels:OrdersViewModel">
-            <Button Command="{Binding UploadOrderCommand}"/>
+        <StackLayout >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <RefreshView Grid.Row="0" Padding="10,0,10,0" x:DataType="viewModels:OrdersViewModel" Command="{Binding LoadOrdersCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+                    <CollectionView x:Name="ItemsListView"
+                ItemsSource="{Binding Orders}"
+                SelectionMode="Single"
+                SelectedItem="{Binding SelectedOrder}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="0,5,0,5">
+                                    <Frame x:DataType="model:Order" Padding="10"   CornerRadius="20" BackgroundColor="White">
+                                        <Grid >
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <Frame Grid.RowSpan="2" Padding="0" HasShadow="False" CornerRadius="10" BackgroundColor="#056839">
+                                                <Image 
+                                       Source="{Binding ID,StringFormat='https://www.everestexport.net/ems/orders/{0}.jpg'}"
+                                       Aspect="AspectFill"
+                                       HeightRequest="60"
+                                       WidthRequest="60" />
+                                            </Frame>
+
+
+                                            <Label Grid.Column="1" 
+                                       Text="{Binding ID,StringFormat='طلبية رقم {0}'}"
+                                       FontAttributes="Bold" />
+
+                                            <Label Grid.Row="1"
+                                       Grid.Column="1"
+                                       Text="{Binding UploadedDate}"
+                                       FontAttributes="Italic"
+                                       VerticalOptions="Center" />
+
+                                            <Frame WidthRequest="90" VerticalOptions="Center" Margin="0,0,20,0"  CornerRadius="20" Grid.RowSpan="2" Grid.Column="2" BackgroundColor="{Binding StatusColor}" Padding="10">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label VerticalTextAlignment="Center" TextColor="White" Text="{Binding StatusIcon}" FontFamily="FAS"/>
+                                                    <Label 
+                                                           Text="{Binding StatusTitle}"
+                                                           FontAttributes="Italic"
+                                                           VerticalOptions="Center" 
+                                                           HorizontalTextAlignment="Center"
+                                                           FontFamily="Cairo"
+                                                           TextColor="White"/>
+                                                </StackLayout>
+                                            </Frame>
+
+                                        </Grid>
+                                    </Frame>
+                                </StackLayout>
+
+
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </RefreshView>
+
+
+                <Frame BorderColor="White" HorizontalOptions="Center" WidthRequest="150" Grid.Row="0" HasShadow="True" Padding="0" VerticalOptions="End"  CornerRadius="20" Margin="20">
+                    <Button Text="اضافة طلبية" Padding="15,0,15,0" ContentLayout="left,0" WidthRequest="150" HorizontalOptions="Center"  FontFamily="Cairo"  BackgroundColor="#056839" Command="{Binding AddOrderCommand}">
+                        <Button.ImageSource>
+                            <FontImageSource FontFamily="FAS" 
+                                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.Plus}"
+                                             Size="15"
+                                             Color="White"/>
+                        </Button.ImageSource>
+                    </Button>
+                </Frame>
+
+
+            </Grid>
+                
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

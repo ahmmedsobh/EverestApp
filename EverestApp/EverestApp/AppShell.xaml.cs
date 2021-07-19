@@ -17,7 +17,10 @@ namespace EverestApp
             //Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
             //Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
             //Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
-            //Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
+            Routing.RegisterRoute(nameof(OrdersPage), typeof(OrdersPage));
+            Routing.RegisterRoute(nameof(AddOrderPage), typeof(AddOrderPage));
+            Routing.RegisterRoute(nameof(OrderDetailsPage), typeof(OrderDetailsPage));
+            Routing.RegisterRoute(nameof(MyAccountPage), typeof(MyAccountPage));
         }
 
         

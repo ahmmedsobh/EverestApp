@@ -62,19 +62,23 @@ namespace EverestApp.ViewModels
             }
         }
 
+        public string Logo
+        {
+            get => "EverestApp.Resources.Images.EverestLogo.png";
+        }
         async Task ExecurteLoginCommand()
         {
             if(Code == null || Code == "")
             {
                 Message = "ادخل الكود الخاص بك";
-                messageColor = "Red";
+                MessageColor = "Red";
                 return;
             }
 
             if (Password == null || Password == "")
             {
                 Message = "ادخل كلمة المرور";
-                messageColor = "Red";
+                MessageColor = "Red";
                 return;
             }
             IsBusy = true;

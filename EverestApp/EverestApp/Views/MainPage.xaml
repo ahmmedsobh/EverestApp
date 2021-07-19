@@ -6,7 +6,23 @@
              xmlns:viewModel="clr-namespace:EverestApp.ViewModels"
              x:Class="EverestApp.Views.MainPage"
              Shell.PresentationMode="Animated"
-             Title="الرئيسية">
+             Title="الرئيسية"
+             xmlns:converters="clr-namespace:EverestApp.Converters"
+             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers">
+
+    <Shell.TitleView>
+        <StackLayout  Orientation="Horizontal">
+            <Image>
+                <Image.Source>
+                    <FontImageSource FontFamily="FAS"
+                                     Color="White"
+                                     Glyph="{x:Static fontAwesome:FontAwesomeIcons.Home}"
+                                     Size="20"/>
+                </Image.Source>
+            </Image>
+            <Label FontSize="20" FontFamily="Cairo" VerticalTextAlignment="Center" Text="الرئيسية" TextColor="White"/>
+        </StackLayout>
+    </Shell.TitleView>
 
     <ContentPage.Resources>
         <Style TargetType="StackLayout">
@@ -39,6 +55,10 @@
                 </VisualStateGroupList>
             </Setter>
         </Style>
+
+        <ResourceDictionary>
+            <converters:StringToImageSourceConverter x:Key="StringToImageSourceConverter"></converters:StringToImageSourceConverter>
+        </ResourceDictionary>
     </ContentPage.Resources>
 
     <ContentPage.Content>
@@ -55,8 +75,7 @@
                         <CollectionView x:Name="ItemsListView"
                                     ItemsSource="{Binding Articles}"
                                     SelectionMode="Single"
-                                    SelectedItem="{Binding SelectedArticle}"
-                                     >
+                                    SelectedItem="{Binding SelectedArticle}">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <StackLayout Padding="0,10,0,10">
@@ -72,7 +91,7 @@
                     </RefreshView>
 
                 </StackLayout>
-                <StackLayout HeightRequest="280">
+                <StackLayout HeightRequest="232" >
                     <CollectionView  ItemsSource="{Binding Items}" ItemsLayout="VerticalGrid, 2" SelectionMode="Single" SelectedItem="{Binding SelectedItem,Mode=TwoWay}">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
@@ -97,7 +116,7 @@
                                                                  Size="50"/>
                                                 </Image.Source>
                                             </Image>
-                                            <Label Padding="0" FontFamily="Cairo" Margin="0,0,0,30" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="{Binding Text}"/>
+                                            <Label Padding="0" TextColor="#62be7e" FontFamily="Cairo" Margin="0,0,0,30" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="{Binding Text}"/>
                                         </StackLayout>
                                     </Frame>
                                 </Grid>
@@ -105,12 +124,12 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 </StackLayout>
-                <StackLayout Padding="10" BackgroundColor="#f5f5f5" HeightRequest="400">
+                <StackLayout Padding="10" BackgroundColor="#f5f5f5" HeightRequest="100">
                     <Label FontSize="20" TextColor="#056839" FontFamily="Cairo" Text="صفحات التواصل" />
                         <CollectionView 
                                     ItemsSource="{Binding Media}"
                                     SelectionMode="Single"
-                                    SelectedItem="{Binding SelectedArticle}"
+                                    SelectedItem="{Binding SelectedMedia}"
                                     ItemsLayout="VerticalGrid, 4">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
@@ -118,13 +137,13 @@
                                     <Image  HorizontalOptions="CenterAndExpand"  
                                                 VerticalOptions="StartAndExpand"
                                                 Aspect="AspectFit"
-                                                Margin="0,0,0,0">
-                                        <Image.Source>
-                                            <FontImageSource FontFamily="FAS"
-                                                                 Color="{Binding IconColor}"
-                                                                 Glyph="{Binding Icon}"
-                                                                 Size="50"/>
-                                        </Image.Source>
+                                                Margin="0,0,0,0"
+                                                Source="{Binding Icon,Converter={StaticResource StringToImageSourceConverter}}"
+                                            WidthRequest="50"
+                                            HeightRequest="50">
+                                        
+                                            
+                                        
                                     </Image>
                                 </StackLayout>
                                 </DataTemplate>

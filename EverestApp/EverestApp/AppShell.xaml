@@ -88,12 +88,24 @@
     <FlyoutItem Title="الرئيسية" Icon="icon_about.png" Shell.FlyoutItemIsVisible="False">
         <ShellContent Route="MainPage" ContentTemplate="{DataTemplate local:MainPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="حسابى" Icon="icon_about.png" Shell.FlyoutItemIsVisible="False">
-        <ShellContent Route="MyAccountPage" ContentTemplate="{DataTemplate local:MyAccountPage}" />
-    </FlyoutItem>
-    <FlyoutItem Title="الطلبيات" Icon="icon_about.png" Shell.FlyoutItemIsVisible="False">
+    
+   <!--<FlyoutItem Title="قائمة الطلبيات" Icon="icon_about.png" Shell.FlyoutItemIsVisible="False">
         <ShellContent Route="OrdersPage" ContentTemplate="{DataTemplate local:OrdersPage}" />
     </FlyoutItem>
+
+    <FlyoutItem Title="اضافة طلب" Icon="icon_about.png" Shell.FlyoutItemIsVisible="False">
+        <ShellContent Route="AddOrderPage" ContentTemplate="{DataTemplate local:AddOrderPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="تفاصيل الطلب" Icon="icon_about.png" Shell.FlyoutItemIsVisible="False">
+        <ShellContent Route="OrderDetailsPage" ContentTemplate="{DataTemplate local:OrderDetailsPage}" />
+    </FlyoutItem>
+    
+    <FlyoutItem Title="حسابى" Icon="icon_about.png" Shell.FlyoutItemIsVisible="False">
+        <ShellContent Route="MyAccountPage" ContentTemplate="{DataTemplate local:MyAccountPage}" />
+    </FlyoutItem>-->
+
+
     <!--<FlyoutItem Title="Browse" Icon="icon_feed.png">
         <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate local:ItemsPage}" />
     </FlyoutItem>-->

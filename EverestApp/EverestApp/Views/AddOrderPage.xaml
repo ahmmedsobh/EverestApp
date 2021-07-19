@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EverestApp.Views.AddOrderPage"
+             xmlns:converters="clr-namespace:EverestApp.Converters"
+             xmlns:viewModel="clr-namespace:EverestApp.ViewModels"
+             Title="اضافة طلب"
+             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers">
+
+    <Shell.TitleView>
+        <StackLayout  Orientation="Horizontal">
+            <Image>
+                <Image.Source>
+                    <FontImageSource FontFamily="FAS"
+                                     Color="White"
+                                     Glyph="{x:Static fontAwesome:FontAwesomeIcons.ListAlt}"
+                                     Size="20"/>
+                </Image.Source>
+            </Image>
+            <Label FontSize="20" FontFamily="Cairo" VerticalTextAlignment="Center" Text="اضافة طلب" TextColor="White"/>
+        </StackLayout>
+    </Shell.TitleView>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:StringToImageSourceConverter x:Key="StringToImageSourceConverter"></converters:StringToImageSourceConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout x:DataType="viewModel:AddOrderViewModel" >
+            <StackLayout Padding="20">
+                <StackLayout Orientation="Horizontal" >
+                    <Button BackgroundColor="#056839" Padding="15,0,15,0" ContentLayout="left,0" HorizontalOptions="FillAndExpand" FontFamily="Cairo" Text="تحميل صورة" Command="{Binding UploadImageCommand}">
+                        <Button.ImageSource>
+                            <FontImageSource FontFamily="FAS" 
+                                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.Image}"
+                                             Size="20"
+                                             Color="White"/>
+                        </Button.ImageSource>
+                    </Button>
+                    <Button BackgroundColor="#056839" Padding="15,0,15,0" ContentLayout="left,0" HorizontalOptions="FillAndExpand"  FontFamily="Cairo" Text="التقاط صورة" Command="{Binding TakeImageCommand}">
+                        <Button.ImageSource>
+                            <FontImageSource FontFamily="FAS" 
+                                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.Camera}"
+                                             Size="20"
+                                             Color="White"/>
+                        </Button.ImageSource>
+                    </Button>
+                </StackLayout>
+                <StackLayout BackgroundColor="#056839"  HeightRequest="300">
+                    <Image 
+                        Aspect="AspectFit" 
+                        Source="{Binding ImageAsBytes,Converter={StaticResource StringToImageSourceConverter}}" 
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand"
+                        Margin="0"/>
+                </StackLayout>
+                <Button Padding="15,0,15,0" ContentLayout="left,0"  BackgroundColor="#056839" FontFamily="Cairo" Text="ارسال الطلب" Command="{Binding SendOrderCommand}">
+                    <Button.ImageSource>
+                        <FontImageSource FontFamily="FAS" 
+                                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.Upload}"
+                                             Size="20"
+                                             Color="White"/>
+                    </Button.ImageSource>
+                </Button>
+                <Label Text="{Binding Message}" FontSize="17" HorizontalTextAlignment="Center" FontFamily="Cairo" TextColor="Red"/>
+                <ActivityIndicator Color="#056839" IsRunning="{Binding IsBusy}"/> 
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
