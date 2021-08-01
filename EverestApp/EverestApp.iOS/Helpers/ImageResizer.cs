@@ -19,24 +19,25 @@ namespace EverestApp.iOS.Helpers
         {
             UIImage originalImage = ImageFromByteArray(imageData);
             UIImageOrientation orientation = originalImage.Orientation;
-
+            return originalImage.AsJPEG(300).ToArray();
+            
             //create a 24bit RGB image
-            using (CGBitmapContext context = new CGBitmapContext(IntPtr.Zero,
-                                                 (int)width, (int)height, 8,
-                                                 4 * (int)width, CGColorSpace.CreateDeviceRGB(),
-                                                 CGImageAlphaInfo.PremultipliedFirst))
-            {
+            //using (CGBitmapContext context = new CGBitmapContext(IntPtr.Zero,
+            //                                     (int)width, (int)height, 8,
+            //                                     4 * (int)width, CGColorSpace.CreateDeviceRGB(),
+            //                                     CGImageAlphaInfo.PremultipliedFirst))
+            //{
 
-                RectangleF imageRect = new RectangleF(0, 0, width, height);
+            //    RectangleF imageRect = new RectangleF(0, 0, width, height);
 
-                // draw the image
-                context.DrawImage(imageRect, originalImage.CGImage);
+            //    // draw the image
+            //    context.DrawImage(imageRect, originalImage.CGImage);
 
-                UIKit.UIImage resizedImage = UIKit.UIImage.FromImage(context.ToImage(), 0, orientation);
+            //    UIKit.UIImage resizedImage = UIKit.UIImage.FromImage(context.ToImage(), 0, orientation);
 
-                // save the image as a jpeg
-                return resizedImage.AsJPEG().ToArray();
-            }
+            //    // save the image as a jpeg
+            //    return resizedImage.AsJPEG(10).ToArray();
+            //}
         }
 
         public static UIKit.UIImage ImageFromByteArray(byte[] data)

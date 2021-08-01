@@ -18,6 +18,9 @@ namespace EverestApp
             DependencyService.Register<AccountService>();
             DependencyService.Register<MainService>();
             DependencyService.Register<OrderService>();
+            DependencyService.Register<AccountFilesService>();
+
+
             MainPage = new AppShell();
         }
 

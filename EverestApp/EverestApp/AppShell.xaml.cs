@@ -21,9 +21,12 @@ namespace EverestApp
             Routing.RegisterRoute(nameof(AddOrderPage), typeof(AddOrderPage));
             Routing.RegisterRoute(nameof(OrderDetailsPage), typeof(OrderDetailsPage));
             Routing.RegisterRoute(nameof(MyAccountPage), typeof(MyAccountPage));
+            Routing.RegisterRoute(nameof(AccountFilesPage), typeof(AccountFilesPage));
+            Routing.RegisterRoute(nameof(AccountFileDetailsPage), typeof(AccountFileDetailsPage));
+
         }
 
-        
+
 
         private async void OnMenuItemClicked(object sender, EventArgs e)
         {

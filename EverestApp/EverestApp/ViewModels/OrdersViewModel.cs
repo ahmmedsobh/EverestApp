@@ -94,7 +94,7 @@ namespace EverestApp.ViewModels
 
         Order GetStatusInfo(Order order)
         {
-            order.Satus = "6";
+            //order.Satus = "6";
             switch(order.Satus)
             {
                 case "1":

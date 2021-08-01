@@ -6,6 +6,7 @@ namespace EverestApp.Models
 {
     class Order
     {
+        public int Index { get; set; }
         public string ID { get; set; }
         public string CustomerID { get; set; }
         public string UploadedDate { get; set; }

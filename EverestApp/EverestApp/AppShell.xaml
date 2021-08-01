@@ -4,7 +4,7 @@
        xmlns:local="clr-namespace:EverestApp.Views"
        Title="EverestApp"
        x:Class="EverestApp.AppShell"
-       FlowDirection="RightToLeft" FlyoutBehavior="Flyout">
+       FlowDirection="RightToLeft" FlyoutBehavior="Disabled">
 
     <!--
         The overall app visual hierarchy is defined here, along with navigation.

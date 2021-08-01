@@ -1,18 +1,8 @@
-﻿using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Android.Graphics;
+using EverestApp.Droid.Helpers;
 using EverestApp.Helpers;
-using Android.Graphics;
 using System.IO;
 using Xamarin.Forms;
-using EverestApp.Droid.Helpers;
 
 [assembly: Dependency(typeof(ImageResizer))]
 namespace EverestApp.Droid.Helpers
@@ -23,11 +13,12 @@ namespace EverestApp.Droid.Helpers
         {
             // Load the bitmap
             Bitmap originalImage = BitmapFactory.DecodeByteArray(imageData, 0, imageData.Length);
-            Bitmap resizedImage = Bitmap.CreateScaledBitmap(originalImage, (int)width, (int)height, false);
+            int h = 800 * originalImage.Height / originalImage.Width;
+            Bitmap resizedImage = Bitmap.CreateScaledBitmap(originalImage, (int)800, (int)h, false);
 
             using (MemoryStream ms = new MemoryStream())
             {
-                resizedImage.Compress(Bitmap.CompressFormat.Jpeg, 100, ms);
+                resizedImage.Compress(Bitmap.CompressFormat.Jpeg, 70, ms);
                 return ms.ToArray();
             }
         }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -114,24 +115,41 @@ namespace EverestApp.Services
         public async Task<IEnumerable<Order>> GetOrdersAsync(bool forceRefresh = false)
         {
             IEnumerable<Order> Data = new List<Order>();
+            IEnumerable<Order> DataWithIndex = new List<Order>();
 
             if (CustomerId == "")
                 return Data;
 
 
-            BaseApiAddress = $"https://www.everestexport.net/ems_getorders.php?id={CustomerId}";
+            BaseApiAddress = $"https://www.everestexport.net/ems_getorders.php?id={CustomerId}&x=" + (new Random()).Next(100000000);
 
-            
+            //string json_str = (new WebClient()).DownloadString(BaseApiAddress);
+
+            //Data = JsonConvert.DeserializeObject<IEnumerable<Order>>(json_str);
+
             var Uri = BaseApiAddress;
             var Client = new HttpClient();
             HttpResponseMessage response = await Client.GetAsync(Uri);
             if (response.IsSuccessStatusCode)
             {
                 var Json = await response.Content.ReadAsStringAsync();
+                //var Json = await Client.GetStringAsync(Uri);
                 Data = JsonConvert.DeserializeObject<IEnumerable<Order>>(Json);
             }
+            var index = 0;
+            DataWithIndex = from d in Data
+                            select new Order
+                            { 
+                                Index = index++,
+                                ID = d.ID,
+                                CustomerID = d.CustomerID,
+                                UploadedDate = d.UploadedDate,
+                                UpdatedDate = d.UpdatedDate,
+                                Satus = d.Satus
+                            };
 
-            return Data;
+
+            return await Task.FromResult(Data);
         }
     }
 }

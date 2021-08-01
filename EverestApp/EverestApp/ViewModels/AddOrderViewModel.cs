@@ -7,6 +7,7 @@ using System.IO;
 using System.Text;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using System.Drawing;
 
 namespace EverestApp.ViewModels
 {
@@ -57,6 +58,8 @@ namespace EverestApp.ViewModels
             SetImageFullPath(file);
         }
 
+        
+
         async void ExecuteTakeImageCommand()
         {
             var file = await MediaPicker.CapturePhotoAsync();
@@ -80,7 +83,7 @@ namespace EverestApp.ViewModels
             MemoryStream memoryStream = new MemoryStream();
             var streem = await file.OpenReadAsync();
             streem.CopyTo(memoryStream);
-
+            
             //resize image 
             var ResizedImage = ImageResizer.ResizeImage(memoryStream.ToArray(), 500, 500);
 
