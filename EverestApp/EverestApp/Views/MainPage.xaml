@@ -65,7 +65,7 @@
         <ScrollView Padding="10">
             <StackLayout   x:DataType="viewModel:MainPageViewModel">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                    <Label FontSize="20" FontFamily="Cairo" HorizontalTextAlignment="Center" Text=" مرحبا بعودتك " />
+                    <Label TextColor="Black" FontSize="20" FontFamily="Cairo" HorizontalTextAlignment="Center" Text=" مرحبا بعودتك " />
                     <Label FontSize="20" TextColor="#056839" FontFamily="Cairo" HorizontalTextAlignment="Center" Text="{Binding Customer.Info}" />
                 </StackLayout>
                 <BoxView HeightRequest="2" BackgroundColor="#e6e6e6"/>

@@ -25,10 +25,12 @@
                                FontAttributes="Bold"
                                Margin="0,10,0,0"
                                FontFamily="Cairo"
-                           FontSize="12"/>
+                               FontSize="12"
+                               TextColor="#056839"/>
                     <Label Text="{Binding CardDescription}" 
                            FontFamily="Cairo"
-                           FontSize="10"/>
+                           FontSize="10"
+                           TextColor="Black"/>
                 </StackLayout>
             </Grid>
         </StackLayout>

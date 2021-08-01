@@ -43,7 +43,7 @@ namespace EverestApp.Services
             DataWithIndex = from d in Data
                             select new AccountFile
                             { 
-                                Index = index++,
+                                Index = ++index,
                                 ID = d.ID,
                                 CustomerID = d.CustomerID,
                                 UpdateDate = d.UpdateDate,

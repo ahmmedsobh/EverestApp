@@ -19,16 +19,16 @@ namespace EverestApp.ViewModels
 
         private Order _selectedOrder;
 
-        public ObservableCollection<Order> Orders { get; }
-        public Command LoadOrdersCommand { get; }
+        public ObservableCollection<Category> Categories { get; }
+        public Command LoadCategoriesCommand { get; }
         public Command<Order> OrderTapped { get; }
         public Command AddOrderCommand { get; }
 
         public OrdersViewModel()
         {
             Title = "Browse";
-            Orders = new ObservableCollection<Order>();
-            LoadOrdersCommand = new Command(async () => await ExecuteLoadOrdersCommand());
+            Categories = new ObservableCollection<Category>();
+            LoadCategoriesCommand = new Command(async () => await ExecuteLoadOrdersCommand());
 
             OrderTapped = new Command<Order>(OnOrderSelected);
 
@@ -41,12 +41,11 @@ namespace EverestApp.ViewModels
 
             try
             {
-                Orders.Clear();
-                var orders = await OrderService.GetOrdersAsync(true);
-                foreach (var item in orders)
+                Categories.Clear();
+                var categories = await OrderService.GetOrdersByCategoryAsync(true);
+                foreach (var item in categories)
                 {
-                    var order = GetStatusInfo(item);
-                    Orders.Add(order);
+                    Categories.Add(item);
                 }
             }
             catch (Exception ex)
@@ -92,50 +91,7 @@ namespace EverestApp.ViewModels
             await Shell.Current.GoToAsync(nameof(AddOrderPage));
         }
 
-        Order GetStatusInfo(Order order)
-        {
-            //order.Satus = "6";
-            switch(order.Satus)
-            {
-                case "1":
-                    order.StatusTitle = "تم الارسال";
-                    order.StatusColor = "#fce83a";
-                    order.StatusIcon = FontAwesomeIcons.PaperPlane;
-                    break;
-                case "2":
-                    order.StatusTitle = "تم العرض";
-                    order.StatusColor = "#ffb302";
-                    order.StatusIcon = FontAwesomeIcons.Eye;
-                    break;
-                case "3":
-                    order.StatusTitle = "تم الاستلام";
-                    order.StatusColor = "#2dccff";
-                    order.StatusIcon = FontAwesomeIcons.SatelliteDish;
-                    break;
-                case "4":
-                    order.StatusTitle = "قيد التنفيذ";
-                    order.StatusColor = "#ff3838";
-                    order.StatusIcon = FontAwesomeIcons.Spinner;
-                    break;
-                case "5":
-                    order.StatusTitle = "تم الشحن";
-                    order.StatusColor = "#56f000";
-                    order.StatusIcon = FontAwesomeIcons.ShippingFast;
-                    break;
-                case "6":
-                    order.StatusTitle = "تم التوصيل";
-                    order.StatusColor = "#9ea7ad";
-                    order.StatusIcon = FontAwesomeIcons.Truck;
-                    break;
-                case "7":
-                    order.StatusTitle = "تم التسليم";
-                    order.StatusColor = "#056839";
-                    order.StatusIcon = FontAwesomeIcons.ClipboardCheck;
-                    break;
-            }
-
-            return order;
-        }
+       
 
     }
 }

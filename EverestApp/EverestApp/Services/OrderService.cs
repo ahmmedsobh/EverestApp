@@ -1,4 +1,5 @@
-﻿using EverestApp.Models;
+﻿using EverestApp.Helpers;
+using EverestApp.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -136,20 +137,155 @@ namespace EverestApp.Services
                 //var Json = await Client.GetStringAsync(Uri);
                 Data = JsonConvert.DeserializeObject<IEnumerable<Order>>(Json);
             }
+
             var index = 0;
             DataWithIndex = from d in Data
                             select new Order
                             { 
-                                Index = index++,
+                                Index = ++index,
                                 ID = d.ID,
                                 CustomerID = d.CustomerID,
                                 UploadedDate = d.UploadedDate,
                                 UpdatedDate = d.UpdatedDate,
-                                Satus = d.Satus
+                                Satus = d.Satus,
+                                StatusTitle = StatusTitle(d.Satus),
+                                StatusIcon = StatusIcon(d.Satus),
                             };
 
 
-            return await Task.FromResult(Data);
+            return await Task.FromResult(DataWithIndex);
+        }
+
+        public async Task<IEnumerable<Category>> GetOrdersByCategoryAsync(bool forceRefresh = false)
+        {
+            IEnumerable<Order> Data = new List<Order>();
+            IEnumerable<Order> DataWithIndex = new List<Order>();
+            IEnumerable<Category> Categories = new List<Category>();
+
+
+            if (CustomerId == "")
+                return Categories;
+
+
+            BaseApiAddress = $"https://www.everestexport.net/ems_getorders.php?id={CustomerId}&x=" + (new Random()).Next(100000000);
+
+            //string json_str = (new WebClient()).DownloadString(BaseApiAddress);
+
+            //Data = JsonConvert.DeserializeObject<IEnumerable<Order>>(json_str);
+
+            var Uri = BaseApiAddress;
+            var Client = new HttpClient();
+            HttpResponseMessage response = await Client.GetAsync(Uri);
+            if (response.IsSuccessStatusCode)
+            {
+                var Json = await response.Content.ReadAsStringAsync();
+                //var Json = await Client.GetStringAsync(Uri);
+                Data = JsonConvert.DeserializeObject<IEnumerable<Order>>(Json);
+            }
+
+            var index = 0;
+            DataWithIndex = from d in Data
+                            select new Order
+                            {
+                                Index = ++index,
+                                ID = d.ID,
+                                CustomerID = d.CustomerID,
+                                UploadedDate = d.UploadedDate,
+                                UpdatedDate = d.UpdatedDate,
+                                Satus = d.Satus,
+                                StatusTitle = StatusTitle(d.Satus),
+                                StatusIcon = StatusIcon(d.Satus),
+                            };
+
+            Categories = (from o in DataWithIndex
+                          group o by new { o.Satus, o.StatusTitle ,o.StatusIcon} into Group
+                          select new Category(Group.Key.Satus, Group.Key.StatusTitle, Group.Key.StatusIcon, "", Group.ToList())).ToList();
+
+
+            return await Task.FromResult(Categories);
+        }
+        string StatusTitle(string Status = "")
+        {
+            if(Status == "")
+            {
+                return "";
+            }
+            string statusTitle = "";
+            switch (Status)
+            {
+                case "1":
+                    statusTitle = "طلبيات مرسلة";
+                    break;
+                case "2":
+                    statusTitle = "تم الاطلاع عليها";
+                    break;
+                case "3":
+                    statusTitle = "استلام جزئي بالمخازن";
+                    break;
+                case "4":
+                    statusTitle = "استلام كامل بالمخازن";
+                    break;
+                case "5":
+                    statusTitle = "تم الفحص والاعداد للشحن";
+                    break;
+                case "6":
+                    statusTitle = "تم الشحن";
+                    break;
+                case "7":
+                    statusTitle = "وصلت مخازن بلد العميل";
+                    break;
+                case "8":
+                    statusTitle = "تم التسليم";
+                    break;
+                case "9":
+                    statusTitle = "تم الطلب من البائع";
+                    break;
+            }
+
+            return statusTitle;
+
+        }
+
+        string StatusIcon(string Status = "")
+        {
+            if (Status == "")
+            {
+                return "";
+            }
+            string statusIcon = "";
+            switch (Status)
+            {
+                case "1":
+                    statusIcon = FontAwesomeIcons.PaperPlane;
+                    break;
+                case "2":
+                    statusIcon = FontAwesomeIcons.Eye;
+                    break;
+                case "3":
+                    statusIcon = FontAwesomeIcons.TruckLoading;
+                    break;
+                case "4":
+                    statusIcon = FontAwesomeIcons.Boxes;
+                    break;
+                case "5":
+                    statusIcon = FontAwesomeIcons.CheckCircle;
+                    break;
+                case "6":
+                    statusIcon = FontAwesomeIcons.ShippingFast;
+                    break;
+                case "7":
+                    statusIcon = FontAwesomeIcons.Warehouse;
+                    break;
+                case "8":
+                    statusIcon = FontAwesomeIcons.ClipboardCheck;
+                    break;
+                case "9":
+                    statusIcon = FontAwesomeIcons.CartArrowDown;
+                    break;
+            }
+
+            return statusIcon;
+
         }
     }
 }

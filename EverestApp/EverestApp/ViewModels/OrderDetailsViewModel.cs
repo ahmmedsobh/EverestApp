@@ -44,14 +44,15 @@ namespace EverestApp.ViewModels
         {
             var orders = await OrderService.GetOrdersAsync();
             var order = orders.FirstOrDefault(o=>o.ID == OrderId);
-            var OrderByStatusInfo = GetStatusInfo(order);
+            
             Order = new Order() 
             {
-                ID = OrderByStatusInfo.ID,
-                CustomerID = OrderByStatusInfo.CustomerID,
-                UploadedDate = OrderByStatusInfo.UploadedDate,
-                UpdatedDate = OrderByStatusInfo.UpdatedDate,
-                StatusTitle = OrderByStatusInfo.StatusTitle,
+                Index = order.Index,
+                ID = order.ID,
+                CustomerID = order.CustomerID,
+                UploadedDate = order.UploadedDate,
+                UpdatedDate = order.UpdatedDate,
+                StatusTitle = order.StatusTitle,
             };
 
 

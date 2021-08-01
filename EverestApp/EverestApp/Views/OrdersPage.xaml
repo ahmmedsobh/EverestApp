@@ -47,11 +47,38 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <RefreshView Grid.Row="0" Padding="10,0,10,0" x:DataType="viewModels:OrdersViewModel" Command="{Binding LoadOrdersCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+                <RefreshView Grid.Row="0" Padding="10,0,10,0" x:DataType="viewModels:OrdersViewModel" Command="{Binding LoadCategoriesCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
                     <CollectionView x:Name="ItemsListView"
-                ItemsSource="{Binding Orders}"
+                ItemsSource="{Binding Categories}"
                 SelectionMode="Single"
-                SelectedItem="{Binding SelectedOrder}">
+                SelectedItem="{Binding SelectedOrder}" IsGrouped="True">
+                        <CollectionView.GroupHeaderTemplate>
+                            <DataTemplate>
+                                <StackLayout x:DataType="model:Category"  Orientation="Horizontal" >
+                                    <Frame  Margin="0,10,10,10" Padding="7"  CornerRadius="50" BackgroundColor="White">
+                                        <StackLayout WidthRequest="30" HeightRequest="30">
+                                            <Image Aspect="AspectFit" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                                                <Image.Source>
+                                                    <FontImageSource FontFamily="FAS"
+                                                                 Color="#056839"
+                                                                 Glyph="{Binding Icon}"
+                                                                 Size="20"/>
+                                                </Image.Source>
+                                            </Image>
+                                        </StackLayout>
+                                    </Frame>
+
+                                    <Label Text="{Binding Name}"
+                                       BackgroundColor="Transparent"
+                                       FontSize="Large"
+                                       FontAttributes="Bold"
+                                       Padding="0,0,0,0"
+                                       TextColor="#056839"
+                                       FontFamily="Cairo"
+                                       VerticalTextAlignment="Center"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.GroupHeaderTemplate>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout Padding="0,5,0,5">
@@ -62,7 +89,6 @@
                                                 <RowDefinition Height="Auto" />
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto" />
                                                 <ColumnDefinition Width="Auto" />
                                                 <ColumnDefinition Width="Auto" />
                                             </Grid.ColumnDefinitions>
@@ -76,27 +102,19 @@
 
 
                                             <Label Grid.Column="1" 
-                                       Text="{Binding ID,StringFormat='طلبية رقم {0}'}"
-                                       FontAttributes="Bold" />
+                                       Text="{Binding Index,StringFormat='طلبية رقم {0}'}"
+                                       FontAttributes="Bold" 
+                                       TextColor="#056839"
+                                       FontFamily="Cairo"/>
 
                                             <Label Grid.Row="1"
                                        Grid.Column="1"
                                        Text="{Binding UploadedDate}"
                                        FontAttributes="Italic"
-                                       VerticalOptions="Center" />
+                                       VerticalOptions="Center" 
+                                       TextColor="Black"/>
 
-                                            <Frame WidthRequest="90" VerticalOptions="Center" Margin="0,0,20,0"  CornerRadius="20" Grid.RowSpan="2" Grid.Column="2" BackgroundColor="{Binding StatusColor}" Padding="10">
-                                                <StackLayout Orientation="Horizontal">
-                                                    <Label VerticalTextAlignment="Center" TextColor="White" Text="{Binding StatusIcon}" FontFamily="FAS"/>
-                                                    <Label 
-                                                           Text="{Binding StatusTitle}"
-                                                           FontAttributes="Italic"
-                                                           VerticalOptions="Center" 
-                                                           HorizontalTextAlignment="Center"
-                                                           FontFamily="Cairo"
-                                                           TextColor="White"/>
-                                                </StackLayout>
-                                            </Frame>
+                                            
 
                                         </Grid>
                                     </Frame>

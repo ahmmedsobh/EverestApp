@@ -25,21 +25,21 @@
             <StackLayout x:DataType="viewModel:OrderDetailsViewModel" Padding="20">
                 <Image  Source="{Binding Order.ID,StringFormat='https://www.everestexport.net/ems/orders/{0}.jpg'}"/>
                 <StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Label FontFamily="Cairo" Text="طلبية رقم :" FontSize="20"/>
-                        <Label Text="{Binding Order.ID}" FontSize="20"/>
+                    <StackLayout >
+                        <Label TextColor="Black" FontFamily="Cairo" Text="طلبية رقم :" FontSize="15"/>
+                        <Label HorizontalTextAlignment="Center" TextColor="#056839" Text="{Binding Order.Index}" FontSize="20"/>
                     </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Label FontFamily="Cairo" Text="تاريخ الارسال :" FontSize="20"/>
-                        <Label Text="{Binding Order.UploadedDate}" FontSize="20"/>
+                    <StackLayout >
+                        <Label TextColor="Black" FontFamily="Cairo" Text="تاريخ الارسال :" FontSize="15"/>
+                        <Label HorizontalTextAlignment="Center" TextColor="#056839" Text="{Binding Order.UploadedDate}" FontSize="20"/>
                     </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Label FontFamily="Cairo" Text="تاريخ التحديث :" FontSize="20"/>
-                        <Label Text="{Binding Order.UpdatedDate}" FontSize="20"/>
+                    <StackLayout >
+                        <Label TextColor="Black" FontFamily="Cairo" Text="تاريخ التحديث :" FontSize="15"/>
+                        <Label HorizontalTextAlignment="Center" TextColor="#056839" Text="{Binding Order.UpdatedDate}" FontSize="20"/>
                     </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Label FontFamily="Cairo" Text="الحالة :" FontSize="20"/>
-                        <Label FontFamily="Cairo" Text="{Binding Order.StatusTitle}" FontSize="20"/>
+                    <StackLayout >
+                        <Label TextColor="Black" FontFamily="Cairo" Text="الحالة :" FontSize="15"/>
+                        <Label HorizontalTextAlignment="Center" TextColor="#056839" FontFamily="Cairo" Text="{Binding Order.StatusTitle}" FontSize="20"/>
                     </StackLayout>
                 </StackLayout>
             </StackLayout>

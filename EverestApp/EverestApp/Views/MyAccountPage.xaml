@@ -44,8 +44,8 @@
                             </Image.Source>
                         </Image>
                     </Frame>
-                    <Label HorizontalTextAlignment="Center"  FontFamily="Cairo" Text="{Binding Info}" FontSize="30"/>
-                    <Label HorizontalTextAlignment="Center" Text="{Binding Code}" FontSize="20"/>
+                    <Label TextColor="#056839" HorizontalTextAlignment="Center"  FontFamily="Cairo" Text="{Binding Info}" FontSize="30"/>
+                    <Label TextColor="Black" HorizontalTextAlignment="Center" Text="{Binding Code}" FontSize="20"/>
                 </StackLayout>
                 <StackLayout  Margin="20" HeightRequest="500">
                     <Button FontFamily="Cairo" Padding="15,0,15,0" ContentLayout="left,0" BackgroundColor="#056839" Text="مشاركة" Command="{Binding ShareImageCommand}">

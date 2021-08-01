@@ -83,13 +83,15 @@
                                             <Label Grid.Column="1" 
                                        Text="{Binding Index,StringFormat='ملف {0}'}"
                                        FontAttributes="Bold" 
-                                       FontFamily="Cairo"/>
+                                       FontFamily="Cairo"
+                                       TextColor="#056839"/>
 
                                             <Label Grid.Row="1"
                                        Grid.Column="1"
                                        Text="{Binding UpdateDate}"
                                        FontAttributes="Italic"
-                                       VerticalOptions="Center" />
+                                       VerticalOptions="Center"
+                                       TextColor="Black"/>
 
                                         </Grid>
                                     </Frame>

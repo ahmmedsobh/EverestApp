@@ -24,16 +24,16 @@
             <StackLayout x:DataType="viewModel:AccountFilesDetailsViewModel" Padding="20">
                 <StackLayout>
                     <StackLayout Orientation="Horizontal">
-                        <Label FontFamily="Cairo" Text="ملف رقم :" FontSize="20"/>
-                        <Label Text="{Binding File.ID}" FontSize="20"/>
+                        <Label TextColor="Black" FontFamily="Cairo" Text="ملف رقم :" FontSize="15"/>
+                        <Label HorizontalTextAlignment="Center" TextColor="#056839" Text="{Binding File.Index}" FontSize="20"/>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
-                        <Label FontFamily="Cairo" Text="تاريخ الارسال :" FontSize="20"/>
-                        <Label Text="{Binding File.UploadDate}" FontSize="20"/>
+                        <Label TextColor="Black" FontFamily="Cairo" Text="تاريخ الارسال :" FontSize="15"/>
+                        <Label HorizontalTextAlignment="Center" TextColor="#056839" Text="{Binding File.UploadDate}" FontSize="20"/>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
-                        <Label FontFamily="Cairo" Text="تاريخ التحديث :" FontSize="20"/>
-                        <Label Text="{Binding File.UpdateDate}" FontSize="20"/>
+                        <Label TextColor="Black" FontFamily="Cairo" Text="تاريخ التحديث :" FontSize="15"/>
+                        <Label HorizontalTextAlignment="Center" TextColor="#056839" Text="{Binding File.UpdateDate}" FontSize="20"/>
                     </StackLayout>
                 </StackLayout>
                 <Button FontFamily="Cairo" Padding="15,0,15,0" ContentLayout="left,0" BackgroundColor="#056839" Text="فتح الملف" Command="{Binding OpenFileCommand}">
