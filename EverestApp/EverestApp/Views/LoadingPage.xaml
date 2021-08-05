@@ -4,7 +4,9 @@
              x:Class="EverestApp.Views.LoadingPage"
              Shell.NavBarIsVisible="False" 
              xmlns:viewModel="clr-namespace:EverestApp.ViewModels"
-             xmlns:converters="clr-namespace:EverestApp.Converters">
+             xmlns:converters="clr-namespace:EverestApp.Converters"
+             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers">
+    
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:StringToImageSourceConverter x:Key="StringToImageSourceConverter"></converters:StringToImageSourceConverter>
@@ -14,8 +16,16 @@
     <ContentPage.Content>
         <StackLayout x:DataType="viewModel:LoadingViewModel" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
             <Image WidthRequest="200" Source="{Binding Logo,Converter={StaticResource StringToImageSourceConverter}}"/>
-            <ActivityIndicator Color="#62be7e" IsRunning="True"/>
-            <Label HorizontalTextAlignment="Center" TextColor="#056839" FontSize="18" FontFamily="Cairo" Text="يرجى الانتظار ..."/>
+            <ActivityIndicator  Color="#62be7e" IsRunning="{Binding IsBusy}"/>
+            <Label IsVisible="{Binding IsBusy}" HorizontalTextAlignment="Center" TextColor="#056839" FontSize="18" FontFamily="Cairo" Text="يرجى الانتظار ..."/>
+            <Button FontFamily="Cairo" Padding="15,0,15,0" ContentLayout="left,0" BackgroundColor="#056839" Text="دخول" Command="{Binding LoginCommand}" IsVisible="{Binding LoginBtnVisible}">
+                <Button.ImageSource>
+                    <FontImageSource FontFamily="FAS" 
+                                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.SignInAlt}"
+                                             Size="20"
+                                             Color="White"/>
+                </Button.ImageSource>
+            </Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

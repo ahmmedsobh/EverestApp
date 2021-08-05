@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EverestApp.Views.ShipmentInfoPage"
+             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers">
+
+    <Shell.TitleView>
+        <StackLayout  Orientation="Horizontal">
+            <Image>
+                <Image.Source>
+                    <FontImageSource FontFamily="FAS"
+                                     Color="White"
+                                     Glyph="{x:Static fontAwesome:FontAwesomeIcons.InfoCircle}"
+                                     Size="20"/>
+                </Image.Source>
+            </Image>
+            <Label FontSize="20" FontFamily="Cairo" VerticalTextAlignment="Center" Text="تعليمات عند الشحن" TextColor="White"/>
+        </StackLayout>
+    </Shell.TitleView>
+
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+            <Label FontFamily="Cairo" FontSize="20" Text="- كتابة الكود بشكل صحيح على فاتورة الطلب" TextColor="#056839"/>
+            <Label FontFamily="Cairo" FontSize="20" Text="- كتابة اسم الشركة في حال عدم وجوده على الفاتورة مع رقم الهاتف" TextColor="#056839"/>
+            <Label FontFamily="Cairo" FontSize="20" Text="- الالتزام بعدم شحن ماركات داخل البضاعة" TextColor="#056839"/>
+            <Label FontFamily="Cairo" FontSize="20" Text="- التأكد من الفاتورة مدفوعة أم لا والكتابة عليها في حال الدفع" TextColor="#056839"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

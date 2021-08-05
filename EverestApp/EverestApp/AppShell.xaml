@@ -4,7 +4,8 @@
        xmlns:local="clr-namespace:EverestApp.Views"
        Title="EverestApp"
        x:Class="EverestApp.AppShell"
-       FlowDirection="RightToLeft" FlyoutBehavior="Disabled">
+       FlowDirection="RightToLeft" FlyoutBehavior="Disabled"
+       xmlns:fontAwesome="clr-namespace:EverestApp.Helpers">
 
     <!--
         The overall app visual hierarchy is defined here, along with navigation.
@@ -106,13 +107,19 @@
     </FlyoutItem>-->
 
 
-    <!--<FlyoutItem Title="Browse" Icon="icon_feed.png">
-        <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate local:ItemsPage}" />
+    <!--<FlyoutItem Title="تعليمات عند الشحن">
+        <FlyoutItem.Icon>
+            <FontImageSource    FontFamily="FAS"
+                                Color="#056839"
+                                Glyph="{x:Static fontAwesome:FontAwesomeIcons.InfoCircle}"
+                                Size="100"/>
+        </FlyoutItem.Icon>
+        <ShellContent Route="MainPage/ShipmentInfoPage" ContentTemplate="{DataTemplate local:ShipmentInfoPage}" />
     </FlyoutItem>-->
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
-    <MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
-    </MenuItem>
+    <!--<MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
+    </MenuItem>-->
 
     <!--
         TabBar lets you define content that won't show up in a flyout menu. When this content is active

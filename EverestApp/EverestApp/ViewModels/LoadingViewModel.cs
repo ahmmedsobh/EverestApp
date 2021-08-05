@@ -10,14 +10,24 @@ namespace EverestApp.ViewModels
 {
     class LoadingViewModel:BaseViewModel
     {
-        IAccountService AccountService = DependencyService.Get<IAccountService>(); 
+        IAccountService AccountService = DependencyService.Get<IAccountService>();
+        public Command LoginCommand { get; }
         public LoadingViewModel()
         {
             //reset client login data to show login page
             //Preferences.Set("Code","");
             //Preferences.Set("Password","");
-
+            LoginCommand = new Command(IsLoggedIn);
             IsLoggedIn();
+        }
+        bool loginBtnVisible;
+        public bool LoginBtnVisible 
+        {
+            get => loginBtnVisible;
+            set
+            {
+                SetProperty(ref loginBtnVisible, value);
+            }
         }
 
         public string Logo 
@@ -26,6 +36,18 @@ namespace EverestApp.ViewModels
         }
         async void IsLoggedIn()
         {
+            IsBusy = true;
+            LoginBtnVisible = false;
+            var current = Connectivity.NetworkAccess;
+
+            if (current != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("رسالة","تأكد من الاتصال بالانترنت","موافق");
+                IsBusy = false;
+                LoginBtnVisible = true;
+                return;
+            }
+
             var isLoggedIn = await AccountService.IsLoggedIn();
             if(isLoggedIn)
             {

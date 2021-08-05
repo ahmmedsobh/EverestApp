@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EverestApp.Views.MessagesPage"
+             xmlns:viewModels="clr-namespace:EverestApp.ViewModels"
+             xmlns:model="clr-namespace:EverestApp.Models"
+             BackgroundColor="LightGray"
+             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers"
+             xmlns:controls="clr-namespace:EverestApp.CustomControls">
+    
+    <Shell.TitleView>
+        <StackLayout  Orientation="Horizontal">
+            <Image>
+                <Image.Source>
+                    <FontImageSource FontFamily="FAS"
+                                     Color="White"
+                                     Glyph="{x:Static fontAwesome:FontAwesomeIcons.CommentMedical}"
+                                     Size="20"/>
+                </Image.Source>
+            </Image>
+            <Label FontSize="20" FontFamily="Cairo" VerticalTextAlignment="Center" Text="الرسائل" TextColor="White"/>
+        </StackLayout>
+    </Shell.TitleView>
+
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand" Margin="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackLayout Grid.Row="0">
+                    <Frame CornerRadius="20" BackgroundColor="White">
+                        <StackLayout>
+                            <Label TextColor="Black" FontFamily="Cairo" Text="لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
+
+أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس نوستريد
+
+أكسير سيتاشن يللأمكو لابورأس نيسي يت أليكيوب أكس أيا كوممودو كونسيكيوات . ديواس
+
+أيوتي أريري دولار إن ريبريهينديرأيت فوليوبتاتي فيلايت أيسسي كايلليوم دولار أيو فيجايت
+
+نيولا باراياتيور. أيكسسيبتيور ساينت أوككايكات كيوبايداتات نون بروايدينت ,سيونت ان كيولبا
+
+كيو أوفيسيا ديسيريونتموليت انيم أيدي ايست لابوريوم."/>
+                        </StackLayout>
+                    </Frame>
+                    <Frame CornerRadius="20" BackgroundColor="#62be7e">
+                        <StackLayout>
+                            <Label TextColor="Black" FontFamily="Cairo" Text="لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
+
+أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس نوستريد
+
+أكسير سيتاشن يللأمكو لابورأس نيسي يت أليكيوب أكس أيا كوممودو كونسيكيوات . ديواس
+
+أيوتي أريري دولار إن ريبريهينديرأيت فوليوبتاتي فيلايت أيسسي كايلليوم دولار أيو فيجايت
+
+نيولا باراياتيور. أيكسسيبتيور ساينت أوككايكات كيوبايداتات نون بروايدينت ,سيونت ان كيولبا
+
+كيو أوفيسيا ديسيريونتموليت انيم أيدي ايست لابوريوم."/>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+
+                <StackLayout Grid.Row="0"  VerticalOptions="End" HorizontalOptions="FillAndExpand">
+                    <StackLayout  Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                        <Frame BackgroundColor="White" CornerRadius="30" Padding="0" HorizontalOptions="FillAndExpand" HasShadow="False">
+                            <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+                                <controls:CustomEntry HorizontalOptions="FillAndExpand"  TextColor="#056839" PlaceholderColor="#62be7e" FontFamily="Cairo" Placeholder="أكتب رسالة" CornerRadius="20" BorderColor="White" BackgroundColor="White" Text="{Binding Password,Mode=OneWayToSource}"/>
+                                <Frame  HasShadow="False"  CornerRadius="80" Padding="0">
+                                    <ImageButton WidthRequest="50"  HeightRequest="50" Padding="10">
+                                        <ImageButton.Source>
+                                            <FontImageSource FontFamily="FAS" 
+                                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.Paperclip}"
+                                             Size="30"
+                                             Color="#056839"/>
+                                        </ImageButton.Source>
+                                    </ImageButton>
+                                </Frame>
+                            </StackLayout>
+                        </Frame>
+                        <Frame WidthRequest="50" HeightRequest="50" CornerRadius="100" Padding="0">
+                            <ImageButton  BackgroundColor="#056839" Padding="5">
+                                <ImageButton.Source>
+                                    <FontImageSource FontFamily="FAS" 
+                                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.AngleLeft}"
+                                             Size="50"
+                                             Color="White"/>
+                                </ImageButton.Source>
+                            </ImageButton>
+                        </Frame>
+                    </StackLayout>
+                </StackLayout>
+                
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

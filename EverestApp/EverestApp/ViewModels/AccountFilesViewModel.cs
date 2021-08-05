@@ -23,6 +23,8 @@ namespace EverestApp.ViewModels
         public Command LoadFilesCommand { get; }
         public Command<AccountFile> FileTapped { get; }
 
+        public Command AddMessageCommand { get; }
+
         public AccountFilesViewModel()
         {
             Title = "الحسابات";
@@ -30,6 +32,7 @@ namespace EverestApp.ViewModels
             LoadFilesCommand = new Command(async () => await ExecuteLoadFilesCommand());
 
             FileTapped = new Command<AccountFile>(OnFileSelected);
+            AddMessageCommand = new Command(ExecuteAddMessageCommand);
 
         }
 
@@ -84,9 +87,9 @@ namespace EverestApp.ViewModels
             await Shell.Current.GoToAsync($"{nameof(AccountFileDetailsPage)}?{nameof(AccountFilesDetailsViewModel.FileId)}={file.ID}");
         }
 
-        async void ExecuteAddCommentCommand()
+        async void ExecuteAddMessageCommand()
         {
-            await Shell.Current.GoToAsync(nameof(AddOrderPage));
+            await Shell.Current.GoToAsync(nameof(MessagesPage));
         }
 
         

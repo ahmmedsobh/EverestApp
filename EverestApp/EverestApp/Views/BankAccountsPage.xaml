@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EverestApp.Views.BankAccountsPage"
+             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers">
+
+    <Shell.TitleView>
+        <StackLayout  Orientation="Horizontal">
+            <Image>
+                <Image.Source>
+                    <FontImageSource FontFamily="FAS"
+                                     Color="White"
+                                     Glyph="{x:Static fontAwesome:FontAwesomeIcons.DollarSign}"
+                                     Size="20"/>
+                </Image.Source>
+            </Image>
+            <Label FontSize="20" FontFamily="Cairo" VerticalTextAlignment="Center" Text="الحسابات البنكية" TextColor="White"/>
+        </StackLayout>
+    </Shell.TitleView>
+
+    <ContentPage.Content>
+        <ScrollView VerticalOptions="FillAndExpand" FlowDirection="LeftToRight">
+            <StackLayout Margin="10" VerticalOptions="FillAndExpand" HeightRequest="850">
+                <StackLayout>
+                    <Image x:Name="Img1" />
+                    <Label FontSize="15" Text="EVEREST ITHALAT IHRACAT LTD. ŞTİ. USD/$"/>
+                    <Label FontSize="15" Text="BANK NAME : QNB Finansbank A.S."/>
+                    <Label FontSize="15" Text="BRANCH NAME : OSMANBEY BRANCH/00979"/>
+                    <Label FontSize="15" Text="ACCOUNT No : 979-40653718"/>
+                    <Label FontSize="15" Text="IBAN : TR04 0011 1000 0000 0040 6537 18"/>
+                    <Label FontSize="15" Text="SWIFT CODE : FNNBTRISOPS"/>
+                </StackLayout>
+                <StackLayout>
+                    <Image x:Name="Img2" />
+                    <Label FontSize="15" Text="EVEREST ITHALAT IHRACAT LTD. ŞTİ .EURO "/>
+                    <Label FontSize="15" Text="ACCOUNT NO : 979-40669689"/>
+                    <Label FontSize="15" Text="IBAN: TR49 0011 1000 0000 0040 6696 89"/>
+                    <Label FontSize="15" Text="SWIFT CODE : FNNBTRISOPS"/>
+                </StackLayout>
+                <StackLayout>
+                    <Image x:Name="Img3" />
+                    <Label FontSize="15" Text="NAME : NUSRET ABİDOĞLU TRY"/>
+                    <Label FontSize="15" Text="BANK NAME : QNB FINANS BANK"/>
+                    <Label FontSize="15" Text="BRANCH : OSMANBEY 00979"/>
+                    <Label FontSize="15" Text="HESAP NO : 21935379"/>
+                    <Label FontSize="15" Text="IBAN: TR34 0011 1000 0000 0021 9353 79"/>
+                </StackLayout>
+                <StackLayout>
+                    <Image x:Name="Img4" />
+                    <Label FontSize="15" Text="NAME : شركة قمة ايفرستY"/>
+                    <Label FontSize="15" Text="HESAP NO  :3354300"/>
+                    <Label FontSize="15" Text="فرع جنين"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

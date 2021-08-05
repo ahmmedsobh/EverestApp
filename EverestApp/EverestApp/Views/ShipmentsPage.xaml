@@ -1,24 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="EverestApp.Views.AccountFilesPage"
+             x:Class="EverestApp.Views.ShipmentsPage"
              xmlns:viewModels="clr-namespace:EverestApp.ViewModels"
              xmlns:model="clr-namespace:EverestApp.Models"
              BackgroundColor="LightGray"
              xmlns:fontAwesome="clr-namespace:EverestApp.Helpers">
-
-
+    
     <Shell.TitleView>
         <StackLayout  Orientation="Horizontal">
             <Image>
                 <Image.Source>
                     <FontImageSource FontFamily="FAS"
                                      Color="White"
-                                     Glyph="{x:Static fontAwesome:FontAwesomeIcons.FilePdf}"
+                                     Glyph="{x:Static fontAwesome:FontAwesomeIcons.ShippingFast}"
                                      Size="20"/>
                 </Image.Source>
             </Image>
-            <Label FontSize="20" FontFamily="Cairo" VerticalTextAlignment="Center" Text="حساباتى" TextColor="White"/>
+            <Label FontSize="20" FontFamily="Cairo" VerticalTextAlignment="Center" Text="الشحنات" TextColor="White"/>
         </StackLayout>
     </Shell.TitleView>
 
@@ -47,15 +46,16 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <RefreshView Grid.Row="0" Padding="10,0,10,0" x:DataType="viewModels:AccountFilesViewModel" Command="{Binding LoadFilesCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+                <RefreshView Grid.Row="0" Padding="10,0,10,0" x:DataType="viewModels:ShipmentViewModel" Command="{Binding LoadShipmentsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
                     <CollectionView x:Name="ItemsListView"
-                ItemsSource="{Binding Files}"
+                ItemsSource="{Binding Shipments}"
                 SelectionMode="Single"
-                SelectedItem="{Binding SelectedFile}">
+                SelectedItem="{Binding SelectedShipment}">
+                        
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout Padding="0,5,0,5">
-                                    <Frame x:DataType="model:AccountFile" Padding="10"   CornerRadius="0" BackgroundColor="White">
+                                    <Frame x:DataType="model:Shipment" Padding="10"   CornerRadius="20" BackgroundColor="White">
                                         <Grid >
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto" />
@@ -65,33 +65,29 @@
                                                 <ColumnDefinition Width="Auto" />
                                                 <ColumnDefinition Width="Auto" />
                                             </Grid.ColumnDefinitions>
-                                            <Frame Grid.RowSpan="2" Padding="0" HasShadow="False" CornerRadius="120" BackgroundColor="#056839">
-                                                <StackLayout WidthRequest="60" HeightRequest="60">
-                                                    <Image VerticalOptions="CenterAndExpand">
-                                                        <Image.Source>
-                                                            <FontImageSource FontFamily="FAS"
-                                                             Color="White"
-                                                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.FilePdf}"
-                                                             Size="30"/>
-                                                        </Image.Source>
-                                                    </Image>
-                                                </StackLayout>
-                                               
+                                            <Frame Grid.RowSpan="2" Padding="0" HasShadow="False" CornerRadius="10" BackgroundColor="#056839">
+                                                <Image 
+                                       Source="{Binding ID,StringFormat='https://www.everestexport.net/ems/shipments/{0}.jpg'}"
+                                       Aspect="AspectFill"
+                                       HeightRequest="60"
+                                       WidthRequest="60" />
                                             </Frame>
 
 
                                             <Label Grid.Column="1" 
-                                       Text="{Binding Index,StringFormat='ملف {0}'}"
+                                       Text="{Binding Index,StringFormat='شحنة رقم {0}'}"
                                        FontAttributes="Bold" 
-                                       FontFamily="Cairo"
-                                       TextColor="#056839"/>
+                                       TextColor="#056839"
+                                       FontFamily="Cairo"/>
 
                                             <Label Grid.Row="1"
                                        Grid.Column="1"
-                                       Text="{Binding UpdateDate}"
+                                       Text="{Binding UploadDate}"
                                        FontAttributes="Italic"
-                                       VerticalOptions="Center"
+                                       VerticalOptions="Center" 
                                        TextColor="Black"/>
+
+
 
                                         </Grid>
                                     </Frame>
@@ -104,11 +100,11 @@
                 </RefreshView>
 
 
-                <!--<Frame BorderColor="White"  HorizontalOptions="Center" WidthRequest="150" Grid.Row="0" HasShadow="True" Padding="0" VerticalOptions="End"  CornerRadius="20" Margin="20">
-                    <Button Text="ارسال رسالة" Padding="15,0,15,0" ContentLayout="left,0" WidthRequest="150" HorizontalOptions="Center"  FontFamily="Cairo"  BackgroundColor="#056839" Command="{Binding AddMessageCommand}">
+                <!--<Frame BorderColor="White" HorizontalOptions="Center" WidthRequest="150" Grid.Row="0" HasShadow="True" Padding="0" VerticalOptions="End"  CornerRadius="20" Margin="20">
+                    <Button Text="اضافة طلبية" Padding="15,0,15,0" ContentLayout="left,0" WidthRequest="150" HorizontalOptions="Center"  FontFamily="Cairo"  BackgroundColor="#056839" Command="{Binding AddOrderCommand}">
                         <Button.ImageSource>
                             <FontImageSource FontFamily="FAS" 
-                                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.CommentMedical}"
+                                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.Plus}"
                                              Size="15"
                                              Color="White"/>
                         </Button.ImageSource>
@@ -121,5 +117,4 @@
 
         </StackLayout>
     </ContentPage.Content>
-
 </ContentPage>

@@ -23,6 +23,13 @@ namespace EverestApp
             Routing.RegisterRoute(nameof(MyAccountPage), typeof(MyAccountPage));
             Routing.RegisterRoute(nameof(AccountFilesPage), typeof(AccountFilesPage));
             Routing.RegisterRoute(nameof(AccountFileDetailsPage), typeof(AccountFileDetailsPage));
+            Routing.RegisterRoute(nameof(ShipmentsPage), typeof(ShipmentsPage));
+            Routing.RegisterRoute(nameof(ShipmentDetailsPage), typeof(ShipmentDetailsPage));
+            Routing.RegisterRoute(nameof(MessagesPage), typeof(MessagesPage));
+            Routing.RegisterRoute(nameof(ShipmentInfoPage), typeof(ShipmentInfoPage));
+            Routing.RegisterRoute(nameof(BankAccountsPage), typeof(BankAccountsPage));
+
+
 
         }
 

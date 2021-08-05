@@ -56,7 +56,7 @@
                                              Color="White"/>
                         </Button.ImageSource>
                     </Button>
-                    <Image Source="{Binding AccountImage,Converter={StaticResource StringToImageSourceConverter}}" />
+                    <Image HeightRequest="400" Source="{Binding AccountImage,Converter={StaticResource StringToImageSourceConverter}}" />
 
                 </StackLayout>
             </StackLayout>

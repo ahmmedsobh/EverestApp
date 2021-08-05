@@ -91,7 +91,7 @@
                     </RefreshView>
 
                 </StackLayout>
-                <StackLayout HeightRequest="232" >
+                <StackLayout HeightRequest="348">
                     <CollectionView  ItemsSource="{Binding Items}" ItemsLayout="VerticalGrid, 2" SelectionMode="Single" SelectedItem="{Binding SelectedItem,Mode=TwoWay}">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
