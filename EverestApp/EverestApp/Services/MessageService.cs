@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -17,16 +18,49 @@ namespace EverestApp.Services
     {
         string BaseApiAddress = "";
         string CustomerId = Preferences.Get("ID", "");
-        public async Task<bool> AddMessageAsync(string msg, string cus,byte[] file)
+        public async Task<bool> AddMessageAsync(string msg,FileResult file)
         {
 
             if (CustomerId == "")
                 return await Task.FromResult(false);
 
+            
+
             BaseApiAddress = $"https://www.everestexport.net/ems_newmsg.php?msg={msg}&cus=" + CustomerId;
 
+            #region comment
+            //-----
+            //string fileName = "";
+            //var Client = new WebClient();
+            //byte[] res;
+            //if (file != null)
+            //{
+            //    fileName = Path.Combine(FileSystem.AppDataDirectory, file.FileName);
+            //    res = Client.UploadFile(BaseApiAddress, "POST", fileName);
+            //}
+            //else
+            //{
+            //    string r = Client.UploadString(BaseApiAddress, "POST", msg);
+            //}
+
+
+            //var content = new MultipartFormDataContent();
+            //if (file != null)
+            //{
+            //    content.Add(new StreamContent(await file.OpenReadAsync()), "file", file.FileName);
+            //}
+
+            //var httpClient = new HttpClient();
+            //var response = await httpClient.PostAsync(BaseApiAddress, content);
+            //if(response.IsSuccessStatusCode)
+            //{
+            //    return await Task.FromResult(true);
+            //}
+            //-----
+
+            #endregion
             NameValueCollection nvc = new NameValueCollection();
-            nvc.Add("submit", "Upload Image");
+            nvc.Add("submit", "Upload File");
             HttpUploadFile(BaseApiAddress, file, nvc);
             return await Task.FromResult(true);
         }
@@ -71,15 +105,25 @@ namespace EverestApp.Services
                                 SentDate = m.SentDate,
                                 MessageText = m.MessageText,
                                 Sender = m.Sender,
-                                Attachement = m.Attachement
+                                Attachement = m.Attachement,
+                                MessageColor = (m.Sender == "" || m.Sender == null) ? "White" : "#62be7e",
+                                HaveAttachement = (m.Attachement == "" || m.Attachement == null) ? false : true
                             };
 
             return await Task.FromResult(DataWithIndex);
         }
 
 
-        public static void HttpUploadFile(string url, byte[] filebytes, NameValueCollection nvc)
+        public async static void HttpUploadFile(string url, FileResult file, NameValueCollection nvc)
         {
+            byte[] filebytes = new byte[0];
+            if(file != null)
+            {
+                MemoryStream memoryStream = new MemoryStream();
+                var streem = await file.OpenReadAsync();
+                streem.CopyTo(memoryStream);
+                filebytes = memoryStream.ToArray();
+            }
             string boundary = "---------------------------" + DateTime.Now.Ticks.ToString("x");
             byte[] boundarybytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
 
@@ -101,7 +145,17 @@ namespace EverestApp.Services
             }
             rs.Write(boundarybytes, 0, boundarybytes.Length);
 
-            string header = "Content-Disposition: form-data; name=\"fileToUpload\"; filename=\"upload.jpg\"\r\nContent-Type: image/jpeg\r\n\r\n";
+            // filename=\"upload.jpg\"\r\nContent-Type: image/jpeg\r\n\r\n
+            string header = "";
+            if (file!=null)
+            {
+                header = "Content-Disposition: form-data; name=\"fileToUpload\";filename=\"" + file.FileName + "\"\r\nContent-Type: " + file.ContentType + "\r\n\r\n";
+
+            }
+            else
+            {
+                header = "Content-Disposition: form-data;\r\n\r\n";
+            }
             byte[] headerbytes = Encoding.UTF8.GetBytes(header);
             rs.Write(headerbytes, 0, headerbytes.Length);
 
@@ -132,6 +186,43 @@ namespace EverestApp.Services
             {
                 wr = null;
             }
+        }
+
+        public async Task<IEnumerable<Message>> GetMessagesAfterLastMessageAsync(int id = 0)
+        {
+            IEnumerable<Message> Data = new List<Message>();
+            IEnumerable<Message> DataWithIndex = new List<Message>();
+
+            if (CustomerId == "")
+                return Data;
+
+            BaseApiAddress = $"https://www.everestexport.net/ems_messages.php?id={CustomerId}&msg={id}&x=" + (new Random()).Next(100000000);
+
+            var Uri = BaseApiAddress;
+            var Client = new HttpClient();
+            HttpResponseMessage response = await Client.GetAsync(Uri);
+            if (response.IsSuccessStatusCode)
+            {
+                var Json = await response.Content.ReadAsStringAsync();
+                Data = JsonConvert.DeserializeObject<IEnumerable<Message>>(Json);
+            }
+
+            var index = 0;
+            DataWithIndex = from m in Data
+                            select new Message
+                            {
+                                Index = ++index,
+                                ID = m.ID,
+                                CustomerID = m.CustomerID,
+                                SentDate = m.SentDate,
+                                MessageText = m.MessageText,
+                                Sender = m.Sender,
+                                Attachement = m.Attachement,
+                                MessageColor = (m.Sender == "" || m.Sender == null) ? "White" : "#62be7e",
+                                HaveAttachement = (m.Attachement == "" || m.Attachement == null) ? false : true
+                            };
+
+            return await Task.FromResult(DataWithIndex);
         }
     }
 }

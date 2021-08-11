@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EverestApp.CustomControls.CustomCells.OutgoingViewCell"
+             xmlns:model="clr-namespace:EverestApp.Models"
+             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers"
+             xmlns:ViewModel="clr-namespace:EverestApp.ViewModels">
+  <ContentView.Content>
+        <SwipeView>
+            <SwipeView.LeftItems>
+                <SwipeItems>
+                    <SwipeItemView>
+                        <StackLayout>
+                            <Frame VerticalOptions="CenterAndExpand" WidthRequest="50" HeightRequest="50" CornerRadius="100" Padding="0">
+                                <ImageButton VerticalOptions="CenterAndExpand" BackgroundColor="red" Padding="15" Command="{Binding Source={RelativeSource AncestorType={x:Type ViewModel:MessagesViewModel}}, Path=DeleteMessageCommand}" CommandParameter="{Binding}">
+                                    <ImageButton.Source>
+                                        <FontImageSource FontFamily="FAS" 
+                                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.TrashAlt}"
+                                             Size="50"
+                                             Color="White"/>
+                                    </ImageButton.Source>
+                                </ImageButton>
+                            </Frame>
+                        </StackLayout>
+                    </SwipeItemView>
+                </SwipeItems>
+            </SwipeView.LeftItems>
+            <Grid ColumnSpacing="0" Padding="0,5,0,5" x:DataType="model:Message">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="40"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+
+
+                </Grid.RowDefinitions>
+                <Frame Grid.Row="0"  Grid.Column="0" Padding="10"  CornerRadius="20">
+                    <Frame.HasShadow>
+                        <OnPlatform x:TypeArguments="x:Boolean" iOS="false" Android="true"/>
+                    </Frame.HasShadow>
+                    <Frame.BackgroundColor>
+                        <OnPlatform x:TypeArguments="Color" iOS="#F5F5F5" Android="White"/>
+                    </Frame.BackgroundColor>
+                    <StackLayout >
+                        <Label FontFamily="Cairo" TextColor="Black"  Text="{Binding MessageText}" />
+                        <Frame BackgroundColor="#72bc89" IsVisible="{Binding HaveAttachement}" Margin="10" CornerRadius="20" Padding="10">
+                            <Label HorizontalTextAlignment="Center" TextColor="White" FontFamily="Cairo" Text="اضغط لفتح الملف المرفق"/>
+                        </Frame>
+                    </StackLayout>
+                </Frame>
+                <Label Grid.Row="1" FontSize="Micro" Grid.Column="0" HorizontalTextAlignment="End"  Text="{Binding SentDate, StringFormat='{0:MM/dd/yyyy hh:mm tt}'}" TextColor="Gray"></Label>
+            </Grid>
+        </SwipeView>
+  </ContentView.Content>
+    
+</ContentView>

@@ -1,4 +1,5 @@
 ﻿using EverestApp.Services;
+using EverestApp.ViewModels;
 using EverestApp.Views;
 using System;
 using Xamarin.Forms;
@@ -8,7 +9,7 @@ namespace EverestApp
 {
     public partial class App : Application
     {
-
+        MessagesViewModel ViewModel = new MessagesViewModel(); 
         public App()
         {
             InitializeComponent();
@@ -20,13 +21,17 @@ namespace EverestApp
             DependencyService.Register<OrderService>();
             DependencyService.Register<AccountFilesService>();
             DependencyService.Register<ShipmentService>();
+            DependencyService.Register<MessageService>();
+            DependencyService.Register<MessagesFileService>();
 
+            
 
             MainPage = new AppShell();
         }
 
         protected override void OnStart()
         {
+            
         }
 
         protected override void OnSleep()
@@ -36,5 +41,7 @@ namespace EverestApp
         protected override void OnResume()
         {
         }
+
+       
     }
 }

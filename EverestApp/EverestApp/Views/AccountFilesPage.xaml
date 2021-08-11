@@ -104,7 +104,7 @@
                 </RefreshView>
 
 
-                <!--<Frame BorderColor="White"  HorizontalOptions="Center" WidthRequest="150" Grid.Row="0" HasShadow="True" Padding="0" VerticalOptions="End"  CornerRadius="20" Margin="20">
+                <Frame BorderColor="White"  HorizontalOptions="Center" WidthRequest="150" Grid.Row="0" HasShadow="True" Padding="0" VerticalOptions="End"  CornerRadius="20" Margin="20">
                     <Button Text="ارسال رسالة" Padding="15,0,15,0" ContentLayout="left,0" WidthRequest="150" HorizontalOptions="Center"  FontFamily="Cairo"  BackgroundColor="#056839" Command="{Binding AddMessageCommand}">
                         <Button.ImageSource>
                             <FontImageSource FontFamily="FAS" 
@@ -113,7 +113,7 @@
                                              Color="White"/>
                         </Button.ImageSource>
                     </Button>
-                </Frame>-->
+                </Frame>
 
 
             </Grid>

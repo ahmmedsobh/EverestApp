@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EverestApp.CustomControls.CustomCells.IncomingViewCell"
+             xmlns:model="clr-namespace:EverestApp.Models">
+  <ContentView.Content>
+        <Grid ColumnSpacing="0" Padding="0" x:DataType="model:Message">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Frame Grid.Row="0" CornerRadius="20" Padding="10" HasShadow="False" Grid.Column="1" BackgroundColor="#72bc89">
+                <StackLayout>
+                    <Label FontFamily="Cairo" TextColor="White" Text="{Binding MessageText}" />
+                    <Frame BackgroundColor="White" IsVisible="{Binding HaveAttachement}" Margin="10" CornerRadius="20" Padding="10">
+                        <Label HorizontalTextAlignment="Center" TextColor="#72bc89" FontFamily="Cairo" Text="اضغط لفتح الملف المرفق"/>
+                    </Frame>
+                </StackLayout>
+            </Frame>
+
+            <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+                <Label  FontSize="Micro"  Text="{Binding SentDate, StringFormat='{0:MM/dd/yyyy hh:mm tt}'}" TextColor="Gray"></Label>
+                <Label  FontSize="Micro"  Text="{Binding Sender}" TextColor="Black"></Label>
+            </StackLayout>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

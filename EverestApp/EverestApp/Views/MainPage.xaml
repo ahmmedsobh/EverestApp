@@ -69,6 +69,24 @@
                     <Label FontSize="20" TextColor="#056839" FontFamily="Cairo" HorizontalTextAlignment="Center" Text="{Binding Customer.Info}" />
                 </StackLayout>
                 <BoxView HeightRequest="2" BackgroundColor="#e6e6e6"/>
+                <StackLayout Orientation="Horizontal" HeightRequest="100">
+                    <Frame Padding="5" HorizontalOptions="FillAndExpand" BackgroundColor="#056839" CornerRadius="10">
+                        <StackLayout >
+                            <Label TextColor="White" Text="رصيدك" FontFamily="Cairo"/>
+                            <Label HorizontalTextAlignment="Center" TextColor="white" Text="1000" FontSize="25"/>
+                        </StackLayout>
+                    </Frame>
+                    <Frame HorizontalOptions="FillAndExpand"  Padding="5" BackgroundColor="#056839" CornerRadius="10">
+                        <StackLayout>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1"
+                                                      Command="{Binding OpenMessagesPageCommand}"/>
+                            </StackLayout.GestureRecognizers>
+                            <Label  TextColor="White" Text="رسائل جديده" FontFamily="Cairo"/>
+                            <Label HorizontalTextAlignment="Center" TextColor="White" Text="{Binding NewMessagesCount}" FontSize="25" FontFamily="Cairo"/>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
                 <StackLayout Padding="10" BackgroundColor="#f5f5f5" HeightRequest="400">
                     <Label FontSize="20" TextColor="#056839" FontFamily="Cairo" Text="آخر الآخبار" />
                     <RefreshView x:DataType="viewModel:MainPageViewModel" Command="{Binding LoadArticlesCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
@@ -91,8 +109,8 @@
                     </RefreshView>
 
                 </StackLayout>
-                <StackLayout HeightRequest="348">
-                    <CollectionView  ItemsSource="{Binding Items}" ItemsLayout="VerticalGrid, 2" SelectionMode="Single" SelectedItem="{Binding SelectedItem,Mode=TwoWay}">
+                <StackLayout HeightRequest="460" VerticalOptions="FillAndExpand">
+                    <CollectionView VerticalOptions="FillAndExpand" ItemsSource="{Binding Items}" ItemsLayout="VerticalGrid, 2" SelectionMode="Single" SelectedItem="{Binding SelectedItem,Mode=TwoWay}">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <Grid>

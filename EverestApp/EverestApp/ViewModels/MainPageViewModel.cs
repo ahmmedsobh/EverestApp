@@ -2,6 +2,7 @@
 using EverestApp.Models;
 using EverestApp.Services;
 using EverestApp.Views;
+using Plugin.LocalNotification;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,12 +22,16 @@ namespace EverestApp.ViewModels
         private Item _selectedItem;
         private Item _selectedMedia;
         IMainService MainService => DependencyService.Get<IMainService>();
+        public IMessageService<Message> MessageService => DependencyService.Get<IMessageService<Message>>();
+        public IMessagesFileService<Message> MessagesFileService => DependencyService.Get<IMessagesFileService<Message>>();
 
         public ObservableCollection<Article> Articles { get; }
         public ObservableCollection<Item> Items { get; }
         public ObservableCollection<Item> Media { get; }
         public Command LoadArticlesCommand { get; }
         public Command<Article> ArticleTapped { get; }
+        public Command OpenMessagesPageCommand { get; }
+
         public MainPageViewModel()
         {
             GetCustomerDate();
@@ -37,6 +42,11 @@ namespace EverestApp.ViewModels
             ArticleTapped = new Command<Article>(OnArticleSelected);
             FillItemsList();
             FillMediaList();
+            ShowNotifications();
+            OpenMessagesPageCommand = new Command(async () =>
+            {
+                await Shell.Current.GoToAsync(nameof(MessagesPage));
+            });
         }
 
         async Task ExecuteLoadArticlesCommand()
@@ -76,7 +86,9 @@ namespace EverestApp.ViewModels
                 new Item(){Id="4",Text="معلومات العميل",Icon=FontAwesomeIcons.InfoCircle,IconColor="#056839",Url="MyAccountPage"},
                 new Item(){Id="5",Text="تعليمات الشحن",Icon=FontAwesomeIcons.ShippingFast,IconColor="#056839",Url="ShipmentInfoPage"},
                 new Item(){Id="6",Text="الحسابات البنكية",Icon=FontAwesomeIcons.DollarSign,IconColor="#056839",Url="BankAccountsPage"},
-            }; 
+                new Item(){Id="7",Text="الرسائل",Icon=FontAwesomeIcons.CommentMedical,IconColor="#056839",Url="MessagesPage"},
+                new Item(){Id="8",Text="تواصل معنا",Icon=FontAwesomeIcons.Envelope,IconColor="#056839",Url="ContactPage"},
+            };
 
             foreach (var item in items)
             {
@@ -138,7 +150,15 @@ namespace EverestApp.ViewModels
             }
         }
 
-
+        string newMessagesCount;
+        public string NewMessagesCount
+        {
+            get => newMessagesCount;
+            set
+            {
+                SetProperty(ref newMessagesCount, value);
+            }
+        }
 
         async void OnArticleSelected(Article article)
         {
@@ -198,6 +218,40 @@ namespace EverestApp.ViewModels
             Customer.Name = Preferences.Get("Name", "");
             Customer.Password = Preferences.Get("Password", "");
             Customer.Info = Preferences.Get("Info", "");
+        }
+
+        async void ShowNotifications()
+        {
+            try
+            {
+                var MessagesModelView = (await MessagesFileService.UpdateMessagesFile());
+                var Count = MessagesModelView.NewMessagesCount;
+                if (Count > 0)
+                {
+                    NewMessagesCount = Count.ToString();
+                    var notification = new NotificationRequest
+                    {
+                        BadgeNumber = Count,
+                        Description = $"وصلتك {Count} رسائل جديده",
+                        Title = "الاشعارات",
+                        ReturningData = $"وصلتك {Count} رسائل جديده",
+                        NotificationId = 1337,
+                        Schedule = { NotifyTime = DateTime.Now.AddSeconds(8) },
+                    };
+
+                    await NotificationCenter.Current.Show(notification);
+
+                }
+                else
+                {
+                    NewMessagesCount = "لايوجد";
+                }
+            }
+            catch
+            {
+
+            }
+            
         }
     }
 }

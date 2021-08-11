@@ -12,6 +12,8 @@ namespace EverestApp.Models
         public string CustomerID { get; set; }
         public string Sender { get; set; }
         public string Attachement { get; set; }
+        public bool HaveAttachement { get; set; }
         public string SentDate { get; set; }
+        public string MessageColor { get; set; }
     }
 }

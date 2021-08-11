@@ -5,7 +5,8 @@
              Shell.NavBarIsVisible="False" 
              xmlns:viewModel="clr-namespace:EverestApp.ViewModels"
              xmlns:converters="clr-namespace:EverestApp.Converters"
-             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers">
+             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers"
+             BackgroundColor="White">
     
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -14,18 +15,30 @@
     </ContentPage.Resources>
     
     <ContentPage.Content>
-        <StackLayout x:DataType="viewModel:LoadingViewModel" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-            <Image WidthRequest="200" Source="{Binding Logo,Converter={StaticResource StringToImageSourceConverter}}"/>
-            <ActivityIndicator  Color="#62be7e" IsRunning="{Binding IsBusy}"/>
-            <Label IsVisible="{Binding IsBusy}" HorizontalTextAlignment="Center" TextColor="#056839" FontSize="18" FontFamily="Cairo" Text="يرجى الانتظار ..."/>
-            <Button FontFamily="Cairo" Padding="15,0,15,0" ContentLayout="left,0" BackgroundColor="#056839" Text="دخول" Command="{Binding LoginCommand}" IsVisible="{Binding LoginBtnVisible}">
-                <Button.ImageSource>
-                    <FontImageSource FontFamily="FAS" 
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Image Grid.Row="0" Aspect="AspectFill" Source="{Binding BackgroundImg,Converter={StaticResource StringToImageSourceConverter}}" Opacity="0.5"/>
+
+
+            <StackLayout Grid.Row="0" x:DataType="viewModel:LoadingViewModel" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                <Image WidthRequest="200" Source="{Binding Logo,Converter={StaticResource StringToImageSourceConverter}}"/>
+                <ActivityIndicator  Color="#62be7e" IsRunning="{Binding IsBusy}"/>
+                <Label IsVisible="{Binding IsBusy}" HorizontalTextAlignment="Center" TextColor="#056839" FontSize="18" FontFamily="Cairo" Text="يرجى الانتظار ..."/>
+                <Button FontFamily="Cairo" Padding="15,0,15,0" ContentLayout="left,0" BackgroundColor="#056839" Text="دخول" Command="{Binding LoginCommand}" IsVisible="{Binding LoginBtnVisible}">
+                    <Button.ImageSource>
+                        <FontImageSource FontFamily="FAS" 
                                              Glyph="{x:Static fontAwesome:FontAwesomeIcons.SignInAlt}"
                                              Size="20"
                                              Color="White"/>
-                </Button.ImageSource>
-            </Button>
-        </StackLayout>
+                    </Button.ImageSource>
+                </Button>
+            </StackLayout>
+            
+        </Grid>
+        
+        
     </ContentPage.Content>
 </ContentPage>
