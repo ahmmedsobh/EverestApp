@@ -47,6 +47,7 @@ namespace EverestApp.ViewModels
 
         async void GetFileDetails(string FileId)
         {
+            IsBusy = true;
             var files = await FileService.GetAcountFilesAsync();
             var file = files.FirstOrDefault(o => o.ID == FileId);
             File = new AccountFile()
@@ -57,6 +58,7 @@ namespace EverestApp.ViewModels
                 UploadDate = file.UploadDate,
                 UpdateDate = file.UpdateDate,
             };
+            IsBusy = false;
         }
 
         async void ExecuteOpenFileCommand()

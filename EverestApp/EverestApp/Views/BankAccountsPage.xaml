@@ -2,7 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EverestApp.Views.BankAccountsPage"
-             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers">
+             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers"
+             xmlns:converters="clr-namespace:EverestApp.Converters"
+             xmlns:ViewModel="clr-namespace:EverestApp.ViewModels"
+             BackgroundColor="#056839">
 
     <Shell.TitleView>
         <StackLayout  Orientation="Horizontal">
@@ -18,40 +21,56 @@
         </StackLayout>
     </Shell.TitleView>
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:StringToImageSourceConverter x:Key="StringToImageSourceConverter"></converters:StringToImageSourceConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <ScrollView VerticalOptions="FillAndExpand" FlowDirection="LeftToRight">
-            <StackLayout Margin="10" VerticalOptions="FillAndExpand" HeightRequest="850">
-                <StackLayout>
-                    <Image x:Name="Img1" />
-                    <Label FontSize="15" Text="EVEREST ITHALAT IHRACAT LTD. ŞTİ. USD/$"/>
-                    <Label FontSize="15" Text="BANK NAME : QNB Finansbank A.S."/>
-                    <Label FontSize="15" Text="BRANCH NAME : OSMANBEY BRANCH/00979"/>
-                    <Label FontSize="15" Text="ACCOUNT No : 979-40653718"/>
-                    <Label FontSize="15" Text="IBAN : TR04 0011 1000 0000 0040 6537 18"/>
-                    <Label FontSize="15" Text="SWIFT CODE : FNNBTRISOPS"/>
+        <Grid x:DataType="ViewModel:BaseViewModel">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Image Grid.Row="0" Aspect="AspectFill" Source="{Binding BackgroundImg2,Converter={StaticResource StringToImageSourceConverter}}" Opacity="0.7"/>
+
+
+            <ScrollView Padding="10" Grid.Row="0" VerticalOptions="FillAndExpand" FlowDirection="LeftToRight">
+                <StackLayout  VerticalOptions="FillAndExpand"  Opacity=".8">
+                    <StackLayout Padding="10" BackgroundColor="#056839">
+                        <Image x:Name="Img1" />
+                        <Label TextColor="White" FontSize="15" Text="EVEREST ITHALAT IHRACAT LTD. ŞTİ. USD/$"/>
+                        <Label TextColor="White" FontSize="15" Text="BANK NAME : QNB Finansbank A.S."/>
+                        <Label TextColor="White" FontSize="15" Text="BRANCH NAME : OSMANBEY BRANCH/00979"/>
+                        <Label TextColor="White" FontSize="15" Text="ACCOUNT No : 979-40653718"/>
+                        <Label TextColor="White" FontSize="15" Text="IBAN : TR04 0011 1000 0000 0040 6537 18"/>
+                        <Label TextColor="White" FontSize="15" Text="SWIFT CODE : FNNBTRISOPS"/>
+                    </StackLayout>
+                    <StackLayout BackgroundColor="#056839" Padding="10">
+                        <Image x:Name="Img2" />
+                        <Label TextColor="White" FontSize="15" Text="EVEREST ITHALAT IHRACAT LTD. ŞTİ .EURO "/>
+                        <Label TextColor="White" FontSize="15" Text="ACCOUNT NO : 979-40669689"/>
+                        <Label TextColor="White" FontSize="15" Text="IBAN: TR49 0011 1000 0000 0040 6696 89"/>
+                        <Label TextColor="White" FontSize="15" Text="SWIFT CODE : FNNBTRISOPS"/>
+                    </StackLayout>
+                    <StackLayout BackgroundColor="#056839" Padding="10">
+                        <Image x:Name="Img3" />
+                        <Label TextColor="White" FontSize="15" Text="NAME : NUSRET ABİDOĞLU TRY"/>
+                        <Label TextColor="White" FontSize="15" Text="BANK NAME : QNB FINANS BANK"/>
+                        <Label TextColor="White" FontSize="15" Text="BRANCH : OSMANBEY 00979"/>
+                        <Label TextColor="White" FontSize="15" Text="HESAP NO : 21935379"/>
+                        <Label TextColor="White" FontSize="15" Text="IBAN: TR34 0011 1000 0000 0021 9353 79"/>
+                    </StackLayout>
+                    <StackLayout BackgroundColor="#056839" Padding="10">
+                        <Image x:Name="Img4" />
+                        <Label TextColor="White" FontSize="15" Text="NAME : شركة قمة ايفرستY"/>
+                        <Label TextColor="White" FontSize="15" Text="HESAP NO  :3354300"/>
+                        <Label TextColor="White" FontSize="15" Text="فرع جنين"/>
+                    </StackLayout>
                 </StackLayout>
-                <StackLayout>
-                    <Image x:Name="Img2" />
-                    <Label FontSize="15" Text="EVEREST ITHALAT IHRACAT LTD. ŞTİ .EURO "/>
-                    <Label FontSize="15" Text="ACCOUNT NO : 979-40669689"/>
-                    <Label FontSize="15" Text="IBAN: TR49 0011 1000 0000 0040 6696 89"/>
-                    <Label FontSize="15" Text="SWIFT CODE : FNNBTRISOPS"/>
-                </StackLayout>
-                <StackLayout>
-                    <Image x:Name="Img3" />
-                    <Label FontSize="15" Text="NAME : NUSRET ABİDOĞLU TRY"/>
-                    <Label FontSize="15" Text="BANK NAME : QNB FINANS BANK"/>
-                    <Label FontSize="15" Text="BRANCH : OSMANBEY 00979"/>
-                    <Label FontSize="15" Text="HESAP NO : 21935379"/>
-                    <Label FontSize="15" Text="IBAN: TR34 0011 1000 0000 0021 9353 79"/>
-                </StackLayout>
-                <StackLayout>
-                    <Image x:Name="Img4" />
-                    <Label FontSize="15" Text="NAME : شركة قمة ايفرستY"/>
-                    <Label FontSize="15" Text="HESAP NO  :3354300"/>
-                    <Label FontSize="15" Text="فرع جنين"/>
-                </StackLayout>
-            </StackLayout>
-        </ScrollView>
+            </ScrollView>
+        </Grid>
+       
     </ContentPage.Content>
 </ContentPage>

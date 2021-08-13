@@ -42,6 +42,7 @@ namespace EverestApp.ViewModels
 
         async void GetOrderDetails(string OrderId)
         {
+            IsBusy = true;
             var orders = await OrderService.GetOrdersAsync();
             var order = orders.FirstOrDefault(o=>o.ID == OrderId);
             
@@ -55,7 +56,7 @@ namespace EverestApp.ViewModels
                 StatusTitle = order.StatusTitle,
             };
 
-
+            IsBusy = false;
         }
 
         Order GetStatusInfo(Order order)

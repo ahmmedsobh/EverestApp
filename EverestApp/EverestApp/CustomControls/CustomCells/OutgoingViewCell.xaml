@@ -36,7 +36,7 @@
 
 
                 </Grid.RowDefinitions>
-                <Frame Grid.Row="0"  Grid.Column="0" Padding="10"  CornerRadius="20">
+                <Frame Grid.Row="0" HorizontalOptions="Start" Grid.Column="0" Padding="10"  CornerRadius="20">
                     <Frame.HasShadow>
                         <OnPlatform x:TypeArguments="x:Boolean" iOS="false" Android="true"/>
                     </Frame.HasShadow>
@@ -50,7 +50,7 @@
                         </Frame>
                     </StackLayout>
                 </Frame>
-                <Label Grid.Row="1" FontSize="Micro" Grid.Column="0" HorizontalTextAlignment="End"  Text="{Binding SentDate, StringFormat='{0:MM/dd/yyyy hh:mm tt}'}" TextColor="Gray"></Label>
+                <Label Grid.Row="1" HorizontalOptions="Start" FontSize="Micro" Grid.Column="0" HorizontalTextAlignment="End"  Text="{Binding SentDate, StringFormat='{0:MM/dd/yyyy hh:mm tt}'}" TextColor="Gray"></Label>
             </Grid>
         </SwipeView>
   </ContentView.Content>

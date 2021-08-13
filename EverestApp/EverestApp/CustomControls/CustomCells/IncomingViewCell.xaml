@@ -14,7 +14,7 @@
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Frame Grid.Row="0" CornerRadius="20" Padding="10" HasShadow="False" Grid.Column="1" BackgroundColor="#72bc89">
+            <Frame Grid.Row="0" HorizontalOptions="End" CornerRadius="20" Padding="10" HasShadow="False" Grid.Column="1" BackgroundColor="#72bc89">
                 <StackLayout>
                     <Label FontFamily="Cairo" TextColor="White" Text="{Binding MessageText}" />
                     <Frame BackgroundColor="White" IsVisible="{Binding HaveAttachement}" Margin="10" CornerRadius="20" Padding="10">
@@ -23,7 +23,7 @@
                 </StackLayout>
             </Frame>
 
-            <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+            <StackLayout HorizontalOptions="End" Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
                 <Label  FontSize="Micro"  Text="{Binding SentDate, StringFormat='{0:MM/dd/yyyy hh:mm tt}'}" TextColor="Gray"></Label>
                 <Label  FontSize="Micro"  Text="{Binding Sender}" TextColor="Black"></Label>
             </StackLayout>

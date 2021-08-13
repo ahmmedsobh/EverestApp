@@ -43,6 +43,7 @@ namespace EverestApp.ViewModels
 
         async void GetFileDetails(string ShipmentId)
         {
+            IsBusy = true;
             var shipments = await ShipmentService.GetShipmentsAsync();
             var shipment = shipments.FirstOrDefault(o => o.ID == ShipmentId);
             Shipment = new Shipment()
@@ -53,6 +54,7 @@ namespace EverestApp.ViewModels
                 UploadDate = shipment.UploadDate,
                 UpdateDate = shipment.UpdateDate,
             };
+            IsBusy = false;
         }
 
         

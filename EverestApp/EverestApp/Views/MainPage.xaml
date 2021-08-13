@@ -8,7 +8,8 @@
              Shell.PresentationMode="Animated"
              Title="الرئيسية"
              xmlns:converters="clr-namespace:EverestApp.Converters"
-             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers">
+             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers"
+             BackgroundColor="#056839">
 
     <Shell.TitleView>
         <StackLayout  Orientation="Horizontal">
@@ -62,115 +63,139 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <ScrollView Padding="10">
-            <StackLayout   x:DataType="viewModel:MainPageViewModel">
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                    <Label TextColor="Black" FontSize="20" FontFamily="Cairo" HorizontalTextAlignment="Center" Text=" مرحبا بعودتك " />
-                    <Label FontSize="20" TextColor="#056839" FontFamily="Cairo" HorizontalTextAlignment="Center" Text="{Binding Customer.Info}" />
-                </StackLayout>
-                <BoxView HeightRequest="2" BackgroundColor="#e6e6e6"/>
-                <StackLayout Orientation="Horizontal" HeightRequest="100">
-                    <Frame Padding="5" HorizontalOptions="FillAndExpand" BackgroundColor="#056839" CornerRadius="10">
-                        <StackLayout >
-                            <Label TextColor="White" Text="رصيدك" FontFamily="Cairo"/>
-                            <Label HorizontalTextAlignment="Center" TextColor="white" Text="1000" FontSize="25"/>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Image Grid.Row="0" Aspect="AspectFill" Source="{Binding BackgroundImg2,Converter={StaticResource StringToImageSourceConverter}}" Opacity="0.7"/>
+
+
+            <ScrollView Padding="10" Opacity=".9">
+                <StackLayout   x:DataType="viewModel:MainPageViewModel">
+                    <Frame CornerRadius="10" Padding="5">
+                        <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                            <Label TextColor="Black" FontSize="20" FontFamily="Cairo" HorizontalTextAlignment="Center" Text=" مرحبا بعودتك " />
+                            <Label FontSize="20" TextColor="#056839" FontFamily="Cairo" HorizontalTextAlignment="Center" Text="{Binding Customer.Info}" />
                         </StackLayout>
                     </Frame>
-                    <Frame HorizontalOptions="FillAndExpand"  Padding="5" BackgroundColor="#056839" CornerRadius="10">
-                        <StackLayout>
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer NumberOfTapsRequired="1"
+                    
+                    <BoxView HeightRequest="2" BackgroundColor="#e6e6e6"/>
+                    <StackLayout Orientation="Horizontal" HeightRequest="100">
+                        <Frame Padding="5" HorizontalOptions="FillAndExpand" BackgroundColor="#056839" CornerRadius="10">
+                            <StackLayout >
+                                <Label HorizontalTextAlignment="Center" TextColor="White" Text="رصيدك" FontFamily="Cairo"/>
+                                <Label HorizontalTextAlignment="Center" TextColor="white" Text="{Binding Customer.Balance}" FontSize="25"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame HorizontalOptions="FillAndExpand"  Padding="5" BackgroundColor="#056839" CornerRadius="10">
+                            <StackLayout>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1"
                                                       Command="{Binding OpenMessagesPageCommand}"/>
-                            </StackLayout.GestureRecognizers>
-                            <Label  TextColor="White" Text="رسائل جديده" FontFamily="Cairo"/>
-                            <Label HorizontalTextAlignment="Center" TextColor="White" Text="{Binding NewMessagesCount}" FontSize="25" FontFamily="Cairo"/>
-                        </StackLayout>
-                    </Frame>
-                </StackLayout>
-                <StackLayout Padding="10" BackgroundColor="#f5f5f5" HeightRequest="400">
-                    <Label FontSize="20" TextColor="#056839" FontFamily="Cairo" Text="آخر الآخبار" />
-                    <RefreshView x:DataType="viewModel:MainPageViewModel" Command="{Binding LoadArticlesCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
-                        <CollectionView x:Name="ItemsListView"
+                                </StackLayout.GestureRecognizers>
+                                <Label HorizontalTextAlignment="Center"  TextColor="White" Text="رسائل جديده" FontFamily="Cairo"/>
+                                <Label HorizontalTextAlignment="Center" TextColor="White" Text="{Binding NewMessagesCount}" FontSize="25" FontFamily="Cairo"/>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                    <Frame CornerRadius="10" Padding="0">
+                        <StackLayout Padding="10" BackgroundColor="#f5f5f5" HeightRequest="400">
+                            <Label FontSize="20" TextColor="#056839" FontFamily="Cairo" Text="آخر الآخبار" />
+                            <RefreshView x:DataType="viewModel:MainPageViewModel" Command="{Binding LoadArticlesCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+                                <CollectionView x:Name="ItemsListView"
                                     ItemsSource="{Binding Articles}"
                                     SelectionMode="Single"
                                     SelectedItem="{Binding SelectedArticle}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackLayout Padding="0,10,0,10">
+                                                <Frame Padding="0" CornerRadius="10">
+                                                    <controls:CardView  BorderColor="DarkGray" x:DataType="model:Article"
+                                                                                CardTitle="{Binding title}"
+                                                                                CardDescription=""
+                                                                                IconBackgroundColor="SlateGray"
+                                                                                IconImageSource="{Binding image,StringFormat='https://www.everestexport.net{0}'}"/>
+                                                </Frame>
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </RefreshView>
+
+                        </StackLayout>
+                    </Frame>
+                    
+                    <StackLayout HeightRequest="460" VerticalOptions="FillAndExpand">
+                        <CollectionView VerticalOptions="FillAndExpand" ItemsSource="{Binding Items}" ItemsLayout="VerticalGrid, 2" SelectionMode="Single" SelectedItem="{Binding SelectedItem,Mode=TwoWay}">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
-                                    <StackLayout Padding="0,10,0,10">
-                                        <controls:CardView  BorderColor="DarkGray" x:DataType="model:Article"
-                                    CardTitle="{Binding title}"
-                                    CardDescription="{Binding alias}"
-                                    IconBackgroundColor="SlateGray"
-                                    IconImageSource="{Binding image,StringFormat='https://www.everestexport.net{0}'}"/>
-                                    </StackLayout>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                    </RefreshView>
-
-                </StackLayout>
-                <StackLayout HeightRequest="460" VerticalOptions="FillAndExpand">
-                    <CollectionView VerticalOptions="FillAndExpand" ItemsSource="{Binding Items}" ItemsLayout="VerticalGrid, 2" SelectionMode="Single" SelectedItem="{Binding SelectedItem,Mode=TwoWay}">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="115"/>
-                                    </Grid.RowDefinitions>
-                                    <Frame CornerRadius="0"   Margin="5" x:DataType="model:Item" Padding="0,8,0,0" BackgroundColor="#e6e6e6" HasShadow="False" HeightRequest="100" WidthRequest="200"  Grid.Column="0" Grid.Row="0">
-                                        <StackLayout HeightRequest="100" WidthRequest="200" HorizontalOptions="CenterAndExpand"   Padding="0">
-                                            <Image  HorizontalOptions="CenterAndExpand"  
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="115"/>
+                                        </Grid.RowDefinitions>
+                                        <Frame CornerRadius="10"   Margin="5" x:DataType="model:Item" Padding="0,8,0,0" BackgroundColor="#e6e6e6" HasShadow="False" HeightRequest="100" WidthRequest="200"  Grid.Column="0" Grid.Row="0">
+                                            <StackLayout HeightRequest="100" WidthRequest="200" HorizontalOptions="CenterAndExpand"   Padding="0">
+                                                <Image  HorizontalOptions="CenterAndExpand"  
                                                 VerticalOptions="StartAndExpand"
                                                 Aspect="AspectFit"
                                                 
                                                 Margin="0,0,0,0">
-                                                <Image.Source>
-                                                    <FontImageSource FontFamily="FAS"
+                                                    <Image.Source>
+                                                        <FontImageSource FontFamily="FAS"
                                                                  Color="{Binding IconColor}"
                                                                  Glyph="{Binding Icon}"
                                                                  Size="50"/>
-                                                </Image.Source>
-                                            </Image>
-                                            <Label Padding="0" TextColor="#62be7e" FontFamily="Cairo" Margin="0,0,0,30" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="{Binding Text}"/>
-                                        </StackLayout>
-                                    </Frame>
-                                </Grid>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </StackLayout>
-                <StackLayout Padding="10" BackgroundColor="#f5f5f5" HeightRequest="100">
-                    <Label FontSize="20" TextColor="#056839" FontFamily="Cairo" Text="صفحات التواصل" />
-                        <CollectionView 
+                                                    </Image.Source>
+                                                </Image>
+                                                <Label Padding="0" TextColor="#62be7e" FontFamily="Cairo" Margin="0,0,0,30" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="{Binding Text}"/>
+                                            </StackLayout>
+                                        </Frame>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                    <Frame CornerRadius="10" Padding="0">
+                        <StackLayout Padding="10" BackgroundColor="#f5f5f5" HeightRequest="100">
+                            <Label FontSize="20" TextColor="#056839" FontFamily="Cairo" Text="صفحات التواصل" />
+                            <CollectionView 
                                     ItemsSource="{Binding Media}"
                                     SelectionMode="Single"
                                     SelectedItem="{Binding SelectedMedia}"
                                     ItemsLayout="VerticalGrid, 4">
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                <StackLayout x:DataType="model:Item">
-                                    <Image  HorizontalOptions="CenterAndExpand"  
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackLayout x:DataType="model:Item">
+                                            <Image  HorizontalOptions="CenterAndExpand"  
                                                 VerticalOptions="StartAndExpand"
                                                 Aspect="AspectFit"
                                                 Margin="0,0,0,0"
                                                 Source="{Binding Icon,Converter={StaticResource StringToImageSourceConverter}}"
                                             WidthRequest="50"
                                             HeightRequest="50">
-                                        
-                                            
-                                        
-                                    </Image>
-                                </StackLayout>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
 
+
+
+                                            </Image>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+                        </StackLayout>
+                    </Frame>
+                    
                 </StackLayout>
-            </StackLayout>
-        </ScrollView>
+            </ScrollView>
+
+        </Grid>
+        
+        
         
     </ContentPage.Content>
 </ContentPage>

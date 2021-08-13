@@ -2,8 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EverestApp.Views.ShipmentDetailsPage"
+             BackgroundColor="#056839"
              xmlns:viewModel="clr-namespace:EverestApp.ViewModels"
-             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers">
+             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers"
+             xmlns:converters="clr-namespace:EverestApp.Converters">
 
     <Shell.TitleView>
         <StackLayout  Orientation="Horizontal">
@@ -19,27 +21,47 @@
         </StackLayout>
     </Shell.TitleView>
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:StringToImageSourceConverter x:Key="StringToImageSourceConverter"></converters:StringToImageSourceConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout VerticalOptions="FillAndExpand">
-                <StackLayout VerticalOptions="FillAndExpand" x:DataType="viewModel:ShipmentDetailsViewModel" Padding="20">
-                    <StackLayout VerticalOptions="FillAndExpand">
-                        <StackLayout>
-                            <Label TextColor="Black" FontFamily="Cairo" Text="شحنة رقم :" FontSize="15"/>
-                            <Label HorizontalTextAlignment="Center" TextColor="#056839" Text="{Binding Shipment.Index}" FontSize="20"/>
+        <Grid x:DataType="viewModel:ShipmentDetailsViewModel">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Image Grid.Row="0" Aspect="AspectFill" Source="{Binding BackgroundImg3,Converter={StaticResource StringToImageSourceConverter}}" Opacity="0.7"/>
+
+
+            <ScrollView Padding="10" Grid.Row="0">
+                <StackLayout BackgroundColor="White" Opacity=".8" VerticalOptions="FillAndExpand">
+                    <StackLayout VerticalOptions="FillAndExpand"  Padding="20">
+                        <StackLayout VerticalOptions="FillAndExpand">
+                            <StackLayout>
+                                <Label TextColor="Black" FontFamily="Cairo" Text="شحنة رقم :" FontSize="15"/>
+                                <Label HorizontalTextAlignment="Center" TextColor="#056839" Text="{Binding Shipment.Index}" FontSize="20"/>
+                            </StackLayout>
+                            <StackLayout>
+                                <Label TextColor="Black" FontFamily="Cairo" Text="تاريخ الرفع :" FontSize="15"/>
+                                <Label HorizontalTextAlignment="Center" TextColor="#056839" Text="{Binding Shipment.UploadDate}" FontSize="20"/>
+                            </StackLayout>
+                            <StackLayout>
+                                <Label TextColor="Black" FontFamily="Cairo" Text="آخر تحديث :" FontSize="15"/>
+                                <Label HorizontalTextAlignment="Center" TextColor="#056839" Text="{Binding Shipment.UpdateDate}" FontSize="20"/>
+                            </StackLayout>
+                            <Image HeightRequest="400"   Source="{Binding Shipment.ID,StringFormat='https://www.everestexport.net/ems/shipments/{0}.jpg'}"/>
                         </StackLayout>
-                        <StackLayout>
-                            <Label TextColor="Black" FontFamily="Cairo" Text="تاريخ الرفع :" FontSize="15"/>
-                            <Label HorizontalTextAlignment="Center" TextColor="#056839" Text="{Binding Shipment.UploadDate}" FontSize="20"/>
-                        </StackLayout>
-                        <StackLayout>
-                            <Label TextColor="Black" FontFamily="Cairo" Text="آخر تحديث :" FontSize="15"/>
-                            <Label HorizontalTextAlignment="Center" TextColor="#056839" Text="{Binding Shipment.UpdateDate}" FontSize="20"/>
-                        </StackLayout>
-                        <Image HeightRequest="400"   Source="{Binding Shipment.ID,StringFormat='https://www.everestexport.net/ems/shipments/{0}.jpg'}"/>
                     </StackLayout>
                 </StackLayout>
-            </StackLayout>
-        </ScrollView>
+            </ScrollView>
+
+            <ActivityIndicator Grid.Row="0" Color="#056839" HorizontalOptions="Center" VerticalOptions="Center" IsRunning="{Binding IsBusy}"/>
+
+        </Grid>
+        
+        
     </ContentPage.Content>
 </ContentPage>

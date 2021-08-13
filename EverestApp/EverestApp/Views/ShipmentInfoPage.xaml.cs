@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EverestApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace EverestApp.Views
         public ShipmentInfoPage()
         {
             InitializeComponent();
+            BindingContext = new BaseViewModel();
         }
     }
 }

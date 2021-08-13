@@ -3,8 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EverestApp.Views.OrderDetailsPage"
              Title="تفاصيل الطلبية"
+             BackgroundColor="#056839"
              xmlns:viewModel="clr-namespace:EverestApp.ViewModels"
-             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers">
+             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers"
+             xmlns:converters="clr-namespace:EverestApp.Converters">
 
     <Shell.TitleView>
         <StackLayout  Orientation="Horizontal">
@@ -20,29 +22,53 @@
         </StackLayout>
     </Shell.TitleView>
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:StringToImageSourceConverter x:Key="StringToImageSourceConverter"></converters:StringToImageSourceConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <StackLayout>
-            <StackLayout x:DataType="viewModel:OrderDetailsViewModel" Padding="20">
-                <Image  Source="{Binding Order.ID,StringFormat='https://www.everestexport.net/ems/orders/{0}.jpg'}"/>
-                <StackLayout>
-                    <StackLayout >
-                        <Label TextColor="Black" FontFamily="Cairo" Text="طلبية رقم :" FontSize="15"/>
-                        <Label HorizontalTextAlignment="Center" TextColor="#056839" Text="{Binding Order.Index}" FontSize="20"/>
-                    </StackLayout>
-                    <StackLayout >
-                        <Label TextColor="Black" FontFamily="Cairo" Text="تاريخ الارسال :" FontSize="15"/>
-                        <Label HorizontalTextAlignment="Center" TextColor="#056839" Text="{Binding Order.UploadedDate}" FontSize="20"/>
-                    </StackLayout>
-                    <StackLayout >
-                        <Label TextColor="Black" FontFamily="Cairo" Text="تاريخ التحديث :" FontSize="15"/>
-                        <Label HorizontalTextAlignment="Center" TextColor="#056839" Text="{Binding Order.UpdatedDate}" FontSize="20"/>
-                    </StackLayout>
-                    <StackLayout >
-                        <Label TextColor="Black" FontFamily="Cairo" Text="الحالة :" FontSize="15"/>
-                        <Label HorizontalTextAlignment="Center" TextColor="#056839" FontFamily="Cairo" Text="{Binding Order.StatusTitle}" FontSize="20"/>
+
+        <Grid x:DataType="viewModel:OrderDetailsViewModel">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <Image Grid.Row="0" Aspect="AspectFill" Source="{Binding BackgroundImg3,Converter={StaticResource StringToImageSourceConverter}}" Opacity="0.7"/>
+
+
+            <ScrollView Grid.Row="0" Padding="10">
+                <StackLayout BackgroundColor="White" Opacity=".7">
+                    <StackLayout  Padding="20">
+                        <Image  Source="{Binding Order.ID,StringFormat='https://www.everestexport.net/ems/orders/{0}.jpg'}"/>
+                        <StackLayout>
+                            <StackLayout >
+                                <Label TextColor="Black" FontFamily="Cairo" Text="طلبية رقم :" FontSize="15"/>
+                                <Label HorizontalTextAlignment="Center" TextColor="#056839" Text="{Binding Order.Index}" FontSize="20"/>
+                            </StackLayout>
+                            <StackLayout >
+                                <Label TextColor="Black" FontFamily="Cairo" Text="تاريخ الارسال :" FontSize="15"/>
+                                <Label HorizontalTextAlignment="Center" TextColor="#056839" Text="{Binding Order.UploadedDate}" FontSize="20"/>
+                            </StackLayout>
+                            <StackLayout >
+                                <Label TextColor="Black" FontFamily="Cairo" Text="تاريخ التحديث :" FontSize="15"/>
+                                <Label HorizontalTextAlignment="Center" TextColor="#056839" Text="{Binding Order.UpdatedDate}" FontSize="20"/>
+                            </StackLayout>
+                            <StackLayout >
+                                <Label TextColor="Black" FontFamily="Cairo" Text="الحالة :" FontSize="15"/>
+                                <Label HorizontalTextAlignment="Center" TextColor="#056839" FontFamily="Cairo" Text="{Binding Order.StatusTitle}" FontSize="20"/>
+                            </StackLayout>
+                        </StackLayout>
                     </StackLayout>
                 </StackLayout>
-            </StackLayout>
-        </StackLayout>
+            </ScrollView>
+
+            <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" Color="#056839" IsRunning="{Binding IsBusy}"/>
+
+        </Grid>
+        
+        
+        
     </ContentPage.Content>
 </ContentPage>

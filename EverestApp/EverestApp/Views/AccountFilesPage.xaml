@@ -4,8 +4,9 @@
              x:Class="EverestApp.Views.AccountFilesPage"
              xmlns:viewModels="clr-namespace:EverestApp.ViewModels"
              xmlns:model="clr-namespace:EverestApp.Models"
-             BackgroundColor="LightGray"
-             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers">
+             BackgroundColor="#056839"
+             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers"
+             xmlns:converters="clr-namespace:EverestApp.Converters">
 
 
     <Shell.TitleView>
@@ -38,88 +39,105 @@
                 </VisualStateGroupList>
             </Setter>
         </Style>
+
+        <ResourceDictionary>
+            <converters:StringToImageSourceConverter x:Key="StringToImageSourceConverter"></converters:StringToImageSourceConverter>
+        </ResourceDictionary>
+
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout >
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
 
-                <RefreshView Grid.Row="0" Padding="10,0,10,0" x:DataType="viewModels:AccountFilesViewModel" Command="{Binding LoadFilesCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
-                    <CollectionView x:Name="ItemsListView"
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Image Grid.Row="0" Aspect="AspectFill" Source="{Binding BackgroundImg2,Converter={StaticResource StringToImageSourceConverter}}" Opacity="0.7"/>
+
+
+            <StackLayout >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <RefreshView Grid.Row="0" Padding="10,0,10,0" x:DataType="viewModels:AccountFilesViewModel" Command="{Binding LoadFilesCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+                        <CollectionView x:Name="ItemsListView"
                 ItemsSource="{Binding Files}"
                 SelectionMode="Single"
                 SelectedItem="{Binding SelectedFile}">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <StackLayout Padding="0,5,0,5">
-                                    <Frame x:DataType="model:AccountFile" Padding="10"   CornerRadius="0" BackgroundColor="White">
-                                        <Grid >
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto" />
-                                                <RowDefinition Height="Auto" />
-                                            </Grid.RowDefinitions>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto" />
-                                                <ColumnDefinition Width="Auto" />
-                                            </Grid.ColumnDefinitions>
-                                            <Frame Grid.RowSpan="2" Padding="0" HasShadow="False" CornerRadius="120" BackgroundColor="#056839">
-                                                <StackLayout WidthRequest="60" HeightRequest="60">
-                                                    <Image VerticalOptions="CenterAndExpand">
-                                                        <Image.Source>
-                                                            <FontImageSource FontFamily="FAS"
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout Padding="0,5,0,5">
+                                        <Frame x:DataType="model:AccountFile" Padding="10"   CornerRadius="0" BackgroundColor="White">
+                                            <Grid >
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <Frame Grid.RowSpan="2" Padding="0" HasShadow="False" CornerRadius="120" BackgroundColor="#056839">
+                                                    <StackLayout WidthRequest="60" HeightRequest="60">
+                                                        <Image VerticalOptions="CenterAndExpand">
+                                                            <Image.Source>
+                                                                <FontImageSource FontFamily="FAS"
                                                              Color="White"
                                                              Glyph="{x:Static fontAwesome:FontAwesomeIcons.FilePdf}"
                                                              Size="30"/>
-                                                        </Image.Source>
-                                                    </Image>
-                                                </StackLayout>
-                                               
-                                            </Frame>
+                                                            </Image.Source>
+                                                        </Image>
+                                                    </StackLayout>
+
+                                                </Frame>
 
 
-                                            <Label Grid.Column="1" 
+                                                <Label Grid.Column="1" 
                                        Text="{Binding Index,StringFormat='ملف {0}'}"
                                        FontAttributes="Bold" 
                                        FontFamily="Cairo"
                                        TextColor="#056839"/>
 
-                                            <Label Grid.Row="1"
+                                                <Label Grid.Row="1"
                                        Grid.Column="1"
                                        Text="{Binding UpdateDate}"
                                        FontAttributes="Italic"
                                        VerticalOptions="Center"
                                        TextColor="Black"/>
 
-                                        </Grid>
-                                    </Frame>
-                                </StackLayout>
+                                            </Grid>
+                                        </Frame>
+                                    </StackLayout>
 
 
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </RefreshView>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </RefreshView>
 
 
-                <Frame BorderColor="White"  HorizontalOptions="Center" WidthRequest="150" Grid.Row="0" HasShadow="True" Padding="0" VerticalOptions="End"  CornerRadius="20" Margin="20">
-                    <Button Text="ارسال رسالة" Padding="15,0,15,0" ContentLayout="left,0" WidthRequest="150" HorizontalOptions="Center"  FontFamily="Cairo"  BackgroundColor="#056839" Command="{Binding AddMessageCommand}">
-                        <Button.ImageSource>
-                            <FontImageSource FontFamily="FAS" 
+                    <Frame BorderColor="White"  HorizontalOptions="Center" WidthRequest="150" Grid.Row="0" HasShadow="True" Padding="0" VerticalOptions="End"  CornerRadius="10" Margin="20">
+                        <Button Text="ارسال رسالة" Padding="15,0,15,0" ContentLayout="left,0" WidthRequest="150" HorizontalOptions="Center"  FontFamily="Cairo"  BackgroundColor="#056839" Command="{Binding AddMessageCommand}">
+                            <Button.ImageSource>
+                                <FontImageSource FontFamily="FAS" 
                                              Glyph="{x:Static fontAwesome:FontAwesomeIcons.CommentMedical}"
                                              Size="15"
                                              Color="White"/>
-                        </Button.ImageSource>
-                    </Button>
-                </Frame>
+                            </Button.ImageSource>
+                        </Button>
+                    </Frame>
 
 
-            </Grid>
+                </Grid>
 
 
-        </StackLayout>
+            </StackLayout>
+        </Grid>
+        
+        
     </ContentPage.Content>
 
 </ContentPage>

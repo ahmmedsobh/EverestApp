@@ -5,8 +5,9 @@
              Title="قائمة الطلبيات"
              xmlns:viewModels="clr-namespace:EverestApp.ViewModels"
              xmlns:model="clr-namespace:EverestApp.Models"
-             BackgroundColor="LightGray"
-             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers">
+             BackgroundColor="#056839"
+             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers"
+             xmlns:converters="clr-namespace:EverestApp.Converters">
 
     <Shell.TitleView>
         <StackLayout  Orientation="Horizontal">
@@ -38,38 +39,52 @@
                 </VisualStateGroupList>
             </Setter>
         </Style>
+
+        <ResourceDictionary>
+            <converters:StringToImageSourceConverter x:Key="StringToImageSourceConverter"></converters:StringToImageSourceConverter>
+        </ResourceDictionary>
+
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout >
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
 
-                <RefreshView Grid.Row="0" Padding="0,0,0,0" x:DataType="viewModels:OrdersViewModel" Command="{Binding LoadCategoriesCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
-                    <CollectionView x:Name="ItemsListView"
+        <Grid x:DataType="viewModels:OrdersViewModel">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Image Grid.Row="0" Aspect="AspectFill" Source="{Binding BackgroundImg2,Converter={StaticResource StringToImageSourceConverter}}" Opacity="0.7"/>
+
+
+            <StackLayout >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <RefreshView Grid.Row="0" Padding="0,0,0,0"  Command="{Binding LoadCategoriesCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+                        <CollectionView x:Name="ItemsListView"
                 ItemsSource="{Binding Categories}"
                 SelectionMode="Single"
                 SelectedItem="{Binding SelectedOrder}" IsGrouped="True">
-                        <CollectionView.GroupHeaderTemplate>
-                            <DataTemplate>
-                                <StackLayout Padding="8,10,8,0">
-                                    <StackLayout  BackgroundColor="White" x:DataType="model:Category"  Orientation="Horizontal" >
-                                        <Frame  Margin="0,10,10,10" Padding="7"  CornerRadius="50" BackgroundColor="#056839">
-                                            <StackLayout WidthRequest="30" HeightRequest="30">
-                                                <Image Aspect="AspectFit" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                                                    <Image.Source>
-                                                        <FontImageSource FontFamily="FAS"
+                            <CollectionView.GroupHeaderTemplate>
+                                <DataTemplate>
+                                    <StackLayout Padding="8,10,8,0">
+                                        <StackLayout  BackgroundColor="White" x:DataType="model:Category"  Orientation="Horizontal" Opacity=".7" >
+                                            <Frame  Margin="0,10,10,10" Padding="7"  CornerRadius="50" BackgroundColor="#056839">
+                                                <StackLayout WidthRequest="30" HeightRequest="30">
+                                                    <Image Aspect="AspectFit" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                                                        <Image.Source>
+                                                            <FontImageSource FontFamily="FAS"
                                                                  Color="White"
                                                                  Glyph="{Binding Icon}"
                                                                  Size="20"/>
-                                                    </Image.Source>
-                                                </Image>
-                                            </StackLayout>
-                                        </Frame>
+                                                        </Image.Source>
+                                                    </Image>
+                                                </StackLayout>
+                                            </Frame>
 
-                                        <Label Text="{Binding Name}"
+                                            <Label Text="{Binding Name}"
                                        BackgroundColor="Transparent"
                                        FontSize="Large"
                                        FontAttributes="Bold"
@@ -77,41 +92,41 @@
                                        TextColor="#056839"
                                        FontFamily="Cairo"
                                        VerticalTextAlignment="Center"/>
+                                        </StackLayout>
                                     </StackLayout>
-                                </StackLayout>
-                               
-                            </DataTemplate>
-                        </CollectionView.GroupHeaderTemplate>
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <StackLayout Padding="8,0,8,8">
-                                    <StackLayout  Padding="15,15,15,15" BackgroundColor="#056839">
-                                        <Frame x:DataType="model:Order" Padding="10"   CornerRadius="20" BackgroundColor="White">
-                                            <Grid >
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto" />
-                                                    <RowDefinition Height="Auto" />
-                                                </Grid.RowDefinitions>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto" />
-                                                    <ColumnDefinition Width="Auto" />
-                                                </Grid.ColumnDefinitions>
-                                                <Frame Grid.RowSpan="2" Padding="0" HasShadow="False" CornerRadius="10" BackgroundColor="#056839">
-                                                    <Image 
+
+                                </DataTemplate>
+                            </CollectionView.GroupHeaderTemplate>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout Padding="8,0,8,8">
+                                        <StackLayout  Padding="15,15,15,15" BackgroundColor="#056839" Opacity=".8">
+                                            <Frame x:DataType="model:Order" Padding="10"   CornerRadius="10" BackgroundColor="White">
+                                                <Grid >
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="Auto" />
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Frame Grid.RowSpan="2" Padding="0" HasShadow="False" CornerRadius="5" BackgroundColor="#056839">
+                                                        <Image 
                                        Source="{Binding ID,StringFormat='https://www.everestexport.net/ems/orders/{0}.jpg'}"
                                        Aspect="AspectFill"
                                        HeightRequest="60"
                                        WidthRequest="60" />
-                                                </Frame>
+                                                    </Frame>
 
 
-                                                <Label Grid.Column="1" 
+                                                    <Label Grid.Column="1" 
                                        Text="{Binding Index,StringFormat='طلبية رقم {0}'}"
                                        FontAttributes="Bold" 
                                        TextColor="#056839"
                                        FontFamily="Cairo"/>
 
-                                                <Label Grid.Row="1"
+                                                    <Label Grid.Row="1"
                                        Grid.Column="1"
                                        Text="{Binding UploadedDate}"
                                        FontAttributes="Italic"
@@ -120,34 +135,38 @@
 
 
 
-                                            </Grid>
-                                        </Frame>
+                                                </Grid>
+                                            </Frame>
+                                        </StackLayout>
                                     </StackLayout>
-                                </StackLayout>
-                                
 
 
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </RefreshView>
+
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </RefreshView>
 
 
-                <Frame BorderColor="White" HorizontalOptions="Center" WidthRequest="150" Grid.Row="0" HasShadow="True" Padding="0" VerticalOptions="End"  CornerRadius="20" Margin="20">
-                    <Button Text="اضافة طلبية" Padding="15,0,15,0" ContentLayout="left,0" WidthRequest="150" HorizontalOptions="Center"  FontFamily="Cairo"  BackgroundColor="#056839" Command="{Binding AddOrderCommand}">
-                        <Button.ImageSource>
-                            <FontImageSource FontFamily="FAS" 
+                    <Frame BorderColor="White" HorizontalOptions="Center" WidthRequest="150" Grid.Row="0" HasShadow="True" Padding="0" VerticalOptions="End"  CornerRadius="10" Margin="20">
+                        <Button Text="اضافة طلبية" Padding="15,0,15,0" ContentLayout="left,0" WidthRequest="150" HorizontalOptions="Center"  FontFamily="Cairo"  BackgroundColor="#056839" Command="{Binding AddOrderCommand}">
+                            <Button.ImageSource>
+                                <FontImageSource FontFamily="FAS" 
                                              Glyph="{x:Static fontAwesome:FontAwesomeIcons.Plus}"
                                              Size="15"
                                              Color="White"/>
-                        </Button.ImageSource>
-                    </Button>
-                </Frame>
+                            </Button.ImageSource>
+                        </Button>
+                    </Frame>
 
 
-            </Grid>
-                
+                </Grid>
 
-        </StackLayout>
+
+            </StackLayout>
+
+        </Grid>
+        
+        
     </ContentPage.Content>
 </ContentPage>

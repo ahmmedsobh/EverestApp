@@ -4,6 +4,7 @@
              x:Class="EverestApp.Views.MyAccountPage"
              xmlns:fontAwesome="clr-namespace:EverestApp.Helpers"
              Title="حسابى"
+             BackgroundColor="#056839"
              xmlns:viewModel="clr-namespace:EverestApp.ViewModels"
              xmlns:converters="clr-namespace:EverestApp.Converters">
 
@@ -28,38 +29,50 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout x:DataType="viewModel:MyAccountViewModel">
-                <StackLayout Padding="20">
-                    <Frame HorizontalOptions="CenterAndExpand" WidthRequest="100" CornerRadius="100">
-                        <Image  HorizontalOptions="CenterAndExpand"  
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Image Grid.Row="0" Aspect="AspectFill" Source="{Binding BackgroundImg2,Converter={StaticResource StringToImageSourceConverter}}" Opacity="0.7"/>
+
+            <ScrollView>
+                <StackLayout x:DataType="viewModel:MyAccountViewModel">
+                    <StackLayout Padding="20">
+                        <Frame HorizontalOptions="CenterAndExpand" WidthRequest="100" CornerRadius="100">
+                            <Image  HorizontalOptions="CenterAndExpand"  
                                                 VerticalOptions="CenterAndExpand"
                                                 Aspect="AspectFit"
                                                 Margin="0,0,0,0">
-                            <Image.Source>
-                                <FontImageSource    FontFamily="FAS"
+                                <Image.Source>
+                                    <FontImageSource    FontFamily="FAS"
                                                 Color="#056839"
                                                 Glyph="{x:Static fontAwesome:FontAwesomeIcons.User}"
                                                 Size="100"/>
-                            </Image.Source>
-                        </Image>
-                    </Frame>
-                    <Label TextColor="#056839" HorizontalTextAlignment="Center"  FontFamily="Cairo" Text="{Binding Info}" FontSize="30"/>
-                    <Label TextColor="Black" HorizontalTextAlignment="Center" Text="{Binding Code}" FontSize="20"/>
-                </StackLayout>
-                <StackLayout  Margin="20" HeightRequest="500">
-                    <Button FontFamily="Cairo" Padding="15,0,15,0" ContentLayout="left,0" BackgroundColor="#056839" Text="مشاركة" Command="{Binding ShareImageCommand}">
-                        <Button.ImageSource>
-                            <FontImageSource FontFamily="FAS" 
+                                </Image.Source>
+                            </Image>
+                        </Frame>
+                        <Label TextColor="#d5ffe2" HorizontalTextAlignment="Center"  FontFamily="Cairo" Text="{Binding Info}" FontSize="30"/>
+                        <Label TextColor="White" HorizontalTextAlignment="Center" Text="{Binding Code}" FontSize="20"/>
+                    </StackLayout>
+                    <StackLayout  Margin="20" HeightRequest="500">
+                        <Button FontFamily="Cairo" Padding="15,0,15,0" ContentLayout="left,0" BackgroundColor="#056839" Text="مشاركة" Command="{Binding ShareImageCommand}">
+                            <Button.ImageSource>
+                                <FontImageSource FontFamily="FAS" 
                                              Glyph="{x:Static fontAwesome:FontAwesomeIcons.ShareAlt}"
                                              Size="20"
                                              Color="White"/>
-                        </Button.ImageSource>
-                    </Button>
-                    <Image HeightRequest="400" Source="{Binding AccountImage,Converter={StaticResource StringToImageSourceConverter}}" />
+                            </Button.ImageSource>
+                        </Button>
+                        <Image HeightRequest="400" Source="{Binding AccountImage,Converter={StaticResource StringToImageSourceConverter}}" />
 
+                    </StackLayout>
                 </StackLayout>
-            </StackLayout>
-        </ScrollView>
+            </ScrollView>
+
+
+        </Grid>
+        
+        
     </ContentPage.Content>
 </ContentPage>

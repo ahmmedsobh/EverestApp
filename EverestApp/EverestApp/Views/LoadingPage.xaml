@@ -6,7 +6,7 @@
              xmlns:viewModel="clr-namespace:EverestApp.ViewModels"
              xmlns:converters="clr-namespace:EverestApp.Converters"
              xmlns:fontAwesome="clr-namespace:EverestApp.Helpers"
-             BackgroundColor="White">
+             BackgroundColor="#d5ffe2">
     
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -20,7 +20,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Image Grid.Row="0" Aspect="AspectFill" Source="{Binding BackgroundImg,Converter={StaticResource StringToImageSourceConverter}}" Opacity="0.5"/>
+            <Image Grid.Row="0" Aspect="AspectFill" Source="{Binding BackgroundImg2,Converter={StaticResource StringToImageSourceConverter}}" Opacity="0.5"/>
 
 
             <StackLayout Grid.Row="0" x:DataType="viewModel:LoadingViewModel" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">

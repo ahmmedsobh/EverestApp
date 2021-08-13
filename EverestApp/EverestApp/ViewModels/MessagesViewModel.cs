@@ -3,7 +3,6 @@ using EverestApp.Models;
 using EverestApp.Services;
 using EverestApp.Views;
 using Newtonsoft.Json;
-using Plugin.LocalNotification;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -54,6 +53,17 @@ namespace EverestApp.ViewModels
             set
             {
                 SetProperty(ref message,value);
+               
+            }
+        }
+
+        string messageLable;
+        public string MessageLable
+        {
+            get => messageLable;
+            set
+            {
+                SetProperty(ref messageLable, value);
             }
         }
 
@@ -117,7 +127,7 @@ namespace EverestApp.ViewModels
 
         async Task ExecuteAddMessagesCommand()
         {
-            IsBusy = true;
+            
 
             try
             {
@@ -126,11 +136,24 @@ namespace EverestApp.ViewModels
                     return;
                 }
 
-                await MessageService.AddMessageAsync(Message,File);
-                FillMessagesList();
+                IsBusy = true;
+                await Task.Run(async () =>
+                {
+                    // Run code here
+                    await MessageService.AddMessageAsync(Message, File);
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        // UI interaction goes here
+                        FillMessagesList();
+                        Message = "";
+                        ExecuteDeleteFileCommand();
 
-                Message = "";
-                ExecuteDeleteFileCommand();
+                    });
+                });
+
+
+                
+
             }
             catch(Exception ex)
             {
@@ -142,6 +165,7 @@ namespace EverestApp.ViewModels
             }
         }
 
+        
         public void OnAppearing()
         {
             IsBusy = true;
@@ -160,37 +184,42 @@ namespace EverestApp.ViewModels
 
         async void FillMessagesList()
         {
-            Messages.Clear();
 
             var MessagesModelView = (await MessagesFileService.UpdateMessagesFile());
             var messages = MessagesModelView.Messages;
             NewMessagesCount = MessagesModelView.NewMessagesCount;
+            
+            Messages.Clear();
             foreach (var item in messages)
             {
                 Messages.Add(item);
             }
+            if (MessagesModelView.NewMessagesCountForAll > 0)
+            {
+                try
+                {
+                    var MessagesToJson = JsonConvert.SerializeObject(messages);
+                    await PCLFileStorage.WriteTextAllAsync("MessagesFile", MessagesToJson);
+                }
+                catch
+                {
+                    if (await PCLFileStorage.IsFileExistAsync("MessagesFile"))
+                    {
+                        await PCLFileStorage.DeleteFile("MessagesFile");
+                    }
+                }
+                finally
+                {
+                    Messages.Clear();
+                    foreach (var item in messages)
+                    {
+                        Messages.Add(item);
+                    }
 
-            try
-            {
-                var MessagesToJson = JsonConvert.SerializeObject(messages);
-                await PCLFileStorage.WriteTextAllAsync("MessagesFile", MessagesToJson);
-            }
-            catch
-            {
-                if (await PCLFileStorage.IsFileExistAsync("MessagesFile"))
-                {
-                    await PCLFileStorage.DeleteFile("MessagesFile");
                 }
             }
-            finally
-            {
-                Messages.Clear();
-                foreach (var item in messages)
-                {
-                    Messages.Add(item);
-                }
-                
-            }
+
+            
 
 
         }

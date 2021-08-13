@@ -4,6 +4,7 @@
              x:Class="EverestApp.Views.AddOrderPage"
              xmlns:converters="clr-namespace:EverestApp.Converters"
              xmlns:viewModel="clr-namespace:EverestApp.ViewModels"
+             BackgroundColor="#056839"
              Title="اضافة طلب"
              xmlns:fontAwesome="clr-namespace:EverestApp.Helpers">
 
@@ -28,46 +29,58 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout x:DataType="viewModel:AddOrderViewModel" >
-            <StackLayout Padding="20">
-                <StackLayout Orientation="Horizontal" >
-                    <Button BackgroundColor="#056839" Padding="15,0,15,0" ContentLayout="left,0" HorizontalOptions="FillAndExpand" FontFamily="Cairo" Text="تحميل صورة" Command="{Binding UploadImageCommand}">
-                        <Button.ImageSource>
-                            <FontImageSource FontFamily="FAS" 
+        <Grid x:DataType="viewModel:AddOrderViewModel" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Image Grid.Row="0" Aspect="AspectFill" Source="{Binding BackgroundImg3,Converter={StaticResource StringToImageSourceConverter}}" Opacity="0.7"/>
+
+            <StackLayout Grid.Row="0" Opacity=".9">
+                <StackLayout Padding="20">
+                    <StackLayout Orientation="Horizontal" >
+                        <Button BackgroundColor="#056839" Padding="15,0,15,0" ContentLayout="left,0" HorizontalOptions="FillAndExpand" FontFamily="Cairo" Text="تحميل صورة" Command="{Binding UploadImageCommand}">
+                            <Button.ImageSource>
+                                <FontImageSource FontFamily="FAS" 
                                              Glyph="{x:Static fontAwesome:FontAwesomeIcons.Image}"
                                              Size="20"
                                              Color="White"/>
-                        </Button.ImageSource>
-                    </Button>
-                    <Button BackgroundColor="#056839" Padding="15,0,15,0" ContentLayout="left,0" HorizontalOptions="FillAndExpand"  FontFamily="Cairo" Text="التقاط صورة" Command="{Binding TakeImageCommand}">
-                        <Button.ImageSource>
-                            <FontImageSource FontFamily="FAS" 
+                            </Button.ImageSource>
+                        </Button>
+                        <Button BackgroundColor="#056839" Padding="15,0,15,0" ContentLayout="left,0" HorizontalOptions="FillAndExpand"  FontFamily="Cairo" Text="التقاط صورة" Command="{Binding TakeImageCommand}">
+                            <Button.ImageSource>
+                                <FontImageSource FontFamily="FAS" 
                                              Glyph="{x:Static fontAwesome:FontAwesomeIcons.Camera}"
                                              Size="20"
                                              Color="White"/>
-                        </Button.ImageSource>
-                    </Button>
-                </StackLayout>
-                <StackLayout BackgroundColor="#056839"  HeightRequest="300">
-                    <Image 
+                            </Button.ImageSource>
+                        </Button>
+                    </StackLayout>
+                    <StackLayout BackgroundColor="#056839"  HeightRequest="300">
+                        <Image 
                         Aspect="AspectFit" 
                         Source="{Binding ImageAsBytes,Converter={StaticResource StringToImageSourceConverter}}" 
                         HorizontalOptions="FillAndExpand"
                         VerticalOptions="FillAndExpand"
                         Margin="0"
                         HeightRequest="300"/>
-                </StackLayout>
-                <Button Padding="15,0,15,0" ContentLayout="left,0"  BackgroundColor="#056839" FontFamily="Cairo" Text="ارسال الطلب" Command="{Binding SendOrderCommand}">
-                    <Button.ImageSource>
-                        <FontImageSource FontFamily="FAS" 
+                    </StackLayout>
+                    <Button Padding="15,0,15,0" ContentLayout="left,0"  BackgroundColor="#056839" FontFamily="Cairo" Text="ارسال الطلب" Command="{Binding SendOrderCommand}">
+                        <Button.ImageSource>
+                            <FontImageSource FontFamily="FAS" 
                                              Glyph="{x:Static fontAwesome:FontAwesomeIcons.Upload}"
                                              Size="20"
                                              Color="White"/>
-                    </Button.ImageSource>
-                </Button>
-                <Label Text="{Binding Message}" FontSize="17" HorizontalTextAlignment="Center" FontFamily="Cairo" TextColor="Red"/>
-                <ActivityIndicator Color="#056839" IsRunning="{Binding IsBusy}"/> 
+                        </Button.ImageSource>
+                    </Button>
+                    <Label Text="{Binding Message}" FontSize="17" HorizontalTextAlignment="Center" FontFamily="Cairo" TextColor="Red"/>
+                    <ActivityIndicator Color="#056839" IsRunning="{Binding IsBusy}"/>
+                </StackLayout>
             </StackLayout>
-        </StackLayout>
+
+            
+
+        </Grid>
+        
     </ContentPage.Content>
 </ContentPage>

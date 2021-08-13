@@ -2,8 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EverestApp.Views.AccountFileDetailsPage"
+             BackgroundColor="#056839"
              xmlns:viewModel="clr-namespace:EverestApp.ViewModels"
-             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers">
+             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers"
+             xmlns:converters="clr-namespace:EverestApp.Converters">
 
     <Shell.TitleView>
         <StackLayout  Orientation="Horizontal">
@@ -19,35 +21,55 @@
         </StackLayout>
     </Shell.TitleView>
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:StringToImageSourceConverter x:Key="StringToImageSourceConverter"></converters:StringToImageSourceConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout>
-                <StackLayout x:DataType="viewModel:AccountFilesDetailsViewModel" Padding="20">
-                    <StackLayout>
+
+        <Grid x:DataType="viewModel:AccountFilesDetailsViewModel">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Image Grid.Row="0" Aspect="AspectFill" Source="{Binding BackgroundImg3,Converter={StaticResource StringToImageSourceConverter}}" Opacity="0.7"/>
+
+            <ScrollView Grid.Row="0" Padding="10">
+                <StackLayout BackgroundColor="White" Opacity=".8"> 
+                    <StackLayout  Padding="20">
                         <StackLayout>
-                            <Label TextColor="Black" FontFamily="Cairo" Text="ملف رقم :" FontSize="15"/>
-                            <Label HorizontalTextAlignment="Center" TextColor="#056839" Text="{Binding File.Index}" FontSize="20"/>
+                            <StackLayout>
+                                <Label TextColor="Black" FontFamily="Cairo" Text="ملف رقم :" FontSize="15"/>
+                                <Label HorizontalTextAlignment="Center" TextColor="#056839" Text="{Binding File.Index}" FontSize="20"/>
+                            </StackLayout>
+                            <StackLayout>
+                                <Label TextColor="Black" FontFamily="Cairo" Text="تاريخ الرفع :" FontSize="15"/>
+                                <Label HorizontalTextAlignment="Center" TextColor="#056839" Text="{Binding File.UploadDate}" FontSize="20"/>
+                            </StackLayout>
+                            <StackLayout>
+                                <Label TextColor="Black" FontFamily="Cairo" Text="آخر تحديث :" FontSize="15"/>
+                                <Label HorizontalTextAlignment="Center" TextColor="#056839" Text="{Binding File.UpdateDate}" FontSize="20"/>
+                            </StackLayout>
                         </StackLayout>
-                        <StackLayout>
-                            <Label TextColor="Black" FontFamily="Cairo" Text="تاريخ الرفع :" FontSize="15"/>
-                            <Label HorizontalTextAlignment="Center" TextColor="#056839" Text="{Binding File.UploadDate}" FontSize="20"/>
-                        </StackLayout>
-                        <StackLayout>
-                            <Label TextColor="Black" FontFamily="Cairo" Text="آخر تحديث :" FontSize="15"/>
-                            <Label HorizontalTextAlignment="Center" TextColor="#056839" Text="{Binding File.UpdateDate}" FontSize="20"/>
-                        </StackLayout>
-                    </StackLayout>
-                    <Button FontFamily="Cairo" Padding="15,0,15,0" ContentLayout="left,0" BackgroundColor="#056839" Text="فتح الملف" Command="{Binding OpenFileCommand}">
-                        <Button.ImageSource>
-                            <FontImageSource FontFamily="FAS" 
+                        <Button FontFamily="Cairo" Padding="15,0,15,0" ContentLayout="left,0" BackgroundColor="#056839" Text="فتح الملف" Command="{Binding OpenFileCommand}">
+                            <Button.ImageSource>
+                                <FontImageSource FontFamily="FAS" 
                                              Glyph="{x:Static fontAwesome:FontAwesomeIcons.FilePdf}"
                                              Size="20"
                                              Color="White"/>
-                        </Button.ImageSource>
-                    </Button>
+                            </Button.ImageSource>
+                        </Button>
+                    </StackLayout>
                 </StackLayout>
-            </StackLayout>
-        </ScrollView>
+            </ScrollView>
+
+            <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" Color="#056839" Grid.Row="0" IsRunning="{Binding IsBusy}"/>
+
+        </Grid>
+        
+        
     </ContentPage.Content>
 
 </ContentPage>

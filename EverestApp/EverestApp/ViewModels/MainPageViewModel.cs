@@ -2,7 +2,6 @@
 using EverestApp.Models;
 using EverestApp.Services;
 using EverestApp.Views;
-using Plugin.LocalNotification;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -218,6 +217,7 @@ namespace EverestApp.ViewModels
             Customer.Name = Preferences.Get("Name", "");
             Customer.Password = Preferences.Get("Password", "");
             Customer.Info = Preferences.Get("Info", "");
+            Customer.Balance = Preferences.Get("Balance", "0");
         }
 
         async void ShowNotifications()
@@ -229,17 +229,17 @@ namespace EverestApp.ViewModels
                 if (Count > 0)
                 {
                     NewMessagesCount = Count.ToString();
-                    var notification = new NotificationRequest
-                    {
-                        BadgeNumber = Count,
-                        Description = $"وصلتك {Count} رسائل جديده",
-                        Title = "الاشعارات",
-                        ReturningData = $"وصلتك {Count} رسائل جديده",
-                        NotificationId = 1337,
-                        Schedule = { NotifyTime = DateTime.Now.AddSeconds(8) },
-                    };
+                    //var notification = new NotificationRequest
+                    //{
+                    //    BadgeNumber = Count,
+                    //    Description = $"وصلتك {Count} رسائل جديده",
+                    //    Title = "الاشعارات",
+                    //    ReturningData = $"وصلتك {Count} رسائل جديده",
+                    //    NotificationId = 1337,
+                    //    Schedule = { NotifyTime = DateTime.Now.AddSeconds(8) },
+                    //};
 
-                    await NotificationCenter.Current.Show(notification);
+                    //await NotificationCenter.Current.Show(notification);
 
                 }
                 else

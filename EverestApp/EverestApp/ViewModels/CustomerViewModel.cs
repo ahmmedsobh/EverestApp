@@ -111,6 +111,8 @@ namespace EverestApp.ViewModels
                     Preferences.Set("Name", customer.Name);
                     Preferences.Set("Password", customer.Password);
                     Preferences.Set("Info", customer.Info);
+                    Preferences.Set("Balance", customer.Balance);
+
 
                     var bytes = await ImageService.DownloadImage($"https://www.everestexport.net/ems/{customer.Code}.jpg");
                     string fileName = Path.Combine(FileSystem.AppDataDirectory, $"AccountImg.jpg");

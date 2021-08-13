@@ -31,6 +31,16 @@ namespace EverestApp.ViewModels
             get => "EverestApp.Resources.Images.Background.jpg";
         }
 
+        public string BackgroundImg2
+        {
+            get => "EverestApp.Resources.Images.Background2.jpg";
+        }
+
+        public string BackgroundImg3
+        {
+            get => "EverestApp.Resources.Images.Background3.jpg";
+        }
+
         protected bool SetProperty<T>(ref T backingStore, T value,
             [CallerMemberName] string propertyName = "",
             Action onChanged = null)

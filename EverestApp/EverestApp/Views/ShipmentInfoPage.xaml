@@ -2,7 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EverestApp.Views.ShipmentInfoPage"
-             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers">
+             BackgroundColor="#056839"
+             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers"
+             xmlns:converters="clr-namespace:EverestApp.Converters"
+             xmlns:ViewModel="clr-namespace:EverestApp.ViewModels">
 
     <Shell.TitleView>
         <StackLayout  Orientation="Horizontal">
@@ -18,12 +21,30 @@
         </StackLayout>
     </Shell.TitleView>
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:StringToImageSourceConverter x:Key="StringToImageSourceConverter"></converters:StringToImageSourceConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <StackLayout Padding="20">
-            <Label FontFamily="Cairo" FontSize="20" Text="- كتابة الكود بشكل صحيح على فاتورة الطلب" TextColor="#056839"/>
-            <Label FontFamily="Cairo" FontSize="20" Text="- كتابة اسم الشركة في حال عدم وجوده على الفاتورة مع رقم الهاتف" TextColor="#056839"/>
-            <Label FontFamily="Cairo" FontSize="20" Text="- الالتزام بعدم شحن ماركات داخل البضاعة" TextColor="#056839"/>
-            <Label FontFamily="Cairo" FontSize="20" Text="- التأكد من الفاتورة مدفوعة أم لا والكتابة عليها في حال الدفع" TextColor="#056839"/>
-        </StackLayout>
+
+        <Grid x:DataType="ViewModel:BaseViewModel">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <Image Grid.Row="0" Aspect="AspectFill" Source="{Binding BackgroundImg2,Converter={StaticResource StringToImageSourceConverter}}" Opacity="0.7"/>
+
+            <StackLayout Grid.Row="0" Padding="20">
+                <Label FontFamily="Cairo" FontSize="20" Text="- كتابة الكود بشكل صحيح على فاتورة الطلب" TextColor="White"/>
+                <Label FontFamily="Cairo" FontSize="20" Text="- كتابة اسم الشركة في حال عدم وجوده على الفاتورة مع رقم الهاتف" TextColor="White"/>
+                <Label FontFamily="Cairo" FontSize="20" Text="- الالتزام بعدم شحن ماركات داخل البضاعة" TextColor="White"/>
+                <Label FontFamily="Cairo" FontSize="20" Text="- التأكد من الفاتورة مدفوعة أم لا والكتابة عليها في حال الدفع" TextColor="White"/>
+            </StackLayout>
+            
+        </Grid>
+        
+      
     </ContentPage.Content>
 </ContentPage>

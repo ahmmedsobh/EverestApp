@@ -2,7 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EverestApp.Views.ContactPage"
-             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers">
+             BackgroundColor="#056839"
+             xmlns:fontAwesome="clr-namespace:EverestApp.Helpers"
+             xmlns:ViewModels="clr-namespace:EverestApp.ViewModels"
+             xmlns:converters="clr-namespace:EverestApp.Converters">
 
     <Shell.TitleView>
         <StackLayout  Orientation="Horizontal">
@@ -18,11 +21,83 @@
         </StackLayout>
     </Shell.TitleView>
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:StringToImageSourceConverter x:Key="StringToImageSourceConverter"></converters:StringToImageSourceConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="صفحة التواصل"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <Image Grid.Row="0" Aspect="AspectFill" Source="{Binding BackgroundImg2,Converter={StaticResource StringToImageSourceConverter}}" Opacity="0.7"/>
+
+
+            <ScrollView Grid.Row="0">
+                <StackLayout x:DataType="ViewModels:ContactViewModel" Padding="10">
+                    <StackLayout>
+                        <Label TextColor="White" Text="الهاتف" FontSize="25" FontFamily="Cairo"/>
+                        <Button FontFamily="Cairo" Padding="15,0,15,0" ContentLayout="left,0" BackgroundColor="#056839" Text="+90 555 887 93 23" Command="{Binding OpenPhoneNumberCommand}" CommandParameter="+905558879323">
+                            <Button.ImageSource>
+                                <FontImageSource FontFamily="FAS" 
+                                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.Phone}"
+                                             Size="20"
+                                             Color="White"/>
+                            </Button.ImageSource>
+                        </Button>
+                        <Button FontFamily="Cairo" Padding="15,0,15,0" ContentLayout="left,0" BackgroundColor="#056839" Text="+90 212 230 61 19" Command="{Binding OpenPhoneNumberCommand}" CommandParameter="+902122306119">
+                            <Button.ImageSource>
+                                <FontImageSource FontFamily="FAS" 
+                                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.Phone}"
+                                             Size="20"
+                                             Color="White"/>
+                            </Button.ImageSource>
+                        </Button>
+                    </StackLayout>
+                    <StackLayout>
+                        <Label TextColor="White" Text="البريد الالكترونى" FontSize="25" FontFamily="Cairo"/>
+                        <Button FontFamily="Cairo" Padding="15,0,15,0" ContentLayout="left,0" BackgroundColor="#056839" Text="everest@everestexport.net" Command="{Binding OpenEmailCommand}" CommandParameter="everest@everestexport.net">
+                            <Button.ImageSource>
+                                <FontImageSource FontFamily="FAS" 
+                                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.Envelope}"
+                                             Size="20"
+                                             Color="White"/>
+                            </Button.ImageSource>
+                        </Button>
+                    </StackLayout>
+                    <StackLayout>
+                        <Label TextColor="White" Text="الموقع الالكترونى" FontSize="25" FontFamily="Cairo"/>
+                        <Button FontFamily="Cairo" Padding="15,0,15,0" ContentLayout="left,0" BackgroundColor="#056839" Text="https://www.everestexport.net" Command="{Binding OpenLinkCommand}" CommandParameter="https://www.everestexport.net">
+                            <Button.ImageSource>
+                                <FontImageSource FontFamily="FAS" 
+                                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.InternetExplorer}"
+                                             Size="20"
+                                             Color="White"/>
+                            </Button.ImageSource>
+                        </Button>
+                    </StackLayout>
+                    <StackLayout>
+                        <Label TextColor="White" Text="العنوان" FontSize="25" FontFamily="Cairo"/>
+                        <Button FontFamily="Cairo" Padding="15,0,15,0" ContentLayout="left,0" BackgroundColor="#056839" Text="H. Edip Adıvar, Sultan Sk. No:22 Şişli/Istanbul, Turkey" Command="{Binding OpenAddressCommand}">
+                            <Button.ImageSource>
+                                <FontImageSource FontFamily="FAS" 
+                                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.MapMarkedAlt}"
+                                             Size="20"
+                                             Color="White"/>
+                            </Button.ImageSource>
+                        </Button>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+
+        </Grid>
+        
+        
+            
+        
     </ContentPage.Content>
 </ContentPage>

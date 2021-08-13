@@ -4,7 +4,7 @@
              x:Class="EverestApp.Views.MessagesPage"
              xmlns:viewModels="clr-namespace:EverestApp.ViewModels"
              xmlns:model="clr-namespace:EverestApp.Models"
-             BackgroundColor="White"
+             BackgroundColor="#d5ffe2"
              xmlns:fontAwesome="clr-namespace:EverestApp.Helpers"
              xmlns:controls="clr-namespace:EverestApp.CustomControls"
              xmlns:local="clr-namespace:EverestApp.CustomControls.CustomCells"
@@ -109,9 +109,9 @@
                         <StackLayout  Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                             <Frame BackgroundColor="White" CornerRadius="30" Padding="0" HorizontalOptions="FillAndExpand" HasShadow="False">
                                 <StackLayout BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                                    <controls:CustomEntry HorizontalOptions="FillAndExpand"  TextColor="#056839" PlaceholderColor="#62be7e" FontFamily="Cairo" Placeholder="أكتب رسالة" CornerRadius="20" BorderColor="White" BackgroundColor="White" Text="{Binding Message,Mode=TwoWay}"/>
+                                    <controls:CustomEntry HorizontalOptions="FillAndExpand" x:Name="txtMessage"  TextColor="#056839" PlaceholderColor="#62be7e" FontFamily="Cairo" Placeholder="أكتب رسالة" CornerRadius="20" BorderColor="White" BackgroundColor="White" Text="{Binding Message,Mode=TwoWay}"/>
                                     <Frame  HasShadow="False"  CornerRadius="80" Padding="0">
-                                        <ImageButton WidthRequest="50" BackgroundColor="Transparent" HeightRequest="50" Padding="10" Command="{Binding OpenFileCommand}">
+                                        <ImageButton WidthRequest="50" BackgroundColor="Transparent" HeightRequest="50" Padding="10" Command="{Binding OpenFileCommand}" >
                                             <ImageButton.Source>
                                                 <FontImageSource FontFamily="FAS" 
                                              Glyph="{x:Static fontAwesome:FontAwesomeIcons.Paperclip}"

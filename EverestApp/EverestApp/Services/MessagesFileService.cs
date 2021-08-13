@@ -69,6 +69,7 @@ namespace EverestApp.Services
                     MessagesModelView.Messages = new List<Message>();
                     MessagesModelView.Messages = Messages;
                     MessagesModelView.NewMessagesCount = NewMessagesCount;
+                    MessagesModelView.NewMessagesCountForAll = NewMessages.Count();
                     return MessagesModelView;
                 }
                 else
@@ -76,7 +77,9 @@ namespace EverestApp.Services
                     IEnumerable<Message> NewMessages = await MessageService.GetMessagesAfterLastMessageAsync(0);
                     MessagesModelView.Messages = new List<Message>();
                     MessagesModelView.Messages = NewMessages;
-                    MessagesModelView.NewMessagesCount = NewMessages.Count();
+                    MessagesModelView.NewMessagesCount = 0;
+                    MessagesModelView.NewMessagesCountForAll = NewMessages.Count();
+
                     return MessagesModelView;
                 }
             }
@@ -88,7 +91,8 @@ namespace EverestApp.Services
                     IEnumerable<Message> NewMessages = await MessageService.GetMessagesAfterLastMessageAsync(0);
                     MessagesModelView.Messages = new List<Message>();
                     MessagesModelView.Messages = NewMessages;
-                    MessagesModelView.NewMessagesCount = NewMessages.Count();
+                    MessagesModelView.NewMessagesCount = 0;
+                    MessagesModelView.NewMessagesCountForAll = NewMessages.Count();
                     return MessagesModelView;
                 }
             }
