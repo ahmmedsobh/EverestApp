@@ -93,13 +93,16 @@ namespace EverestApp.ViewModels
 
         async void ExecuteSendOrderCommand()
         {
-            if (ImageAsBytes == null )
+            if (ImageAsBytes == null)
             {
-                if(ImageAsBytes.Length == 0)
-                {
-                    Message = "قم برفع صورة";
-                    return;
-                }
+                Message = "قم برفع صورة";
+                return;
+            }
+
+            if (ImageAsBytes.Length == 0)
+            {
+                Message = "قم برفع صورة";
+                return;
             }
 
             //var IsConnected = await connectionService.IsConnected();

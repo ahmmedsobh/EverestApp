@@ -27,7 +27,7 @@
                 <Image WidthRequest="200" Source="{Binding Logo,Converter={StaticResource StringToImageSourceConverter}}"/>
                 <ActivityIndicator  Color="#62be7e" IsRunning="{Binding IsBusy}"/>
                 <Label IsVisible="{Binding IsBusy}" HorizontalTextAlignment="Center" TextColor="#056839" FontSize="18" FontFamily="Cairo" Text="يرجى الانتظار ..."/>
-                <Button FontFamily="Cairo" Padding="15,0,15,0" ContentLayout="left,0" BackgroundColor="#056839" Text="دخول" Command="{Binding LoginCommand}" IsVisible="{Binding LoginBtnVisible}">
+                <Button FontFamily="Cairo" FontSize="15" Padding="15,0,15,0" ContentLayout="left,0" BackgroundColor="#056839" Text="دخول" Command="{Binding LoginCommand}" IsVisible="{Binding LoginBtnVisible}">
                     <Button.ImageSource>
                         <FontImageSource FontFamily="FAS" 
                                              Glyph="{x:Static fontAwesome:FontAwesomeIcons.SignInAlt}"

@@ -41,7 +41,7 @@
                 <StackLayout x:DataType="ViewModels:ContactViewModel" Padding="10">
                     <StackLayout>
                         <Label TextColor="White" Text="الهاتف" FontSize="25" FontFamily="Cairo"/>
-                        <Button FontFamily="Cairo" Padding="15,0,15,0" ContentLayout="left,0" BackgroundColor="#056839" Text="+90 555 887 93 23" Command="{Binding OpenPhoneNumberCommand}" CommandParameter="+905558879323">
+                        <Button  Padding="15,0,15,0" ContentLayout="left,0" BackgroundColor="#056839" Text="+90 555 887 93 23" Command="{Binding OpenPhoneNumberCommand}" CommandParameter="+905558879323">
                             <Button.ImageSource>
                                 <FontImageSource FontFamily="FAS" 
                                              Glyph="{x:Static fontAwesome:FontAwesomeIcons.Phone}"
@@ -49,7 +49,7 @@
                                              Color="White"/>
                             </Button.ImageSource>
                         </Button>
-                        <Button FontFamily="Cairo" Padding="15,0,15,0" ContentLayout="left,0" BackgroundColor="#056839" Text="+90 212 230 61 19" Command="{Binding OpenPhoneNumberCommand}" CommandParameter="+902122306119">
+                        <Button  Padding="15,0,15,0" ContentLayout="left,0" BackgroundColor="#056839" Text="+90 212 230 61 19" Command="{Binding OpenPhoneNumberCommand}" CommandParameter="+902122306119">
                             <Button.ImageSource>
                                 <FontImageSource FontFamily="FAS" 
                                              Glyph="{x:Static fontAwesome:FontAwesomeIcons.Phone}"
@@ -60,7 +60,7 @@
                     </StackLayout>
                     <StackLayout>
                         <Label TextColor="White" Text="البريد الالكترونى" FontSize="25" FontFamily="Cairo"/>
-                        <Button FontFamily="Cairo" Padding="15,0,15,0" ContentLayout="left,0" BackgroundColor="#056839" Text="everest@everestexport.net" Command="{Binding OpenEmailCommand}" CommandParameter="everest@everestexport.net">
+                        <Button  Padding="15,0,15,0" ContentLayout="left,0" BackgroundColor="#056839" Text="everest@everestexport.net" Command="{Binding OpenEmailCommand}" CommandParameter="everest@everestexport.net">
                             <Button.ImageSource>
                                 <FontImageSource FontFamily="FAS" 
                                              Glyph="{x:Static fontAwesome:FontAwesomeIcons.Envelope}"
@@ -71,10 +71,10 @@
                     </StackLayout>
                     <StackLayout>
                         <Label TextColor="White" Text="الموقع الالكترونى" FontSize="25" FontFamily="Cairo"/>
-                        <Button FontFamily="Cairo" Padding="15,0,15,0" ContentLayout="left,0" BackgroundColor="#056839" Text="https://www.everestexport.net" Command="{Binding OpenLinkCommand}" CommandParameter="https://www.everestexport.net">
+                        <Button  Padding="15,0,15,0" ContentLayout="left,0" BackgroundColor="#056839" Text="https://www.everestexport.net" Command="{Binding OpenLinkCommand}" CommandParameter="https://www.everestexport.net">
                             <Button.ImageSource>
                                 <FontImageSource FontFamily="FAS" 
-                                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.InternetExplorer}"
+                                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.Paperclip}"
                                              Size="20"
                                              Color="White"/>
                             </Button.ImageSource>
@@ -82,7 +82,7 @@
                     </StackLayout>
                     <StackLayout>
                         <Label TextColor="White" Text="العنوان" FontSize="25" FontFamily="Cairo"/>
-                        <Button FontFamily="Cairo" Padding="15,0,15,0" ContentLayout="left,0" BackgroundColor="#056839" Text="H. Edip Adıvar, Sultan Sk. No:22 Şişli/Istanbul, Turkey" Command="{Binding OpenAddressCommand}">
+                        <Button  Padding="15,0,15,0" ContentLayout="left,0" BackgroundColor="#056839" Text="H. Edip Adıvar, Sultan Sk. No:22 Şişli/Istanbul, Turkey" Command="{Binding OpenAddressCommand}">
                             <Button.ImageSource>
                                 <FontImageSource FontFamily="FAS" 
                                              Glyph="{x:Static fontAwesome:FontAwesomeIcons.MapMarkedAlt}"

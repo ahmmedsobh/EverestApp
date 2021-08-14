@@ -121,10 +121,11 @@
 
 
                                                     <Label Grid.Column="1" 
-                                       Text="{Binding Index,StringFormat='طلبية رقم {0}'}"
-                                       FontAttributes="Bold" 
-                                       TextColor="#056839"
-                                       FontFamily="Cairo"/>
+                                                           Text="{Binding Index,StringFormat='طلبية رقم {0}'}"
+                                                           FontAttributes="Bold" 
+                                                           TextColor="#056839"
+                                                           FontFamily="Cairo"
+                                                           FontSize="17"/>
 
                                                     <Label Grid.Row="1"
                                        Grid.Column="1"
@@ -149,7 +150,7 @@
 
 
                     <Frame BorderColor="White" HorizontalOptions="Center" WidthRequest="150" Grid.Row="0" HasShadow="True" Padding="0" VerticalOptions="End"  CornerRadius="10" Margin="20">
-                        <Button Text="اضافة طلبية" Padding="15,0,15,0" ContentLayout="left,0" WidthRequest="150" HorizontalOptions="Center"  FontFamily="Cairo"  BackgroundColor="#056839" Command="{Binding AddOrderCommand}">
+                        <Button Text="اضافة طلبية" FontSize="15" Padding="15,0,15,0" ContentLayout="left,0" WidthRequest="150" HorizontalOptions="Center"  FontFamily="Cairo"  BackgroundColor="#056839" Command="{Binding AddOrderCommand}">
                             <Button.ImageSource>
                                 <FontImageSource FontFamily="FAS" 
                                              Glyph="{x:Static fontAwesome:FontAwesomeIcons.Plus}"

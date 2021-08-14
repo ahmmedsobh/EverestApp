@@ -96,10 +96,11 @@
 
 
                                                 <Label Grid.Column="1" 
-                                       Text="{Binding Index,StringFormat='ملف {0}'}"
-                                       FontAttributes="Bold" 
-                                       FontFamily="Cairo"
-                                       TextColor="#056839"/>
+                                                       Text="{Binding Index,StringFormat='ملف {0}'}"
+                                                       FontAttributes="Bold" 
+                                                       FontFamily="Cairo"
+                                                       TextColor="#056839"
+                                                       FontSize="17"/>
 
                                                 <Label Grid.Row="1"
                                        Grid.Column="1"
@@ -120,7 +121,7 @@
 
 
                     <Frame BorderColor="White"  HorizontalOptions="Center" WidthRequest="150" Grid.Row="0" HasShadow="True" Padding="0" VerticalOptions="End"  CornerRadius="10" Margin="20">
-                        <Button Text="ارسال رسالة" Padding="15,0,15,0" ContentLayout="left,0" WidthRequest="150" HorizontalOptions="Center"  FontFamily="Cairo"  BackgroundColor="#056839" Command="{Binding AddMessageCommand}">
+                        <Button Text="ارسال رسالة" FontSize="15" Padding="15,0,15,0" ContentLayout="left,0" WidthRequest="150" HorizontalOptions="Center"  FontFamily="Cairo"  BackgroundColor="#056839" Command="{Binding AddMessageCommand}">
                             <Button.ImageSource>
                                 <FontImageSource FontFamily="FAS" 
                                              Glyph="{x:Static fontAwesome:FontAwesomeIcons.CommentMedical}"

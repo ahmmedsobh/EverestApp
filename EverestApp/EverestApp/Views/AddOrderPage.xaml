@@ -65,7 +65,7 @@
                         Margin="0"
                         HeightRequest="300"/>
                     </StackLayout>
-                    <Button Padding="15,0,15,0" ContentLayout="left,0"  BackgroundColor="#056839" FontFamily="Cairo" Text="ارسال الطلب" Command="{Binding SendOrderCommand}">
+                    <Button Padding="15,0,15,0" FontSize="15" ContentLayout="left,0"  BackgroundColor="#056839" FontFamily="Cairo" Text="ارسال الطلب" Command="{Binding SendOrderCommand}">
                         <Button.ImageSource>
                             <FontImageSource FontFamily="FAS" 
                                              Glyph="{x:Static fontAwesome:FontAwesomeIcons.Upload}"

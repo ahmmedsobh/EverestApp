@@ -56,7 +56,7 @@
                         <Label TextColor="White" HorizontalTextAlignment="Center" Text="{Binding Code}" FontSize="20"/>
                     </StackLayout>
                     <StackLayout  Margin="20" HeightRequest="500">
-                        <Button FontFamily="Cairo" Padding="15,0,15,0" ContentLayout="left,0" BackgroundColor="#056839" Text="مشاركة" Command="{Binding ShareImageCommand}">
+                        <Button FontFamily="Cairo" FontSize="15" Padding="15,0,15,0" ContentLayout="left,0" BackgroundColor="#056839" Text="مشاركة" Command="{Binding ShareImageCommand}">
                             <Button.ImageSource>
                                 <FontImageSource FontFamily="FAS" 
                                              Glyph="{x:Static fontAwesome:FontAwesomeIcons.ShareAlt}"

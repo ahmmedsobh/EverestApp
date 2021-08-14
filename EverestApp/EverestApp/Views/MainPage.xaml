@@ -152,7 +152,7 @@
                                                                  Size="50"/>
                                                     </Image.Source>
                                                 </Image>
-                                                <Label Padding="0" TextColor="#62be7e" FontFamily="Cairo" Margin="0,0,0,30" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="{Binding Text}"/>
+                                                <Label Padding="0" FontSize="15" TextColor="#62be7e" FontFamily="Cairo" Margin="0,0,0,30" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="{Binding Text}"/>
                                             </StackLayout>
                                         </Frame>
                                     </Grid>

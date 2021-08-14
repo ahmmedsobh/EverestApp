@@ -88,10 +88,11 @@
 
 
                                                 <Label Grid.Column="1" 
-                                       Text="{Binding Index,StringFormat='شحنة رقم {0}'}"
-                                       FontAttributes="Bold" 
-                                       TextColor="#056839"
-                                       FontFamily="Cairo"/>
+                                                       Text="{Binding Index,StringFormat='شحنة رقم {0}'}"
+                                                       FontAttributes="Bold" 
+                                                       TextColor="#056839"
+                                                       FontFamily="Cairo"
+                                                       FontSize="17"/>
 
                                                 <Label Grid.Row="1"
                                        Grid.Column="1"
