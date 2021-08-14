@@ -43,6 +43,11 @@ namespace EverestApp.ViewModels
 
         async void GetFileDetails(string ShipmentId)
         {
+            //var IsConnected = await connectionService.IsConnected();
+
+            //if (!IsConnected)
+            //    return;
+
             IsBusy = true;
             var shipments = await ShipmentService.GetShipmentsAsync();
             var shipment = shipments.FirstOrDefault(o => o.ID == ShipmentId);

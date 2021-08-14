@@ -42,6 +42,11 @@ namespace EverestApp.ViewModels
 
             try
             {
+                //var IsConnected = await connectionService.IsConnected();
+
+                //if (!IsConnected)
+                //    return;
+
                 Files.Clear();
                 var files = await FilesService.GetAcountFilesAsync();
                 

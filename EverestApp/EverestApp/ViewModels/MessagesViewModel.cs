@@ -184,6 +184,10 @@ namespace EverestApp.ViewModels
 
         async void FillMessagesList()
         {
+            //var IsConnected = await connectionService.IsConnected();
+
+            //if (!IsConnected)
+            //    return;
 
             var MessagesModelView = (await MessagesFileService.UpdateMessagesFile());
             var messages = MessagesModelView.Messages;

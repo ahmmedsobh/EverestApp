@@ -42,6 +42,12 @@ namespace EverestApp.ViewModels
 
         async void GetOrderDetails(string OrderId)
         {
+
+            //var IsConnected = await connectionService.IsConnected();
+
+            //if (!IsConnected)
+            //    return;
+
             IsBusy = true;
             var orders = await OrderService.GetOrdersAsync();
             var order = orders.FirstOrDefault(o=>o.ID == OrderId);

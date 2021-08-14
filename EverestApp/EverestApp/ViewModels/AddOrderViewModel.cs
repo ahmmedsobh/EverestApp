@@ -102,6 +102,11 @@ namespace EverestApp.ViewModels
                 }
             }
 
+            //var IsConnected = await connectionService.IsConnected();
+
+            //if (!IsConnected)
+            //    return;
+
             IsBusy = true;
             var result = await OrderService.AddOrderAsync(ImageAsBytes);
             if (result)

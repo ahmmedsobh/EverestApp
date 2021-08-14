@@ -81,6 +81,12 @@ namespace EverestApp.ViewModels
                 MessageColor = "Red";
                 return;
             }
+
+            //var IsConnected = await connectionService.IsConnected();
+
+            //if (!IsConnected)
+            //    return;
+
             IsBusy = true;
             var CustomerDate = await CustomerService.GetCustomerAsync(Code,Password);
             if(CustomerDate == null)

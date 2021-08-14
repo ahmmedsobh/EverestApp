@@ -33,6 +33,12 @@ namespace EverestApp.ViewModels
 
         async Task ExecuteLoadShipmentsCommand()
         {
+
+            //var IsConnected = await connectionService.IsConnected();
+
+            //if (!IsConnected)
+            //    return;
+
             IsBusy = true;
 
             try

@@ -11,6 +11,7 @@ namespace EverestApp.ViewModels
     public class BaseViewModel : INotifyPropertyChanged
     {
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        public IConectionService connectionService = DependencyService.Get<IConectionService>();
 
         bool isBusy = false;
         public bool IsBusy

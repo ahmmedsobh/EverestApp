@@ -47,6 +47,11 @@ namespace EverestApp.ViewModels
 
         async void GetFileDetails(string FileId)
         {
+            //var IsConnected =  await connectionService.IsConnected();
+
+            //if (!IsConnected)
+            //    return;
+
             IsBusy = true;
             var files = await FileService.GetAcountFilesAsync();
             var file = files.FirstOrDefault(o => o.ID == FileId);
