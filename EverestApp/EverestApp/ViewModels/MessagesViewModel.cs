@@ -87,6 +87,16 @@ namespace EverestApp.ViewModels
             }
         }
 
+        string fileNameLableColor;
+        public string FileNameLableColor
+        {
+            get => fileNameLableColor;
+            set
+            {
+                SetProperty(ref fileNameLableColor, value);
+            }
+        }
+
         bool isFileVisible;
         public bool IsFileVisible
         {
@@ -233,6 +243,14 @@ namespace EverestApp.ViewModels
             var file = await FilePicker.PickAsync();
             if (file != null)
             {
+                if (CheckFileExtension(file.FileName) == false)
+                {
+                    FileNameLable = "هذا الامتداد غير مدعوم";
+                    IsFileVisible = true;
+                    FileNameLableColor = "Red";
+                    return;
+                }
+
                 File = file;
                 var FullName = file.FileName;
                 if (file.FileName.Length > 20)
@@ -248,7 +266,26 @@ namespace EverestApp.ViewModels
                 }
                 FileNameLable = FullName;
                 IsFileVisible = true;
+                FileNameLableColor = "#056839";
             }
+        }
+
+        bool CheckFileExtension(string FileName)
+        {
+            if (FileName == "" || FileName == null)
+                return false;
+
+            if (!FileName.Contains("."))
+                return false;
+
+            var FileExtension = FileName.Split('.')[1];
+            string[] AcceptedExtensions = { "jpeg", "jpg", "pdf", "docx", "xlsx" };
+
+            if (AcceptedExtensions.Contains(FileExtension))
+                return true;
+
+            return false;
+
         }
 
         void ExecuteDeleteFileCommand()
@@ -325,21 +362,6 @@ namespace EverestApp.ViewModels
             Device.StartTimer(new TimeSpan(0,0, 40),() =>
             {
                 FillMessagesList();
-                //if(NewMessagesCount > 0)
-                //{
-                //    var notification = new NotificationRequest
-                //    {
-                //        BadgeNumber = NewMessagesCount,
-                //        Description = "وصلتك رسالة جديده",
-                //        Title = "الاشعارات",
-                //        ReturningData = "وصلتك رسالة جديده",
-                //        NotificationId = 1337,
-                //        Schedule = { NotifyTime = DateTime.Now.AddSeconds(1) },
-                //    };
-
-                //    NotificationCenter.Current.Show(notification);
-
-                //}
                 return true;
             });
 

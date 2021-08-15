@@ -14,7 +14,6 @@ namespace EverestApp
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
             DependencyService.Register<CustomerService>();
             DependencyService.Register<AccountService>();
             DependencyService.Register<MainService>();

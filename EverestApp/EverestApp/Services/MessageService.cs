@@ -28,37 +28,7 @@ namespace EverestApp.Services
 
             BaseApiAddress = $"https://www.everestexport.net/ems_newmsg.php?msg={msg}&cus=" + CustomerId;
 
-            #region comment
-            //-----
-            //string fileName = "";
-            //var Client = new WebClient();
-            //byte[] res;
-            //if (file != null)
-            //{
-            //    fileName = Path.Combine(FileSystem.AppDataDirectory, file.FileName);
-            //    res = Client.UploadFile(BaseApiAddress, "POST", fileName);
-            //}
-            //else
-            //{
-            //    string r = Client.UploadString(BaseApiAddress, "POST", msg);
-            //}
-
-
-            //var content = new MultipartFormDataContent();
-            //if (file != null)
-            //{
-            //    content.Add(new StreamContent(await file.OpenReadAsync()), "file", file.FileName);
-            //}
-
-            //var httpClient = new HttpClient();
-            //var response = await httpClient.PostAsync(BaseApiAddress, content);
-            //if(response.IsSuccessStatusCode)
-            //{
-            //    return await Task.FromResult(true);
-            //}
-            //-----
-
-            #endregion
+            
             NameValueCollection nvc = new NameValueCollection();
             nvc.Add("submit", "Upload File");
             HttpUploadFile(BaseApiAddress, file, nvc);

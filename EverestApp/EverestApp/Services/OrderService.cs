@@ -38,21 +38,7 @@ namespace EverestApp.Services
             nvc.Add("submit", "Upload Image");
             HttpUploadFile(BaseApiAddress, file, nvc);
 
-            //var content = new MultipartFormDataContent();
-            //content.Add(new ByteArrayContent(image, 0, image.Length), "fileToUpload", "upload.jpg");
-
-            //var httpClient = new HttpClient();
-            //httpClient.DefaultRequestHeaders.Accept.Clear();
-            //httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/html"));
-            //httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xhtml+xml"));
-            //httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
-            //httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("image/webp"));
-            //httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
-
-            //var response = await httpClient.PostAsync(BaseApiAddress, content);
-
-            //if (response.IsSuccessStatusCode)
-            //    return await Task.FromResult(true);
+           
 
             return await Task.FromResult(true);
         }
@@ -124,9 +110,7 @@ namespace EverestApp.Services
 
             BaseApiAddress = $"https://www.everestexport.net/ems_getorders.php?id={CustomerId}&x=" + (new Random()).Next(100000000);
 
-            //string json_str = (new WebClient()).DownloadString(BaseApiAddress);
-
-            //Data = JsonConvert.DeserializeObject<IEnumerable<Order>>(json_str);
+          
 
             var Uri = BaseApiAddress;
             var Client = new HttpClient();
@@ -134,7 +118,6 @@ namespace EverestApp.Services
             if (response.IsSuccessStatusCode)
             {
                 var Json = await response.Content.ReadAsStringAsync();
-                //var Json = await Client.GetStringAsync(Uri);
                 Data = JsonConvert.DeserializeObject<IEnumerable<Order>>(Json);
             }
 
@@ -169,9 +152,7 @@ namespace EverestApp.Services
 
             BaseApiAddress = $"https://www.everestexport.net/ems_getorders.php?id={CustomerId}&x=" + (new Random()).Next(100000000);
 
-            //string json_str = (new WebClient()).DownloadString(BaseApiAddress);
-
-            //Data = JsonConvert.DeserializeObject<IEnumerable<Order>>(json_str);
+            
 
             var Uri = BaseApiAddress;
             var Client = new HttpClient();
@@ -179,7 +160,6 @@ namespace EverestApp.Services
             if (response.IsSuccessStatusCode)
             {
                 var Json = await response.Content.ReadAsStringAsync();
-                //var Json = await Client.GetStringAsync(Uri);
                 Data = JsonConvert.DeserializeObject<IEnumerable<Order>>(Json);
             }
 

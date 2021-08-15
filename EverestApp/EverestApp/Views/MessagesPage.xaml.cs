@@ -20,7 +20,6 @@ namespace EverestApp.Views
             InitializeComponent();
             BindingContext = ViewModel = new MessagesViewModel();
         }
-
         protected override void OnAppearing()
         {
             base.OnAppearing();

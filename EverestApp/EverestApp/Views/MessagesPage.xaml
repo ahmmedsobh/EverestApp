@@ -96,7 +96,7 @@
 
                     <StackLayout Grid.Row="1"  VerticalOptions="End" HorizontalOptions="FillAndExpand">
                         <StackLayout Orientation="Horizontal" IsVisible="{Binding IsFileVisible}">
-                            <Label FontFamily="Cairo" Text="{Binding FileNameLable}"/>
+                            <Label FontFamily="Cairo" Text="{Binding FileNameLable}" TextColor="{Binding FileNameLableColor}"/>
                             <ImageButton BackgroundColor="Transparent" Command="{Binding DeleteFileCommand}">
                                 <ImageButton.Source>
                                     <FontImageSource FontFamily="FAS" 

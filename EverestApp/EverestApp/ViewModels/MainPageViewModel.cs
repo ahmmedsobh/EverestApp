@@ -229,18 +229,6 @@ namespace EverestApp.ViewModels
                 if (Count > 0)
                 {
                     NewMessagesCount = Count.ToString();
-                    //var notification = new NotificationRequest
-                    //{
-                    //    BadgeNumber = Count,
-                    //    Description = $"وصلتك {Count} رسائل جديده",
-                    //    Title = "الاشعارات",
-                    //    ReturningData = $"وصلتك {Count} رسائل جديده",
-                    //    NotificationId = 1337,
-                    //    Schedule = { NotifyTime = DateTime.Now.AddSeconds(8) },
-                    //};
-
-                    //await NotificationCenter.Current.Show(notification);
-
                 }
                 else
                 {
